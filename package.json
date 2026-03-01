@@ -1,0 +1,15 @@
+{
+  "name": "ebay-sold-tracker",
+  "version": "1.0.0",
+  "description": "Track sold eBay listings for 2018 Bowman Chrome Shohei Ohtani Rookie PSA 10",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "express": "^4.21.0",
+    "puppeteer": "^24.0.0"
+  }
+}

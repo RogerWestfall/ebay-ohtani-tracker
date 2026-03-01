@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eBay Sold Tracker — Ohtani Rookie PSA 10</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f1117;
+      color: #e1e4e8;
+      padding: 24px;
+      line-height: 1.5;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+    .subtitle {
+      color: #8b949e;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+    .stats-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 16px 24px;
+      min-width: 160px;
+    }
+    .stat-card .label { font-size: 0.75rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-card .value { font-size: 1.5rem; font-weight: 700; color: #58a6ff; margin-top: 4px; }
+    .stat-card .value.green { color: #3fb950; }
+    .stat-card .value.orange { color: #d29922; }
+
+    .chart-container {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+      max-height: 400px;
+    }
+
+    .table-container {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    th {
+      background: #1c2129;
+      color: #8b949e;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid #30363d;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    th:hover { color: #58a6ff; }
+    th .sort-arrow { margin-left: 4px; font-size: 0.65rem; }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #21262d;
+      vertical-align: middle;
+    }
+    tr:hover { background: #1c2129; }
+    .thumb {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 4px;
+      background: #0d1117;
+    }
+    .price { font-weight: 700; color: #3fb950; white-space: nowrap; }
+    .shipping { color: #8b949e; font-size: 0.8rem; }
+    .date { white-space: nowrap; }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .badge-auction { background: #1f3a5f; color: #58a6ff; }
+    .badge-bin { background: #1a3a2a; color: #3fb950; }
+    .badge-offer { background: #3a2f1a; color: #d29922; }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .title-cell {
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 80px 20px;
+      color: #8b949e;
+    }
+    .spinner {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      border: 3px solid #30363d;
+      border-top-color: #58a6ff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error {
+      text-align: center;
+      padding: 40px;
+      color: #f85149;
+    }
+  </style>
+</head>
+<body>
+  <h1>2018 Bowman Chrome Shohei Ohtani Rookie PSA 10</h1>
+  <p class="subtitle">Recent Completed &amp; Sold eBay Listings</p>
+
+  <div id="stats-row" class="stats-row" style="display:none;">
+    <div class="stat-card">
+      <div class="label">Total Sold</div>
+      <div class="value" id="stat-count">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Average Price</div>
+      <div class="value green" id="stat-avg">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Lowest</div>
+      <div class="value" id="stat-low">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Highest</div>
+      <div class="value orange" id="stat-high">—</div>
+    </div>
+  </div>
+
+  <div class="chart-container" id="chart-container" style="display:none;">
+    <canvas id="priceChart"></canvas>
+  </div>
+
+  <div class="table-container">
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <div>Fetching sold listings from eBay…</div>
+    </div>
+    <div id="error" class="error" style="display:none;"></div>
+    <table id="listings-table" style="display:none;">
+      <thead>
+        <tr>
+          <th data-col="image">Image</th>
+          <th data-col="title" data-sort="string">Title <span class="sort-arrow"></span></th>
+          <th data-col="price" data-sort="number">Price <span class="sort-arrow"></span></th>
+          <th data-col="shippingCost" data-sort="number">Shipping <span class="sort-arrow"></span></th>
+          <th data-col="dateSold" data-sort="date">Date Sold <span class="sort-arrow"></span></th>
+          <th data-col="listingType" data-sort="string">Type <span class="sort-arrow"></span></th>
+          <th data-col="bids" data-sort="number">Bids <span class="sort-arrow"></span></th>
+          <th data-col="condition" data-sort="string">Condition <span class="sort-arrow"></span></th>
+          <th data-col="seller" data-sort="string">Seller <span class="sort-arrow"></span></th>
+          <th data-col="location" data-sort="string">Location <span class="sort-arrow"></span></th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+  <script>
+    let allListings = [];
+    let sortCol = null;
+    let sortDir = "asc";
+    let chart = null;
+
+    async function fetchListings() {
+      try {
+        const res = await fetch("/api/sold-listings");
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error);
+        allListings = data.listings;
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("listings-table").style.display = "table";
+        document.getElementById("stats-row").style.display = "flex";
+        document.getElementById("chart-container").style.display = "block";
+        renderStats();
+        renderTable(allListings);
+        renderChart();
+      } catch (err) {
+        document.getElementById("loading").style.display = "none";
+        const errEl = document.getElementById("error");
+        errEl.style.display = "block";
+        errEl.textContent = "Failed to fetch listings: " + err.message;
+      }
+    }
+
+    function renderStats() {
+      const prices = allListings.map(l => l.price);
+      document.getElementById("stat-count").textContent = allListings.length;
+      if (prices.length === 0) return;
+      document.getElementById("stat-avg").textContent = "$" + (prices.reduce((a, b) => a + b, 0) / prices.length).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById("stat-low").textContent = "$" + Math.min(...prices).toLocaleString("en-US", { minimumFractionDigits: 2 });
+      document.getElementById("stat-high").textContent = "$" + Math.max(...prices).toLocaleString("en-US", { minimumFractionDigits: 2 });
+    }
+
+    function renderTable(listings) {
+      const tbody = document.getElementById("table-body");
+      tbody.innerHTML = listings.map(l => `
+        <tr>
+          <td>${l.image ? `<img class="thumb" src="${l.image}" alt="" loading="lazy">` : "—"}</td>
+          <td class="title-cell"><a href="${l.link}" target="_blank" title="${esc(l.title)}">${esc(l.title)}</a></td>
+          <td class="price">$${l.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}</td>
+          <td class="shipping">${l.shippingCost === 0 ? "Free" : l.shippingCost != null ? "$" + l.shippingCost.toFixed(2) : l.shippingText || "—"}</td>
+          <td class="date">${l.dateSold || "—"}</td>
+          <td>${typeBadge(l.listingType)}</td>
+          <td>${l.bids != null ? l.bids : "—"}</td>
+          <td>${l.condition || "—"}</td>
+          <td>${l.seller || "—"}</td>
+          <td>${l.location || "—"}</td>
+        </tr>
+      `).join("");
+    }
+
+    function typeBadge(type) {
+      if (type === "Auction") return `<span class="badge badge-auction">Auction</span>`;
+      if (type === "Best Offer Accepted") return `<span class="badge badge-offer">Best Offer</span>`;
+      return `<span class="badge badge-bin">BIN</span>`;
+    }
+
+    function esc(str) {
+      const d = document.createElement("div");
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    function renderChart() {
+      // Sort by date for chart (oldest first)
+      const withDates = allListings.filter(l => l.dateSold);
+      withDates.sort((a, b) => new Date(a.dateSold) - new Date(b.dateSold));
+
+      const labels = withDates.map(l => l.dateSold);
+      const prices = withDates.map(l => l.price);
+
+      const ctx = document.getElementById("priceChart").getContext("2d");
+      chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [{
+            label: "Sale Price ($)",
+            data: prices,
+            borderColor: "#58a6ff",
+            backgroundColor: "rgba(88, 166, 255, 0.1)",
+            fill: true,
+            tension: 0.3,
+            pointBackgroundColor: "#58a6ff",
+            pointRadius: 5,
+            pointHoverRadius: 7,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => "$" + ctx.parsed.y.toLocaleString("en-US", { minimumFractionDigits: 2 }),
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: { color: "#8b949e", maxRotation: 45 },
+              grid: { color: "#21262d" },
+            },
+            y: {
+              ticks: {
+                color: "#8b949e",
+                callback: v => "$" + v.toLocaleString(),
+              },
+              grid: { color: "#21262d" },
+            },
+          },
+        },
+      });
+    }
+
+    // Column sorting
+    document.querySelectorAll("th[data-sort]").forEach(th => {
+      th.addEventListener("click", () => {
+        const col = th.dataset.col;
+        const type = th.dataset.sort;
+        if (sortCol === col) {
+          sortDir = sortDir === "asc" ? "desc" : "asc";
+        } else {
+          sortCol = col;
+          sortDir = "asc";
+        }
+        // Update arrows
+        document.querySelectorAll("th .sort-arrow").forEach(s => s.textContent = "");
+        th.querySelector(".sort-arrow").textContent = sortDir === "asc" ? "▲" : "▼";
+
+        const sorted = [...allListings].sort((a, b) => {
+          let va = a[col], vb = b[col];
+          if (va == null) return 1;
+          if (vb == null) return -1;
+          if (type === "number") {
+            return sortDir === "asc" ? va - vb : vb - va;
+          }
+          if (type === "date") {
+            return sortDir === "asc"
+              ? new Date(va) - new Date(vb)
+              : new Date(vb) - new Date(va);
+          }
+          va = String(va).toLowerCase();
+          vb = String(vb).toLowerCase();
+          return sortDir === "asc" ? va.localeCompare(vb) : vb.localeCompare(va);
+        });
+        renderTable(sorted);
+      });
+    });
+
+    fetchListings();
+  </script>
+</body>
+</html>
