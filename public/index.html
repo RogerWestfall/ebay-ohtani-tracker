@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>eBay Sold Tracker — Ohtani Rookie PSA 10</title>
+  <title>Sports Card Portfolio Tracker</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0/dist/chartjs-plugin-annotation.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -14,224 +15,336 @@
       padding: 24px;
       line-height: 1.5;
     }
-    h1 {
-      font-size: 1.6rem;
-      margin-bottom: 4px;
-      color: #fff;
+    h1 { font-size: 1.6rem; margin-bottom: 4px; color: #fff; }
+    h2 {
+      font-size: 1rem; color: #8b949e; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;
     }
-    .subtitle {
-      color: #8b949e;
-      font-size: 0.9rem;
-      margin-bottom: 24px;
-    }
-    .stats-row {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
+    .subtitle { color: #8b949e; font-size: 0.9rem; margin-bottom: 24px; }
+    .section { margin-bottom: 24px; }
+    .stats-row { display: flex; gap: 16px; flex-wrap: wrap; }
     .stat-card {
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      padding: 16px 24px;
-      min-width: 160px;
+      background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+      padding: 16px 24px; min-width: 140px; flex: 1;
     }
-    .stat-card .label { font-size: 0.75rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.05em; }
-    .stat-card .value { font-size: 1.5rem; font-weight: 700; color: #58a6ff; margin-top: 4px; }
+    .stat-card .label { font-size: 0.7rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-card .value { font-size: 1.4rem; font-weight: 700; color: #58a6ff; margin-top: 4px; }
     .stat-card .value.green { color: #3fb950; }
+    .stat-card .value.red { color: #f85149; }
     .stat-card .value.orange { color: #d29922; }
+    .stat-card .sub { font-size: 0.75rem; color: #8b949e; margin-top: 2px; }
+    .stat-card.pnl-positive { border-color: #238636; }
+    .stat-card.pnl-negative { border-color: #da3633; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 2px solid #30363d; }
+    .tab {
+      padding: 10px 20px; cursor: pointer; color: #8b949e; font-size: 0.85rem;
+      font-weight: 600; border-bottom: 2px solid transparent; margin-bottom: -2px;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .tab:hover { color: #e1e4e8; }
+    .tab.active { color: #58a6ff; border-bottom-color: #58a6ff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
     .chart-container {
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 24px;
-      max-height: 400px;
+      background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+      padding: 20px; margin-bottom: 24px; max-height: 400px;
     }
-
     .table-container {
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      overflow-x: auto;
+      background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow-x: auto;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     th {
-      background: #1c2129;
-      color: #8b949e;
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
-      padding: 12px 14px;
-      text-align: left;
-      border-bottom: 1px solid #30363d;
-      cursor: pointer;
-      user-select: none;
-      white-space: nowrap;
+      background: #1c2129; color: #8b949e; font-weight: 600; text-transform: uppercase;
+      font-size: 0.7rem; letter-spacing: 0.05em; padding: 12px 14px; text-align: left;
+      border-bottom: 1px solid #30363d; cursor: pointer; user-select: none; white-space: nowrap;
     }
     th:hover { color: #58a6ff; }
     th .sort-arrow { margin-left: 4px; font-size: 0.65rem; }
-    td {
-      padding: 10px 14px;
-      border-bottom: 1px solid #21262d;
-      vertical-align: middle;
-    }
+    td { padding: 10px 14px; border-bottom: 1px solid #21262d; vertical-align: middle; }
     tr:hover { background: #1c2129; }
-    .thumb {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      border-radius: 4px;
-      background: #0d1117;
-    }
+    .thumb { width: 60px; height: 60px; object-fit: contain; border-radius: 4px; background: #0d1117; }
     .price { font-weight: 700; color: #3fb950; white-space: nowrap; }
     .shipping { color: #8b949e; font-size: 0.8rem; }
     .date { white-space: nowrap; }
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; }
     .badge-auction { background: #1f3a5f; color: #58a6ff; }
     .badge-bin { background: #1a3a2a; color: #3fb950; }
     .badge-offer { background: #3a2f1a; color: #d29922; }
     a { color: #58a6ff; text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .title-cell {
-      max-width: 300px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+    .title-cell { max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-    .loading {
-      text-align: center;
-      padding: 80px 20px;
-      color: #8b949e;
-    }
+    .loading { text-align: center; padding: 80px 20px; color: #8b949e; }
     .spinner {
-      display: inline-block;
-      width: 36px;
-      height: 36px;
-      border: 3px solid #30363d;
-      border-top-color: #58a6ff;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-bottom: 12px;
+      display: inline-block; width: 36px; height: 36px;
+      border: 3px solid #30363d; border-top-color: #58a6ff;
+      border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    .error {
-      text-align: center;
-      padding: 40px;
-      color: #f85149;
-    }
+    .error { text-align: center; padding: 40px; color: #f85149; }
   </style>
 </head>
 <body>
-  <h1>2018 Bowman Chrome Shohei Ohtani Rookie PSA 10</h1>
-  <p class="subtitle">Recent Completed &amp; Sold eBay Listings</p>
+  <h1>Sports Card Portfolio Tracker</h1>
+  <p class="subtitle" id="subtitle">Loading portfolio…</p>
 
-  <div id="stats-row" class="stats-row" style="display:none;">
-    <div class="stat-card">
-      <div class="label">Total Sold</div>
-      <div class="value" id="stat-count">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Average Price</div>
-      <div class="value green" id="stat-avg">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Lowest</div>
-      <div class="value" id="stat-low">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Highest</div>
-      <div class="value orange" id="stat-high">—</div>
+  <!-- Portfolio Summary -->
+  <div id="portfolio-summary" class="section" style="display:none;">
+    <h2>Portfolio Summary</h2>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="label">Total Invested</div>
+        <div class="value" id="port-cost">—</div>
+        <div class="sub" id="port-cards-count"></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Total Market Value</div>
+        <div class="value green" id="port-value">—</div>
+      </div>
+      <div class="stat-card" id="port-pnl-card">
+        <div class="label">Total P&L</div>
+        <div class="value green" id="port-pnl">—</div>
+        <div class="sub" id="port-pnl-pct"></div>
+      </div>
     </div>
   </div>
 
-  <div class="chart-container" id="chart-container" style="display:none;">
-    <canvas id="priceChart"></canvas>
-  </div>
+  <!-- Card Tabs -->
+  <div class="tabs" id="card-tabs"></div>
 
-  <div class="table-container">
-    <div id="loading" class="loading">
-      <div class="spinner"></div>
-      <div>Fetching sold listings from eBay…</div>
-    </div>
-    <div id="error" class="error" style="display:none;"></div>
-    <table id="listings-table" style="display:none;">
-      <thead>
-        <tr>
-          <th data-col="image">Image</th>
-          <th data-col="title" data-sort="string">Title <span class="sort-arrow"></span></th>
-          <th data-col="price" data-sort="number">Price <span class="sort-arrow"></span></th>
-          <th data-col="shippingCost" data-sort="number">Shipping <span class="sort-arrow"></span></th>
-          <th data-col="dateSold" data-sort="date">Date Sold <span class="sort-arrow"></span></th>
-          <th data-col="listingType" data-sort="string">Type <span class="sort-arrow"></span></th>
-          <th data-col="bids" data-sort="number">Bids <span class="sort-arrow"></span></th>
-          <th data-col="condition" data-sort="string">Condition <span class="sort-arrow"></span></th>
-          <th data-col="seller" data-sort="string">Seller <span class="sort-arrow"></span></th>
-          <th data-col="location" data-sort="string">Location <span class="sort-arrow"></span></th>
-        </tr>
-      </thead>
-      <tbody id="table-body"></tbody>
-    </table>
-  </div>
+  <!-- Card Panels (dynamically generated) -->
+  <div id="card-panels"></div>
 
   <script>
-    let allListings = [];
-    let sortCol = null;
-    let sortDir = "asc";
-    let chart = null;
+    let portfolio = null;
+    const cardData = []; // { card, listings, chart, sortCol, sortDir }
 
-    async function fetchListings() {
-      try {
-        const res = await fetch("/api/sold-listings");
-        const data = await res.json();
-        if (!data.success) throw new Error(data.error);
-        allListings = data.listings;
-        document.getElementById("loading").style.display = "none";
-        document.getElementById("listings-table").style.display = "table";
-        document.getElementById("stats-row").style.display = "flex";
-        document.getElementById("chart-container").style.display = "block";
-        renderStats();
-        renderTable(allListings);
-        renderChart();
-      } catch (err) {
-        document.getElementById("loading").style.display = "none";
-        const errEl = document.getElementById("error");
-        errEl.style.display = "block";
-        errEl.textContent = "Failed to fetch listings: " + err.message;
+    function fmt(n) {
+      return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function median(arr) {
+      if (arr.length === 0) return 0;
+      const sorted = [...arr].sort((a, b) => a - b);
+      const mid = Math.floor(sorted.length / 2);
+      return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+    }
+    function esc(str) {
+      const d = document.createElement("div");
+      d.textContent = str;
+      return d.innerHTML;
+    }
+    function typeBadge(type) {
+      if (type === "Auction") return `<span class="badge badge-auction">Auction</span>`;
+      if (type === "Best Offer Accepted") return `<span class="badge badge-offer">Best Offer</span>`;
+      return `<span class="badge badge-bin">BIN</span>`;
+    }
+
+    async function init() {
+      // Fetch portfolio config
+      const portRes = await fetch("/api/portfolio");
+      const portData = await portRes.json();
+      if (!portData.success) {
+        document.getElementById("subtitle").textContent = "Failed to load portfolio";
+        return;
       }
+      portfolio = portData.portfolio;
+      document.getElementById("subtitle").textContent = portfolio.cards.length + " cards tracked";
+
+      // Build tabs and panels
+      const tabsEl = document.getElementById("card-tabs");
+      const panelsEl = document.getElementById("card-panels");
+
+      portfolio.cards.forEach((card, i) => {
+        // Tab
+        const tab = document.createElement("div");
+        tab.className = "tab" + (i === 0 ? " active" : "");
+        tab.textContent = card.name;
+        tab.dataset.index = i;
+        tab.addEventListener("click", () => switchTab(i));
+        tabsEl.appendChild(tab);
+
+        // Panel
+        const panel = document.createElement("div");
+        panel.className = "tab-content" + (i === 0 ? " active" : "");
+        panel.id = `panel-${i}`;
+        panel.innerHTML = buildPanelHTML(i, card);
+        panelsEl.appendChild(panel);
+
+        cardData.push({ card, listings: null, chart: null, sortCol: null, sortDir: "asc" });
+      });
+
+      // Fetch all cards in parallel
+      const fetches = portfolio.cards.map((_, i) =>
+        fetch(`/api/sold-listings/${i}`).then(r => r.json())
+      );
+      const results = await Promise.all(fetches);
+
+      results.forEach((data, i) => {
+        const panel = document.getElementById(`panel-${i}`);
+        const loadingEl = panel.querySelector(".loading");
+        const errorEl = panel.querySelector(".error");
+
+        if (!data.success) {
+          loadingEl.style.display = "none";
+          errorEl.style.display = "block";
+          errorEl.textContent = "Failed to fetch: " + data.error;
+          return;
+        }
+
+        cardData[i].listings = data.listings;
+        loadingEl.style.display = "none";
+        panel.querySelector(".card-investment").style.display = "block";
+        panel.querySelector(".card-market").style.display = "block";
+        panel.querySelector(".card-chart-container").style.display = "block";
+        panel.querySelector(".listings-table").style.display = "table";
+
+        renderCardInvestment(i);
+        renderCardMarketStats(i);
+        renderCardTable(i, data.listings);
+        renderCardChart(i);
+        setupSorting(i);
+      });
+
+      renderPortfolioSummary();
     }
 
-    function renderStats() {
-      const prices = allListings.map(l => l.price);
-      document.getElementById("stat-count").textContent = allListings.length;
+    function buildPanelHTML(i, card) {
+      return `
+        <div class="loading">
+          <div class="spinner"></div>
+          <div>Fetching sold listings for ${esc(card.name)}…</div>
+        </div>
+        <div class="error" style="display:none;"></div>
+
+        <div class="card-investment section" style="display:none;">
+          <h2>My Investment</h2>
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="label">Cost Basis</div>
+              <div class="value" id="inv-cost-${i}">—</div>
+              <div class="sub" id="inv-pp-${i}"></div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Market Value (Median)</div>
+              <div class="value green" id="inv-market-${i}">—</div>
+              <div class="sub" id="inv-market-sub-${i}"></div>
+            </div>
+            <div class="stat-card" id="inv-pnl-card-${i}">
+              <div class="label">Unrealized P&L</div>
+              <div class="value green" id="inv-pnl-${i}">—</div>
+              <div class="sub" id="inv-pnl-pct-${i}"></div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Purchase Date</div>
+              <div class="value" id="inv-date-${i}">—</div>
+              <div class="sub" id="inv-days-${i}"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-market section" style="display:none;">
+          <h2>Market Activity</h2>
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="label">Recent Sales</div>
+              <div class="value" id="stat-count-${i}">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Average</div>
+              <div class="value green" id="stat-avg-${i}">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Median</div>
+              <div class="value green" id="stat-median-${i}">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Lowest</div>
+              <div class="value" id="stat-low-${i}">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Highest</div>
+              <div class="value orange" id="stat-high-${i}">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-chart-container chart-container" style="display:none;">
+          <canvas id="chart-${i}"></canvas>
+        </div>
+
+        <div class="table-container">
+          <table class="listings-table" style="display:none;">
+            <thead>
+              <tr>
+                <th data-col="image">Image</th>
+                <th data-col="title" data-sort="string">Title <span class="sort-arrow"></span></th>
+                <th data-col="price" data-sort="number">Price <span class="sort-arrow"></span></th>
+                <th data-col="shippingCost" data-sort="number">Shipping <span class="sort-arrow"></span></th>
+                <th data-col="dateSold" data-sort="date">Date Sold <span class="sort-arrow"></span></th>
+                <th data-col="listingType" data-sort="string">Type <span class="sort-arrow"></span></th>
+                <th data-col="bids" data-sort="number">Bids <span class="sort-arrow"></span></th>
+                <th data-col="condition" data-sort="string">Condition <span class="sort-arrow"></span></th>
+                <th data-col="seller" data-sort="string">Seller <span class="sort-arrow"></span></th>
+                <th data-col="location" data-sort="string">Location <span class="sort-arrow"></span></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-${i}"></tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function switchTab(idx) {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".tab")[idx].classList.add("active");
+      document.getElementById(`panel-${idx}`).classList.add("active");
+    }
+
+    function renderCardInvestment(i) {
+      const card = cardData[i].card;
+      const prices = cardData[i].listings.map(l => l.price);
+      const med = median(prices);
+      const cost = card.totalCost;
+      const pnl = med - cost;
+      const pnlPct = (pnl / cost) * 100;
+      const pos = pnl >= 0;
+
+      document.getElementById(`inv-cost-${i}`).textContent = fmt(cost);
+      document.getElementById(`inv-pp-${i}`).textContent = "Card price: " + fmt(card.purchasePrice);
+      document.getElementById(`inv-market-${i}`).textContent = fmt(med);
+      document.getElementById(`inv-market-${i}`).className = "value " + (pos ? "green" : "red");
+      document.getElementById(`inv-market-sub-${i}`).textContent = "Based on " + prices.length + " recent sales";
+      document.getElementById(`inv-pnl-${i}`).textContent = (pos ? "+" : "") + fmt(pnl);
+      document.getElementById(`inv-pnl-${i}`).className = "value " + (pos ? "green" : "red");
+      document.getElementById(`inv-pnl-pct-${i}`).textContent = (pos ? "+" : "") + pnlPct.toFixed(1) + "%";
+      document.getElementById(`inv-pnl-pct-${i}`).style.color = pos ? "#3fb950" : "#f85149";
+      document.getElementById(`inv-pnl-card-${i}`).className = "stat-card " + (pos ? "pnl-positive" : "pnl-negative");
+
+      const pd = new Date(card.purchaseDate);
+      document.getElementById(`inv-date-${i}`).textContent = pd.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+      document.getElementById(`inv-days-${i}`).textContent = Math.floor((Date.now() - pd.getTime()) / 86400000) + " days held";
+    }
+
+    function renderCardMarketStats(i) {
+      const prices = cardData[i].listings.map(l => l.price);
+      document.getElementById(`stat-count-${i}`).textContent = prices.length;
       if (prices.length === 0) return;
-      document.getElementById("stat-avg").textContent = "$" + (prices.reduce((a, b) => a + b, 0) / prices.length).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      document.getElementById("stat-low").textContent = "$" + Math.min(...prices).toLocaleString("en-US", { minimumFractionDigits: 2 });
-      document.getElementById("stat-high").textContent = "$" + Math.max(...prices).toLocaleString("en-US", { minimumFractionDigits: 2 });
+      document.getElementById(`stat-avg-${i}`).textContent = fmt(prices.reduce((a, b) => a + b, 0) / prices.length);
+      document.getElementById(`stat-median-${i}`).textContent = fmt(median(prices));
+      document.getElementById(`stat-low-${i}`).textContent = fmt(Math.min(...prices));
+      document.getElementById(`stat-high-${i}`).textContent = fmt(Math.max(...prices));
     }
 
-    function renderTable(listings) {
-      const tbody = document.getElementById("table-body");
-      tbody.innerHTML = listings.map(l => `
+    function renderCardTable(i, listings) {
+      document.getElementById(`tbody-${i}`).innerHTML = listings.map(l => `
         <tr>
           <td>${l.image ? `<img class="thumb" src="${l.image}" alt="" loading="lazy">` : "—"}</td>
           <td class="title-cell"><a href="${l.link}" target="_blank" title="${esc(l.title)}">${esc(l.title)}</a></td>
-          <td class="price">$${l.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}</td>
+          <td class="price">${fmt(l.price)}</td>
           <td class="shipping">${l.shippingCost === 0 ? "Free" : l.shippingCost != null ? "$" + l.shippingCost.toFixed(2) : l.shippingText || "—"}</td>
           <td class="date">${l.dateSold || "—"}</td>
           <td>${typeBadge(l.listingType)}</td>
@@ -243,28 +356,36 @@
       `).join("");
     }
 
-    function typeBadge(type) {
-      if (type === "Auction") return `<span class="badge badge-auction">Auction</span>`;
-      if (type === "Best Offer Accepted") return `<span class="badge badge-offer">Best Offer</span>`;
-      return `<span class="badge badge-bin">BIN</span>`;
-    }
-
-    function esc(str) {
-      const d = document.createElement("div");
-      d.textContent = str;
-      return d.innerHTML;
-    }
-
-    function renderChart() {
-      // Sort by date for chart (oldest first)
-      const withDates = allListings.filter(l => l.dateSold);
+    function renderCardChart(i) {
+      const card = cardData[i].card;
+      const withDates = cardData[i].listings.filter(l => l.dateSold);
       withDates.sort((a, b) => new Date(a.dateSold) - new Date(b.dateSold));
 
       const labels = withDates.map(l => l.dateSold);
       const prices = withDates.map(l => l.price);
 
-      const ctx = document.getElementById("priceChart").getContext("2d");
-      chart = new Chart(ctx, {
+      const annotations = {
+        costBasisLine: {
+          type: "line",
+          yMin: card.totalCost,
+          yMax: card.totalCost,
+          borderColor: "#f85149",
+          borderWidth: 2,
+          borderDash: [8, 4],
+          label: {
+            display: true,
+            content: "Cost Basis: " + fmt(card.totalCost),
+            position: "start",
+            backgroundColor: "rgba(248, 81, 73, 0.85)",
+            color: "#fff",
+            font: { size: 11, weight: "bold" },
+            padding: 4,
+          },
+        },
+      };
+
+      const ctx = document.getElementById(`chart-${i}`).getContext("2d");
+      cardData[i].chart = new Chart(ctx, {
         type: "line",
         data: {
           labels,
@@ -285,65 +406,76 @@
           maintainAspectRatio: false,
           plugins: {
             legend: { display: false },
-            tooltip: {
-              callbacks: {
-                label: ctx => "$" + ctx.parsed.y.toLocaleString("en-US", { minimumFractionDigits: 2 }),
-              },
-            },
+            tooltip: { callbacks: { label: ctx => fmt(ctx.parsed.y) } },
+            annotation: { annotations },
           },
           scales: {
-            x: {
-              ticks: { color: "#8b949e", maxRotation: 45 },
-              grid: { color: "#21262d" },
-            },
-            y: {
-              ticks: {
-                color: "#8b949e",
-                callback: v => "$" + v.toLocaleString(),
-              },
-              grid: { color: "#21262d" },
-            },
+            x: { ticks: { color: "#8b949e", maxRotation: 45 }, grid: { color: "#21262d" } },
+            y: { ticks: { color: "#8b949e", callback: v => "$" + v.toLocaleString() }, grid: { color: "#21262d" } },
           },
         },
       });
     }
 
-    // Column sorting
-    document.querySelectorAll("th[data-sort]").forEach(th => {
-      th.addEventListener("click", () => {
-        const col = th.dataset.col;
-        const type = th.dataset.sort;
-        if (sortCol === col) {
-          sortDir = sortDir === "asc" ? "desc" : "asc";
-        } else {
-          sortCol = col;
-          sortDir = "asc";
-        }
-        // Update arrows
-        document.querySelectorAll("th .sort-arrow").forEach(s => s.textContent = "");
-        th.querySelector(".sort-arrow").textContent = sortDir === "asc" ? "▲" : "▼";
+    function setupSorting(i) {
+      const panel = document.getElementById(`panel-${i}`);
+      panel.querySelectorAll("th[data-sort]").forEach(th => {
+        th.addEventListener("click", () => {
+          const col = th.dataset.col;
+          const type = th.dataset.sort;
+          const cd = cardData[i];
+          if (cd.sortCol === col) {
+            cd.sortDir = cd.sortDir === "asc" ? "desc" : "asc";
+          } else {
+            cd.sortCol = col;
+            cd.sortDir = "asc";
+          }
+          panel.querySelectorAll("th .sort-arrow").forEach(s => s.textContent = "");
+          th.querySelector(".sort-arrow").textContent = cd.sortDir === "asc" ? "▲" : "▼";
 
-        const sorted = [...allListings].sort((a, b) => {
-          let va = a[col], vb = b[col];
-          if (va == null) return 1;
-          if (vb == null) return -1;
-          if (type === "number") {
-            return sortDir === "asc" ? va - vb : vb - va;
-          }
-          if (type === "date") {
-            return sortDir === "asc"
-              ? new Date(va) - new Date(vb)
-              : new Date(vb) - new Date(va);
-          }
-          va = String(va).toLowerCase();
-          vb = String(vb).toLowerCase();
-          return sortDir === "asc" ? va.localeCompare(vb) : vb.localeCompare(va);
+          const sorted = [...cd.listings].sort((a, b) => {
+            let va = a[col], vb = b[col];
+            if (va == null) return 1;
+            if (vb == null) return -1;
+            if (type === "number") return cd.sortDir === "asc" ? va - vb : vb - va;
+            if (type === "date") return cd.sortDir === "asc" ? new Date(va) - new Date(vb) : new Date(vb) - new Date(va);
+            va = String(va).toLowerCase(); vb = String(vb).toLowerCase();
+            return cd.sortDir === "asc" ? va.localeCompare(vb) : vb.localeCompare(va);
+          });
+          renderCardTable(i, sorted);
         });
-        renderTable(sorted);
       });
-    });
+    }
 
-    fetchListings();
+    function renderPortfolioSummary() {
+      let totalCost = 0, totalValue = 0;
+      let cardsLoaded = 0;
+
+      cardData.forEach(cd => {
+        if (!cd.listings) return;
+        totalCost += cd.card.totalCost;
+        totalValue += median(cd.listings.map(l => l.price));
+        cardsLoaded++;
+      });
+
+      if (cardsLoaded === 0) return;
+
+      const pnl = totalValue - totalCost;
+      const pnlPct = (pnl / totalCost) * 100;
+      const pos = pnl >= 0;
+
+      document.getElementById("portfolio-summary").style.display = "block";
+      document.getElementById("port-cost").textContent = fmt(totalCost);
+      document.getElementById("port-cards-count").textContent = cardsLoaded + " card" + (cardsLoaded > 1 ? "s" : "");
+      document.getElementById("port-value").textContent = fmt(totalValue);
+      document.getElementById("port-pnl").textContent = (pos ? "+" : "") + fmt(pnl);
+      document.getElementById("port-pnl").className = "value " + (pos ? "green" : "red");
+      document.getElementById("port-pnl-pct").textContent = (pos ? "+" : "") + pnlPct.toFixed(1) + "%";
+      document.getElementById("port-pnl-pct").style.color = pos ? "#3fb950" : "#f85149";
+      document.getElementById("port-pnl-card").className = "stat-card " + (pos ? "pnl-positive" : "pnl-negative");
+    }
+
+    init();
   </script>
 </body>
 </html>

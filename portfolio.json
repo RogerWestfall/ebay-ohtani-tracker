@@ -1,0 +1,20 @@
+{
+  "cards": [
+    {
+      "name": "2018 Bowman Chrome Shohei Ohtani Rookie PSA 10",
+      "query": "2018 Bowman Chrome Shohei Ohtani Rookie PSA 10",
+      "purchasePrice": 1655.00,
+      "totalCost": 1808.40,
+      "purchaseDate": "2025-09-20",
+      "excludeTerms": ["refractor", "auto", "autograph"]
+    },
+    {
+      "name": "2018 Topps Chrome Update Juan Soto PSA 10",
+      "query": "2018 Topps Chrome Update Juan Soto PSA 10",
+      "purchasePrice": 57.00,
+      "totalCost": 67.27,
+      "purchaseDate": "2025-11-28",
+      "excludeTerms": ["refractor", "auto", "autograph"]
+    }
+  ]
+}

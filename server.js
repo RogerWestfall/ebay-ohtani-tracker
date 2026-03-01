@@ -2,37 +2,64 @@ const express = require("express");
 const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const SEARCH_QUERY = "2018 Bowman Chrome Shohei Ohtani Rookie PSA 10";
-
 app.use(express.static(path.join(__dirname, "public")));
 
-// Cache to avoid hammering eBay on every request
-let cache = { listings: null, fetchedAt: 0 };
+function loadPortfolio() {
+  return JSON.parse(fs.readFileSync(path.join(__dirname, "portfolio.json"), "utf8"));
+}
+
+// Per-card cache
+const cache = {};
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
-app.get("/api/sold-listings", async (_req, res) => {
+app.get("/api/portfolio", (_req, res) => {
   try {
-    const now = Date.now();
-    if (cache.listings && now - cache.fetchedAt < CACHE_TTL) {
-      return res.json({ success: true, query: SEARCH_QUERY, listings: cache.listings, cached: true });
+    const data = loadPortfolio();
+    res.json({ success: true, portfolio: data });
+  } catch (err) {
+    console.error("Error reading portfolio:", err.message);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Fetch sold listings for a specific card by index
+app.get("/api/sold-listings/:cardIndex", async (req, res) => {
+  try {
+    const portfolio = loadPortfolio();
+    const idx = parseInt(req.params.cardIndex, 10);
+    if (isNaN(idx) || idx < 0 || idx >= portfolio.cards.length) {
+      return res.status(400).json({ success: false, error: "Invalid card index" });
     }
-    const listings = await fetchSoldListings();
-    cache = { listings, fetchedAt: now };
-    res.json({ success: true, query: SEARCH_QUERY, listings });
+
+    const card = portfolio.cards[idx];
+    const cacheKey = `card_${idx}`;
+    const now = Date.now();
+
+    if (cache[cacheKey] && now - cache[cacheKey].fetchedAt < CACHE_TTL) {
+      return res.json({
+        success: true,
+        card: card.name,
+        listings: cache[cacheKey].listings,
+        cached: true,
+      });
+    }
+
+    const listings = await fetchSoldListings(card.query, card.excludeTerms || []);
+    cache[cacheKey] = { listings, fetchedAt: now };
+    res.json({ success: true, card: card.name, listings });
   } catch (err) {
     console.error("Error fetching listings:", err.message);
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-async function fetchSoldListings() {
-  const encoded = encodeURIComponent(SEARCH_QUERY);
-  // LH_Complete=1 & LH_Sold=1 filters for completed+sold listings
-  // _sop=13 sorts by end date (recent first)
+async function fetchSoldListings(query, excludeTerms) {
+  const encoded = encodeURIComponent(query);
   const url = `https://www.ebay.com/sch/i.html?_nkw=${encoded}&LH_Complete=1&LH_Sold=1&_sop=13&_ipg=120`;
 
   console.log("Launching browser to fetch:", url);
@@ -55,7 +82,6 @@ async function fetchSoldListings() {
 
     await page.goto(url, { waitUntil: "networkidle2", timeout: 30000 });
 
-    // Wait for search results to render (eBay now uses .s-card)
     await page.waitForSelector(".s-card", { timeout: 15000 }).catch(() => {
       console.log("No .s-card found, checking page state...");
     });
@@ -69,29 +95,28 @@ async function fetchSoldListings() {
     $(".s-card").each((_i, el) => {
       const $el = $(el);
 
-      // Title
       const title = $el.find(".s-card__title .su-styled-text").first().text().trim();
       if (!title || title === "Shop on eBay") return;
 
-      // Link
-      const link = $el.find("a.s-card__link[href*='/itm/']").attr("href") || "";
+      // Filter out excluded terms
+      const titleLower = title.toLowerCase();
+      for (const term of excludeTerms) {
+        if (titleLower.includes(term.toLowerCase())) return;
+      }
 
-      // Image
+      const link = $el.find("a.s-card__link[href*='/itm/']").attr("href") || "";
       const image = $el.find(".s-card__image").attr("src") || "";
 
-      // Price — from .s-card__price
       const priceText = $el.find(".s-card__price").text().trim();
       const priceMatch = priceText.match(/\$([\d,]+\.?\d*)/);
       const price = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, "")) : null;
 
-      // Extract all attribute rows text for shipping, type, etc.
       const attrTexts = [];
       $el.find(".s-card__attribute-row").each((_j, row) => {
         attrTexts.push($(row).text().trim());
       });
       const attrJoined = attrTexts.join(" | ");
 
-      // Shipping
       let shippingCost = null;
       let shippingText = null;
       for (const attr of attrTexts) {
@@ -107,7 +132,6 @@ async function fetchSoldListings() {
         }
       }
 
-      // Date sold — from .s-card__caption
       let dateSold = null;
       const captionText = $el.find(".s-card__caption .su-styled-text").text().trim();
       const dateMatch = captionText.match(
@@ -117,7 +141,6 @@ async function fetchSoldListings() {
         dateSold = dateMatch[1].trim();
       }
 
-      // Listing type — from attribute rows
       let listingType = "Buy It Now";
       const lowerAttrs = attrJoined.toLowerCase();
       if (lowerAttrs.includes("bid")) {
@@ -126,14 +149,11 @@ async function fetchSoldListings() {
         listingType = "Best Offer Accepted";
       }
 
-      // Bids count
       const bidsMatch = lowerAttrs.match(/(\d+)\s*bid/i);
       const bids = bidsMatch ? parseInt(bidsMatch[1], 10) : null;
 
-      // Condition — from .s-card__subtitle
       const condition = $el.find(".s-card__subtitle .su-styled-text").text().trim() || null;
 
-      // Seller — from secondary attributes section
       let seller = null;
       const sellerEl = $el.find(".su-card-container__attributes__secondary .s-card__attribute-row").first();
       if (sellerEl.length) {
@@ -144,7 +164,6 @@ async function fetchSoldListings() {
         seller = sellerTexts.filter(Boolean).join(" — ") || null;
       }
 
-      // Location
       let location = null;
       for (const attr of attrTexts) {
         if (attr.toLowerCase().startsWith("located in")) {
@@ -171,7 +190,7 @@ async function fetchSoldListings() {
       }
     });
 
-    console.log(`Parsed ${listings.length} sold listings`);
+    console.log(`Parsed ${listings.length} sold listings for "${query}"`);
     return listings;
   } finally {
     await browser.close();
