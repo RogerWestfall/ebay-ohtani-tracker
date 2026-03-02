@@ -45,6 +45,19 @@
       "totalCost": 979.88,
       "purchaseDate": "2025-09-21",
       "excludeTerms": []
+    },
+    {
+      "name": "1989 Fleer Bill Ripken FF Error PSA 9",
+      "query": "1989 Fleer Bill Ripken FF Error #616 PSA 9",
+      "cardNumber": "616",
+      "variant": true,
+      "autograph": false,
+      "misc": "FF Error, Fuck Face Error",
+      "requireTerms": ["error"],
+      "purchasePrice": 180.44,
+      "totalCost": 186.45,
+      "purchaseDate": "2025-11-16",
+      "excludeTerms": ["black box", "whiteout", "white-out", "white out", "scribble", "saw cut", "corrected", "rick face"]
     }
   ]
 }
