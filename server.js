@@ -49,7 +49,13 @@ app.get("/api/sold-listings/:cardIndex", async (req, res) => {
       });
     }
 
-    const listings = await fetchSoldListings(card.query, card.excludeTerms || []);
+    const listings = await fetchSoldListings(card.query, {
+      excludeTerms: card.excludeTerms || [],
+      requireTerms: card.requireTerms || [],
+      cardNumber: card.cardNumber || null,
+      variant: card.variant !== undefined ? card.variant : null,
+      autograph: card.autograph !== undefined ? card.autograph : null,
+    });
     cache[cacheKey] = { listings, fetchedAt: now };
     res.json({ success: true, card: card.name, listings });
   } catch (err) {
@@ -58,7 +64,66 @@ app.get("/api/sold-listings/:cardIndex", async (req, res) => {
   }
 });
 
-async function fetchSoldListings(query, excludeTerms) {
+// Detect bundle/lot listings — (2), (3), "x2", "lot", etc.
+const BUNDLE_PATTERN = /^\s*\(\d+\)|\(\d+\)\s|x\s*\d{2,}|\b\d+\s*card\s*lot\b|\blot\b|\bbundle\b|\bset of\b/i;
+function isBundleListing(title) {
+  return BUNDLE_PATTERN.test(title);
+}
+
+// Variant-related terms — used when card.variant === false to filter out parallels/inserts
+const VARIANT_TERMS = [
+  "refractor", "xfractor", "superfractor",
+  "variation", "short print",
+  "mojo", "prism", "prizm",
+  "shimmer", "atomic", "sapphire",
+  "camo", "sepia", "negative",
+  "printing plate", "vintage stock",
+  "parallel", "mini diamond",
+];
+// Short abbreviations need word-boundary matching to avoid false positives
+// "SP" — short print (avoid matching "PSA", "SPORTS")
+// "VAR" — variation abbreviation (avoid matching "various", etc.)
+const VARIANT_ABBREV_PATTERN = /\bSP\b|\bVAR\b/i;
+
+function isVariantListing(title) {
+  const lower = title.toLowerCase();
+  for (const term of VARIANT_TERMS) {
+    if (lower.includes(term)) return true;
+  }
+  // Check for short abbreviations with word boundaries
+  if (VARIANT_ABBREV_PATTERN.test(title)) return true;
+  return false;
+}
+
+// Autograph-related terms — used when card.autograph === false
+const AUTOGRAPH_TERMS = ["auto", "autograph", "signed", "signature"];
+
+function isAutographListing(title) {
+  const lower = title.toLowerCase();
+  for (const term of AUTOGRAPH_TERMS) {
+    if (lower.includes(term)) return true;
+  }
+  return false;
+}
+
+// Match card number in title with smart regex
+// Numeric cards (e.g. "1"): require # prefix so #1 matches but #10 or #1b doesn't
+// Alphanumeric cards (e.g. "HMT55"): match with or without # prefix
+function matchesCardNumber(title, cardNumber) {
+  if (!cardNumber) return true;
+  const escaped = cardNumber.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const startsWithLetter = /^[a-zA-Z]/.test(cardNumber);
+  let pattern;
+  if (startsWithLetter) {
+    pattern = new RegExp(`(?:#)?${escaped}(?!\\w)`, "i");
+  } else {
+    // Use (?!\w) to block both digits (#10) and letter suffixes (#1b SP variants)
+    pattern = new RegExp(`#${escaped}(?!\\w)`, "i");
+  }
+  return pattern.test(title);
+}
+
+async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber, variant, autograph }) {
   const encoded = encodeURIComponent(query);
   const url = `https://www.ebay.com/sch/i.html?_nkw=${encoded}&LH_Complete=1&LH_Sold=1&_sop=13&_ipg=120`;
 
@@ -98,11 +163,30 @@ async function fetchSoldListings(query, excludeTerms) {
       const title = $el.find(".s-card__title .su-styled-text").first().text().trim();
       if (!title || title === "Shop on eBay") return;
 
-      // Filter out excluded terms
+      // Filter out excluded terms (card-specific blacklist)
       const titleLower = title.toLowerCase();
       for (const term of excludeTerms) {
         if (titleLower.includes(term.toLowerCase())) return;
       }
+
+      // Require all terms in requireTerms to be present (whitelist)
+      if (requireTerms.length > 0) {
+        for (const term of requireTerms) {
+          if (!titleLower.includes(term.toLowerCase())) return;
+        }
+      }
+
+      // Filter out variants when the card is NOT a variant
+      if (variant === false && isVariantListing(title)) return;
+
+      // Filter out autographs when the card is NOT an autograph
+      if (autograph === false && isAutographListing(title)) return;
+
+      // Require card number match if specified
+      if (!matchesCardNumber(title, cardNumber)) return;
+
+      // Filter out bundle/lot listings (multiple cards sold together)
+      if (isBundleListing(title)) return;
 
       const link = $el.find("a.s-card__link[href*='/itm/']").attr("href") || "";
       const image = $el.find(".s-card__image").attr("src") || "";

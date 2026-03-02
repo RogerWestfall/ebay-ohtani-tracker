@@ -3,18 +3,48 @@
     {
       "name": "2018 Bowman Chrome Shohei Ohtani Rookie PSA 10",
       "query": "2018 Bowman Chrome Shohei Ohtani Rookie PSA 10",
+      "cardNumber": "1",
+      "variant": false,
+      "autograph": false,
       "purchasePrice": 1655.00,
       "totalCost": 1808.40,
       "purchaseDate": "2025-09-20",
-      "excludeTerms": ["refractor", "auto", "autograph"]
+      "excludeTerms": []
     },
     {
       "name": "2018 Topps Chrome Update Juan Soto PSA 10",
       "query": "2018 Topps Chrome Update Juan Soto PSA 10",
+      "cardNumber": "HMT55",
+      "variant": false,
+      "autograph": false,
       "purchasePrice": 57.00,
       "totalCost": 67.27,
       "purchaseDate": "2025-11-28",
-      "excludeTerms": ["refractor", "auto", "autograph"]
+      "excludeTerms": []
+    },
+    {
+      "name": "2024 Bowman Draft Chrome Konnor Griffin PSA 10",
+      "query": "2024 Bowman Draft Chrome Konnor Griffin PSA 10",
+      "cardNumber": "BDC22",
+      "variant": false,
+      "autograph": false,
+      "purchasePrice": 309.99,
+      "totalCost": 344.02,
+      "purchaseDate": "2026-02-28",
+      "excludeTerms": []
+    },
+    {
+      "name": "2018 Topps Chrome Shohei Ohtani Pink Refractor Pitching PSA 10",
+      "query": "2018 Topps Chrome Shohei Ohtani Pink Refractor Pitching PSA 10",
+      "cardNumber": "150",
+      "variant": true,
+      "autograph": false,
+      "misc": "Pitching - Pink Refractor",
+      "requireTerms": ["pink", "pitching"],
+      "purchasePrice": 900.00,
+      "totalCost": 979.88,
+      "purchaseDate": "2025-09-21",
+      "excludeTerms": []
     }
   ]
 }
