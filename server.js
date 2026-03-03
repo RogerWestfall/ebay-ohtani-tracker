@@ -59,12 +59,25 @@ async function getBrowser() {
   return browser;
 }
 
-// Request queue — serialize eBay fetches to prevent memory overload
-let fetchQueue = Promise.resolve();
+// Concurrency-limited queue — max 2 simultaneous eBay fetches
+const MAX_CONCURRENT = 2;
+let activeCount = 0;
+const waitQueue = [];
 
 function queueFetch(fn) {
   return new Promise((resolve, reject) => {
-    fetchQueue = fetchQueue.then(() => fn().then(resolve, reject));
+    const run = () => {
+      activeCount++;
+      fn().then(resolve, reject).finally(() => {
+        activeCount--;
+        if (waitQueue.length > 0) waitQueue.shift()();
+      });
+    };
+    if (activeCount < MAX_CONCURRENT) {
+      run();
+    } else {
+      waitQueue.push(run);
+    }
   });
 }
 
@@ -329,4 +342,29 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
+
+  // Pre-warm cache on startup so first visitor gets instant results
+  try {
+    const portfolio = loadPortfolio();
+    console.log(`Pre-warming cache for ${portfolio.cards.length} cards...`);
+    portfolio.cards.forEach((card, idx) => {
+      const cacheKey = `card_${idx}`;
+      queueFetch(() =>
+        fetchSoldListings(card.query, {
+          excludeTerms: card.excludeTerms || [],
+          requireTerms: card.requireTerms || [],
+          cardNumber: card.cardNumber || null,
+          variant: card.variant !== undefined ? card.variant : null,
+          autograph: card.autograph !== undefined ? card.autograph : null,
+        })
+      ).then(listings => {
+        cache[cacheKey] = { listings, fetchedAt: Date.now() };
+        console.log(`Cache warmed: ${card.name} (${listings.length} listings)`);
+      }).catch(err => {
+        console.error(`Cache warm failed for ${card.name}:`, err.message);
+      });
+    });
+  } catch (err) {
+    console.error("Failed to start cache warming:", err.message);
+  }
 });

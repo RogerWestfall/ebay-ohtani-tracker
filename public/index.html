@@ -82,6 +82,30 @@
     a:hover { text-decoration: underline; }
     .title-cell { min-width: 280px; max-width: 500px; overflow: hidden; word-break: break-word; line-height: 1.4; }
 
+    /* Card hero image */
+    .card-hero {
+      display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px;
+    }
+    .card-hero-image {
+      flex-shrink: 0; width: 200px; height: 280px;
+      background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .card-hero-image img {
+      width: 100%; height: 100%; object-fit: contain;
+    }
+    .card-hero-image .placeholder {
+      color: #30363d; font-size: 3rem;
+    }
+    .card-hero-info { flex: 1; min-width: 0; }
+    .card-hero-name {
+      font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 4px;
+    }
+    .card-hero-details {
+      font-size: 0.85rem; color: #8b949e; line-height: 1.6;
+    }
+    .card-hero-details span { color: #e1e4e8; }
+
     .loading { text-align: center; padding: 80px 20px; color: #8b949e; }
     .spinner {
       display: inline-block; width: 36px; height: 36px;
@@ -100,6 +124,9 @@
       .stat-card { padding: 12px 16px; min-width: 100px; }
       .stat-card .value { font-size: 1.1rem; }
       .stat-card .label { font-size: 0.65rem; }
+      .card-hero { gap: 16px; }
+      .card-hero-image { width: 140px; height: 196px; }
+      .card-hero-name { font-size: 1rem; }
       .chart-container { padding: 12px; max-height: 300px; }
       .thumb { width: 40px; height: 40px; }
       .title-cell { min-width: 150px; max-width: 180px; }
@@ -109,6 +136,8 @@
 
     @media (max-width: 480px) {
       body { padding: 8px; }
+      .card-hero { flex-direction: column; align-items: center; text-align: center; }
+      .card-hero-image { width: 160px; height: 224px; }
       .stats-row { flex-direction: column; }
       .stat-card { min-width: unset; }
       .title-cell { min-width: 120px; max-width: 140px; }
@@ -216,39 +245,51 @@
 
       selectorEl.addEventListener("change", () => switchTab(parseInt(selectorEl.value)));
 
-      // Fetch all cards in parallel
-      const fetches = portfolio.cards.map((_, i) =>
-        fetch(`/api/sold-listings/${i}`).then(r => r.json())
-      );
-      const results = await Promise.all(fetches);
+      // Fetch all cards — render each as it arrives
+      portfolio.cards.forEach((_, i) => {
+        fetch(`/api/sold-listings/${i}`).then(r => r.json()).then(data => {
+          const panel = document.getElementById(`panel-${i}`);
+          const loadingEl = panel.querySelector(".loading");
+          const errorEl = panel.querySelector(".error");
 
-      results.forEach((data, i) => {
-        const panel = document.getElementById(`panel-${i}`);
-        const loadingEl = panel.querySelector(".loading");
-        const errorEl = panel.querySelector(".error");
+          if (!data.success) {
+            loadingEl.style.display = "none";
+            errorEl.style.display = "block";
+            errorEl.textContent = "Failed to fetch: " + data.error;
+            return;
+          }
 
-        if (!data.success) {
+          cardData[i].listings = data.listings;
           loadingEl.style.display = "none";
-          errorEl.style.display = "block";
-          errorEl.textContent = "Failed to fetch: " + data.error;
-          return;
-        }
+          panel.querySelector(".card-hero").style.display = "flex";
+          panel.querySelector(".card-investment").style.display = "block";
+          panel.querySelector(".card-market").style.display = "block";
+          panel.querySelector(".card-chart-container").style.display = "block";
+          panel.querySelector(".listings-table").style.display = "table";
 
-        cardData[i].listings = data.listings;
-        loadingEl.style.display = "none";
-        panel.querySelector(".card-investment").style.display = "block";
-        panel.querySelector(".card-market").style.display = "block";
-        panel.querySelector(".card-chart-container").style.display = "block";
-        panel.querySelector(".listings-table").style.display = "table";
+          // Find and display the card hero image
+          setHeroImage(i, data.listings);
 
-        renderCardInvestment(i);
-        renderCardMarketStats(i);
-        renderCardTable(i, data.listings);
-        renderCardChart(i);
-        setupSorting(i);
+          renderCardInvestment(i);
+          renderCardMarketStats(i);
+          renderCardTable(i, data.listings);
+          renderCardChart(i);
+          setupSorting(i);
+
+          // Update portfolio summary as each card loads
+          renderPortfolioSummary();
+        }).catch(err => {
+          const panel = document.getElementById(`panel-${i}`);
+          panel.querySelector(".loading").style.display = "none";
+          panel.querySelector(".error").style.display = "block";
+          panel.querySelector(".error").textContent = "Failed to fetch: " + err.message;
+        });
       });
+    }
 
-      renderPortfolioSummary();
+    function upscaleImage(url) {
+      if (!url) return "";
+      return url.replace(/s-l\d+/, "s-l500");
     }
 
     function buildPanelHTML(i, card) {
@@ -258,6 +299,21 @@
           <div>Fetching sold listings for ${esc(card.name)}…</div>
         </div>
         <div class="error" style="display:none;"></div>
+
+        <div class="card-hero" style="display:none;">
+          <div class="card-hero-image">
+            <div class="placeholder" id="hero-placeholder-${i}">&#x1F0CF;</div>
+            <img id="hero-img-${i}" style="display:none;" alt="${esc(card.name)}">
+          </div>
+          <div class="card-hero-info">
+            <div class="card-hero-name">${esc(card.name)}</div>
+            <div class="card-hero-details">
+              ${card.cardNumber ? `Card #: <span>${esc(card.cardNumber)}</span><br>` : ""}
+              ${card.misc ? `Notes: <span>${esc(card.misc)}</span><br>` : ""}
+              ${card.itemId ? `eBay Item: <span>${esc(card.itemId)}</span>` : ""}
+            </div>
+          </div>
+        </div>
 
         <div class="card-investment section" style="display:none;">
           <h2>My Investment</h2>
@@ -342,6 +398,33 @@
       document.getElementById(`panel-${idx}`).classList.add("active");
       // Sync dropdown if called programmatically
       document.getElementById("card-selector").value = idx;
+    }
+
+    function setHeroImage(i, listings) {
+      const card = cardData[i].card;
+      const imgEl = document.getElementById(`hero-img-${i}`);
+      const placeholderEl = document.getElementById(`hero-placeholder-${i}`);
+      let imageUrl = "";
+
+      // Try to match the specific itemId in listing links
+      if (card.itemId) {
+        const match = listings.find(l => l.link && l.link.includes(card.itemId));
+        if (match && match.image) {
+          imageUrl = upscaleImage(match.image);
+        }
+      }
+
+      // Fallback: use first listing with an image
+      if (!imageUrl) {
+        const first = listings.find(l => l.image);
+        if (first) imageUrl = upscaleImage(first.image);
+      }
+
+      if (imageUrl) {
+        imgEl.src = imageUrl;
+        imgEl.style.display = "block";
+        placeholderEl.style.display = "none";
+      }
     }
 
     function renderCardInvestment(i) {
