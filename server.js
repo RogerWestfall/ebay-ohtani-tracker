@@ -113,15 +113,33 @@ app.get("/api/sold-listings/:cardIndex", async (req, res) => {
       });
     }
 
-    const listings = await queueFetch(() =>
-      fetchSoldListings(card.query, {
-        excludeTerms: card.excludeTerms || [],
-        requireTerms: card.requireTerms || [],
-        cardNumber: card.cardNumber || null,
-        variant: card.variant !== undefined ? card.variant : null,
-        autograph: card.autograph !== undefined ? card.autograph : null,
-      })
+    const REQUEST_TIMEOUT_MS = 25000; // respond before Render's ~30s HTTP timeout
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("REQUEST_TIMEOUT")), REQUEST_TIMEOUT_MS)
     );
+
+    let listings;
+    try {
+      listings = await Promise.race([
+        queueFetch(() =>
+          fetchSoldListings(card.query, {
+            excludeTerms: card.excludeTerms || [],
+            requireTerms: card.requireTerms || [],
+            cardNumber: card.cardNumber || null,
+            variant: card.variant !== undefined ? card.variant : null,
+            autograph: card.autograph !== undefined ? card.autograph : null,
+          })
+        ),
+        timeoutPromise,
+      ]);
+    } catch (err) {
+      if (err.message === "REQUEST_TIMEOUT") {
+        console.warn(`Timeout on card index ${idx} (${card.name}) — client will retry`);
+        return res.json({ success: false, error: "timeout", retry: true });
+      }
+      throw err;
+    }
+
     cache[cacheKey] = { listings, fetchedAt: now };
     res.json({ success: true, card: card.name, listings });
   } catch (err) {

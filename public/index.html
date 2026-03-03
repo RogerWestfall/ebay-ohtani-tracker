@@ -345,6 +345,13 @@
         .then(data => {
           if (!data.success) {
             loadingEl.style.display = "none";
+            if (data.retry) {
+              // Server was busy — auto-retry after a short delay
+              loadingEl.innerHTML = `<div class="spinner"></div><div>Server busy, retrying…</div>`;
+              loadingEl.style.display = "block";
+              setTimeout(() => fetchCard(i), 4000);
+              return;
+            }
             showCardError(i, "Server error: " + data.error);
             return;
           }
