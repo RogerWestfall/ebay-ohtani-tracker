@@ -204,7 +204,7 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
     );
     await page.setViewport({ width: 1280, height: 900 });
 
-    await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
 
     await page.waitForSelector(".s-card", { timeout: 15000 }).catch(() => {
       console.log("No .s-card found, checking page state...");

@@ -323,16 +323,29 @@
       selectorEl.addEventListener("change", () => switchTab(parseInt(selectorEl.value)));
 
       // Fetch all cards — render each as it arrives
-      portfolio.cards.forEach((_, i) => {
-        fetch(`/api/sold-listings/${i}`).then(r => r.json()).then(data => {
-          const panel = document.getElementById(`panel-${i}`);
-          const loadingEl = panel.querySelector(".loading");
-          const errorEl = panel.querySelector(".error");
+      portfolio.cards.forEach((_, i) => fetchCard(i));
+    }
 
+    function fetchCard(i) {
+      const panel = document.getElementById(`panel-${i}`);
+      const loadingEl = panel.querySelector(".loading");
+      const errorEl = panel.querySelector(".error");
+      loadingEl.style.display = "block";
+      errorEl.style.display = "none";
+
+      fetch(`/api/sold-listings/${i}`)
+        .then(async r => {
+          const text = await r.text();
+          if (!text) throw new Error("Server returned an empty response — it may have timed out. Try refreshing.");
+          let data;
+          try { data = JSON.parse(text); }
+          catch (e) { throw new Error("Invalid server response. It may have timed out on Render."); }
+          return data;
+        })
+        .then(data => {
           if (!data.success) {
             loadingEl.style.display = "none";
-            errorEl.style.display = "block";
-            errorEl.textContent = "Failed to fetch: " + data.error;
+            showCardError(i, "Server error: " + data.error);
             return;
           }
 
@@ -356,12 +369,34 @@
           // Update portfolio summary as each card loads
           renderPortfolioSummary();
         }).catch(err => {
-          const panel = document.getElementById(`panel-${i}`);
-          panel.querySelector(".loading").style.display = "none";
-          panel.querySelector(".error").style.display = "block";
-          panel.querySelector(".error").textContent = "Failed to fetch: " + err.message;
+          loadingEl.style.display = "none";
+          showCardError(i, err.message);
         });
-      });
+    }
+
+    function showCardError(i, msg) {
+      const errorEl = document.getElementById(`panel-${i}`).querySelector(".error");
+      errorEl.innerHTML = `
+        <div>${esc(msg)}</div>
+        <button onclick="retryCard(${i})" style="margin-top:12px;padding:8px 18px;background:var(--surface-2);color:var(--accent);border:1px solid var(--accent);border-radius:6px;cursor:pointer;font-size:0.85rem;">
+          Retry
+        </button>
+      `;
+      errorEl.style.display = "block";
+    }
+
+    function retryCard(i) {
+      // Destroy existing chart if any so it can be recreated
+      if (cardData[i].chart) { cardData[i].chart.destroy(); cardData[i].chart = null; }
+      cardData[i].listings = null;
+      // Hide previously shown sections
+      const panel = document.getElementById(`panel-${i}`);
+      panel.querySelector(".card-hero").style.display = "none";
+      panel.querySelector(".card-investment").style.display = "none";
+      panel.querySelector(".card-market").style.display = "none";
+      panel.querySelector(".card-chart-container").style.display = "none";
+      panel.querySelector(".listings-table").style.display = "none";
+      fetchCard(i);
     }
 
     function upscaleImage(url) {
