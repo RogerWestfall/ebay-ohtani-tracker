@@ -7,135 +7,211 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0/dist/chartjs-plugin-annotation.min.js"></script>
   <style>
+    :root {
+      --bg:         #07090f;
+      --surface:    #0d1220;
+      --surface-2:  #131a2e;
+      --border:     #1c2840;
+      --border-2:   #243350;
+      --accent:     #c9922a;
+      --accent-dim: rgba(201, 146, 42, 0.12);
+      --text:       #d4dff0;
+      --text-muted: #4e6585;
+      --green:      #27c770;
+      --red:        #f04f4f;
+      --blue:       #4b9ede;
+      --gold:       #e8b84b;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #0f1117;
-      color: #e1e4e8;
-      padding: 24px;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.5;
+      min-height: 100vh;
     }
-    h1 { font-size: 1.6rem; margin-bottom: 4px; color: #fff; }
-    h2 {
-      font-size: 1rem; color: #8b949e; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;
-    }
-    .subtitle { color: #8b949e; font-size: 0.9rem; margin-bottom: 24px; }
-    .section { margin-bottom: 24px; }
-    .stats-row { display: flex; gap: 16px; flex-wrap: wrap; }
-    .stat-card {
-      background: #161b22; border: 1px solid #30363d; border-radius: 8px;
-      padding: 16px 24px; min-width: 140px; flex: 1;
-    }
-    .stat-card .label { font-size: 0.7rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.05em; }
-    .stat-card .value { font-size: 1.4rem; font-weight: 700; color: #58a6ff; margin-top: 4px; }
-    .stat-card .value.green { color: #3fb950; }
-    .stat-card .value.red { color: #f85149; }
-    .stat-card .value.orange { color: #d29922; }
-    .stat-card .sub { font-size: 0.75rem; color: #8b949e; margin-top: 2px; }
-    .stat-card.pnl-positive { border-color: #238636; }
-    .stat-card.pnl-negative { border-color: #da3633; }
 
-    /* Card Selector Dropdown */
-    .card-selector-wrapper { margin-bottom: 24px; }
-    .card-selector-label { font-size: 0.7rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-    .card-selector {
-      width: 100%; max-width: 500px; padding: 10px 16px;
-      background: #161b22; color: #e1e4e8; border: 1px solid #30363d; border-radius: 8px;
-      font-size: 0.95rem; font-weight: 600; cursor: pointer;
-      appearance: none; -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b949e' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 14px center;
+    /* ── Site header ── */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 28px 16px;
+      display: flex; align-items: baseline; gap: 14px;
     }
-    .card-selector:hover { border-color: #58a6ff; }
-    .card-selector:focus { outline: none; border-color: #58a6ff; box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2); }
-    .card-selector option { background: #161b22; color: #e1e4e8; padding: 8px; }
+    .site-header h1 {
+      font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em;
+      color: #fff;
+    }
+    .site-header .subtitle {
+      font-size: 0.8rem; color: var(--text-muted); font-weight: 400;
+    }
+
+    /* ── Page body ── */
+    .page-body { padding: 24px 28px; max-width: 1400px; }
+
+    /* ── Section headings ── */
+    h2 {
+      font-size: 0.68rem; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px;
+    }
+    .section { margin-bottom: 28px; }
+
+    /* ── Portfolio summary banner ── */
+    .portfolio-banner {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 24px; margin-bottom: 28px;
+      display: flex; align-items: center; gap: 0;
+    }
+    .portfolio-banner .banner-item {
+      flex: 1; padding: 0 24px; border-right: 1px solid var(--border);
+    }
+    .portfolio-banner .banner-item:first-child { padding-left: 0; }
+    .portfolio-banner .banner-item:last-child { border-right: none; }
+    .banner-label {
+      font-size: 0.65rem; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px;
+    }
+    .banner-value {
+      font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; color: #fff;
+    }
+    .banner-value.green { color: var(--green); }
+    .banner-value.red   { color: var(--red); }
+    .banner-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── Card selector ── */
+    .card-selector-wrapper { margin-bottom: 24px; }
+    .card-selector-label {
+      font-size: 0.65rem; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;
+    }
+    .card-selector {
+      width: 100%; max-width: 520px; padding: 11px 16px;
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border-2); border-radius: 8px;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23c9922a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      transition: border-color 0.15s;
+    }
+    .card-selector:hover { border-color: var(--accent); }
+    .card-selector:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+    .card-selector option { background: var(--surface-2); color: var(--text); }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
+    /* ── Stat cards ── */
+    .stats-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 20px; min-width: 130px; flex: 1;
+      transition: border-color 0.15s;
+    }
+    .stat-card .label {
+      font-size: 0.63rem; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.09em;
+    }
+    .stat-card .value {
+      font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--blue); margin-top: 5px;
+    }
+    .stat-card .value.green  { color: var(--green); }
+    .stat-card .value.red    { color: var(--red); }
+    .stat-card .value.orange { color: var(--gold); }
+    .stat-card .sub { font-size: 0.73rem; color: var(--text-muted); margin-top: 3px; }
+    .stat-card.pnl-positive { border-color: rgba(39, 199, 112, 0.35); }
+    .stat-card.pnl-negative { border-color: rgba(240, 79, 79, 0.35); }
+
+    /* ── Chart ── */
     .chart-container {
-      background: #161b22; border: 1px solid #30363d; border-radius: 8px;
-      padding: 20px; margin-bottom: 24px; max-height: 400px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px; margin-bottom: 24px; max-height: 400px;
     }
+
+    /* ── Table ── */
     .table-container {
-      background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow-x: auto;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; overflow-x: auto;
     }
-    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
     th {
-      background: #1c2129; color: #8b949e; font-weight: 600; text-transform: uppercase;
-      font-size: 0.7rem; letter-spacing: 0.05em; padding: 12px 14px; text-align: left;
-      border-bottom: 1px solid #30363d; cursor: pointer; user-select: none; white-space: nowrap;
+      background: var(--surface-2); color: var(--text-muted); font-weight: 700;
+      text-transform: uppercase; font-size: 0.63rem; letter-spacing: 0.09em;
+      padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--border);
+      cursor: pointer; user-select: none; white-space: nowrap;
+      transition: color 0.15s;
     }
-    th:hover { color: #58a6ff; }
-    th .sort-arrow { margin-left: 4px; font-size: 0.65rem; }
-    td { padding: 10px 14px; border-bottom: 1px solid #21262d; vertical-align: middle; }
-    tr:hover { background: #1c2129; }
-    .thumb { width: 60px; height: 60px; object-fit: contain; border-radius: 4px; background: #0d1117; }
-    .price { font-weight: 700; color: #3fb950; white-space: nowrap; }
-    .shipping { color: #8b949e; font-size: 0.8rem; }
-    .date { white-space: nowrap; }
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; }
-    .badge-auction { background: #1f3a5f; color: #58a6ff; }
-    .badge-bin { background: #1a3a2a; color: #3fb950; }
-    .badge-offer { background: #3a2f1a; color: #d29922; }
-    a { color: #58a6ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    th:hover { color: var(--accent); }
+    th .sort-arrow { margin-left: 4px; font-size: 0.6rem; color: var(--accent); }
+    td { padding: 10px 14px; border-bottom: 1px solid rgba(28,40,64,0.7); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface-2); }
+    .thumb { width: 60px; height: 60px; object-fit: contain; border-radius: 4px; background: var(--bg); }
+    .price { font-weight: 700; color: var(--green); white-space: nowrap; }
+    .shipping { color: var(--text-muted); font-size: 0.8rem; }
+    .date { white-space: nowrap; color: var(--text-muted); font-size: 0.82rem; }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; }
+    .badge-auction { background: rgba(75,158,222,0.15); color: var(--blue); border: 1px solid rgba(75,158,222,0.25); }
+    .badge-bin     { background: rgba(39,199,112,0.12); color: var(--green); border: 1px solid rgba(39,199,112,0.25); }
+    .badge-offer   { background: rgba(232,184,75,0.12); color: var(--gold); border: 1px solid rgba(232,184,75,0.25); }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: #7bb8e8; text-decoration: underline; }
     .title-cell { min-width: 280px; max-width: 500px; overflow: hidden; word-break: break-word; line-height: 1.4; }
 
-    /* Card hero image */
-    .card-hero {
-      display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px;
-    }
+    /* ── Card hero ── */
+    .card-hero { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px; }
     .card-hero-image {
       flex-shrink: 0; width: 200px; height: 280px;
-      background: #161b22; border: 1px solid #30363d; border-radius: 8px;
-      overflow: hidden; display: flex; align-items: center; justify-content: center;
+      background: var(--surface-2); border: 1px solid var(--border-2);
+      border-radius: 10px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
     }
-    .card-hero-image img {
-      width: 100%; height: 100%; object-fit: contain;
-    }
-    .card-hero-image .placeholder {
-      color: #30363d; font-size: 3rem;
-    }
-    .card-hero-info { flex: 1; min-width: 0; }
+    .card-hero-image img { width: 100%; height: 100%; object-fit: contain; }
+    .card-hero-image .placeholder { color: var(--border-2); font-size: 3rem; }
+    .card-hero-info { flex: 1; min-width: 0; padding-top: 4px; }
     .card-hero-name {
-      font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 4px;
+      font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em;
+      color: #fff; margin-bottom: 8px; line-height: 1.3;
     }
-    .card-hero-details {
-      font-size: 0.85rem; color: #8b949e; line-height: 1.6;
-    }
-    .card-hero-details span { color: #e1e4e8; }
+    .card-hero-details { font-size: 0.82rem; color: var(--text-muted); line-height: 1.9; }
+    .card-hero-details .detail-label { color: var(--accent); font-weight: 600; margin-right: 4px; }
+    .card-hero-details span { color: var(--text); }
 
-    .loading { text-align: center; padding: 80px 20px; color: #8b949e; }
+    /* ── Loading / error ── */
+    .loading { text-align: center; padding: 80px 20px; color: var(--text-muted); }
     .spinner {
-      display: inline-block; width: 36px; height: 36px;
-      border: 3px solid #30363d; border-top-color: #58a6ff;
+      display: inline-block; width: 34px; height: 34px;
+      border: 3px solid var(--border-2); border-top-color: var(--accent);
       border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .error { text-align: center; padding: 40px; color: #f85149; }
+    .error { text-align: center; padding: 40px; color: var(--red); }
 
-    /* Mobile responsive */
+    /* ── Mobile ── */
     @media (max-width: 768px) {
-      body { padding: 12px; }
-      h1 { font-size: 1.3rem; }
-      .card-selector { max-width: 100%; font-size: 0.85rem; }
+      .site-header { padding: 14px 16px 12px; }
+      .site-header h1 { font-size: 1.1rem; }
+      .page-body { padding: 16px; }
+      .portfolio-banner { flex-direction: column; gap: 16px; }
+      .portfolio-banner .banner-item { border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 16px; }
+      .portfolio-banner .banner-item:last-child { border-bottom: none; padding-bottom: 0; }
+      .banner-value { font-size: 1.4rem; }
+      .card-selector { max-width: 100%; }
       .stats-row { gap: 8px; }
-      .stat-card { padding: 12px 16px; min-width: 100px; }
+      .stat-card { padding: 12px 14px; min-width: 100px; }
       .stat-card .value { font-size: 1.1rem; }
-      .stat-card .label { font-size: 0.65rem; }
       .card-hero { gap: 16px; }
       .card-hero-image { width: 140px; height: 196px; }
       .card-hero-name { font-size: 1rem; }
-      .chart-container { padding: 12px; max-height: 300px; }
+      .chart-container { padding: 12px; max-height: 280px; }
       .thumb { width: 40px; height: 40px; }
       .title-cell { min-width: 150px; max-width: 180px; }
       td { padding: 8px 10px; font-size: 0.8rem; }
-      th { padding: 10px; font-size: 0.65rem; }
+      th { padding: 10px; font-size: 0.62rem; }
     }
 
     @media (max-width: 480px) {
-      body { padding: 8px; }
       .card-hero { flex-direction: column; align-items: center; text-align: center; }
       .card-hero-image { width: 160px; height: 224px; }
       .stats-row { flex-direction: column; }
@@ -146,38 +222,39 @@
   </style>
 </head>
 <body>
-  <h1>Sports Card Portfolio Tracker</h1>
-  <p class="subtitle" id="subtitle">Loading portfolio…</p>
+  <header class="site-header">
+    <h1>Card Portfolio</h1>
+    <span class="subtitle" id="subtitle">Loading…</span>
+  </header>
 
-  <!-- Portfolio Summary -->
-  <div id="portfolio-summary" class="section" style="display:none;">
-    <h2>Portfolio Summary</h2>
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="label">Total Invested</div>
-        <div class="value" id="port-cost">—</div>
-        <div class="sub" id="port-cards-count"></div>
+  <div class="page-body">
+    <!-- Portfolio Summary Banner -->
+    <div id="portfolio-summary" class="portfolio-banner" style="display:none;">
+      <div class="banner-item">
+        <div class="banner-label">Total Invested</div>
+        <div class="banner-value" id="port-cost">—</div>
+        <div class="banner-sub" id="port-cards-count"></div>
       </div>
-      <div class="stat-card">
-        <div class="label">Total Market Value</div>
-        <div class="value green" id="port-value">—</div>
+      <div class="banner-item">
+        <div class="banner-label">Market Value</div>
+        <div class="banner-value green" id="port-value">—</div>
       </div>
-      <div class="stat-card" id="port-pnl-card">
-        <div class="label">Total P&L</div>
-        <div class="value green" id="port-pnl">—</div>
-        <div class="sub" id="port-pnl-pct"></div>
+      <div class="banner-item" id="port-pnl-card">
+        <div class="banner-label">Total P&amp;L</div>
+        <div class="banner-value green" id="port-pnl">—</div>
+        <div class="banner-sub" id="port-pnl-pct"></div>
       </div>
     </div>
-  </div>
 
-  <!-- Card Selector -->
-  <div class="card-selector-wrapper">
-    <div class="card-selector-label">Select Card</div>
-    <select class="card-selector" id="card-selector"></select>
-  </div>
+    <!-- Card Selector -->
+    <div class="card-selector-wrapper">
+      <div class="card-selector-label">Select Card</div>
+      <select class="card-selector" id="card-selector"></select>
+    </div>
 
-  <!-- Card Panels (dynamically generated) -->
-  <div id="card-panels"></div>
+    <!-- Card Panels (dynamically generated) -->
+    <div id="card-panels"></div>
+  </div>
 
   <script>
     let portfolio = null;
@@ -308,9 +385,9 @@
           <div class="card-hero-info">
             <div class="card-hero-name">${esc(card.name)}</div>
             <div class="card-hero-details">
-              ${card.cardNumber ? `Card #: <span>${esc(card.cardNumber)}</span><br>` : ""}
-              ${card.misc ? `Notes: <span>${esc(card.misc)}</span><br>` : ""}
-              ${card.itemId ? `eBay Item: <span>${esc(card.itemId)}</span>` : ""}
+              ${card.cardNumber ? `<span class="detail-label">Card #</span><span>${esc(card.cardNumber)}</span><br>` : ""}
+              ${card.misc ? `<span class="detail-label">Notes</span><span>${esc(card.misc)}</span><br>` : ""}
+              ${card.itemId ? `<span class="detail-label">eBay Item</span><span>${esc(card.itemId)}</span>` : ""}
             </div>
           </div>
         </div>
@@ -587,15 +664,14 @@
       const pnlPct = (pnl / totalCost) * 100;
       const pos = pnl >= 0;
 
-      document.getElementById("portfolio-summary").style.display = "block";
+      document.getElementById("portfolio-summary").style.display = "flex";
       document.getElementById("port-cost").textContent = fmt(totalCost);
       document.getElementById("port-cards-count").textContent = cardsLoaded + " card" + (cardsLoaded > 1 ? "s" : "");
       document.getElementById("port-value").textContent = fmt(totalValue);
       document.getElementById("port-pnl").textContent = (pos ? "+" : "") + fmt(pnl);
-      document.getElementById("port-pnl").className = "value " + (pos ? "green" : "red");
+      document.getElementById("port-pnl").className = "banner-value " + (pos ? "green" : "red");
       document.getElementById("port-pnl-pct").textContent = (pos ? "+" : "") + pnlPct.toFixed(1) + "%";
-      document.getElementById("port-pnl-pct").style.color = pos ? "#3fb950" : "#f85149";
-      document.getElementById("port-pnl-card").className = "stat-card " + (pos ? "pnl-positive" : "pnl-negative");
+      document.getElementById("port-pnl-pct").style.color = pos ? "var(--green)" : "var(--red)";
     }
 
     init();
