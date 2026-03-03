@@ -15,7 +15,58 @@ function loadPortfolio() {
 
 // Per-card cache
 const cache = {};
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
+
+// Shared browser singleton — one Chrome instance reused across all requests
+let browserInstance = null;
+let browserLaunchPromise = null;
+
+async function getBrowser() {
+  if (browserInstance && browserInstance.isConnected()) {
+    return browserInstance;
+  }
+  // If already launching, wait for it
+  if (browserLaunchPromise) {
+    return browserLaunchPromise;
+  }
+  browserLaunchPromise = (async () => {
+    const launchOptions = {
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--single-process",
+        "--no-zygote",
+        "--disable-gpu",
+        "--disable-extensions",
+      ],
+    };
+    if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+      launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+    }
+    console.log("Launching shared browser instance...");
+    browserInstance = await puppeteer.launch(launchOptions);
+    browserInstance.on("disconnected", () => {
+      console.log("Browser disconnected, will relaunch on next request");
+      browserInstance = null;
+      browserLaunchPromise = null;
+    });
+    return browserInstance;
+  })();
+  const browser = await browserLaunchPromise;
+  browserLaunchPromise = null;
+  return browser;
+}
+
+// Request queue — serialize eBay fetches to prevent memory overload
+let fetchQueue = Promise.resolve();
+
+function queueFetch(fn) {
+  return new Promise((resolve, reject) => {
+    fetchQueue = fetchQueue.then(() => fn().then(resolve, reject));
+  });
+}
 
 app.get("/api/portfolio", (_req, res) => {
   try {
@@ -49,13 +100,15 @@ app.get("/api/sold-listings/:cardIndex", async (req, res) => {
       });
     }
 
-    const listings = await fetchSoldListings(card.query, {
-      excludeTerms: card.excludeTerms || [],
-      requireTerms: card.requireTerms || [],
-      cardNumber: card.cardNumber || null,
-      variant: card.variant !== undefined ? card.variant : null,
-      autograph: card.autograph !== undefined ? card.autograph : null,
-    });
+    const listings = await queueFetch(() =>
+      fetchSoldListings(card.query, {
+        excludeTerms: card.excludeTerms || [],
+        requireTerms: card.requireTerms || [],
+        cardNumber: card.cardNumber || null,
+        variant: card.variant !== undefined ? card.variant : null,
+        autograph: card.autograph !== undefined ? card.autograph : null,
+      })
+    );
     cache[cacheKey] = { listings, fetchedAt: now };
     res.json({ success: true, card: card.name, listings });
   } catch (err) {
@@ -127,25 +180,18 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
   const encoded = encodeURIComponent(query);
   const url = `https://www.ebay.com/sch/i.html?_nkw=${encoded}&LH_Complete=1&LH_Sold=1&_sop=13&_ipg=120`;
 
-  console.log("Launching browser to fetch:", url);
+  console.log("Fetching:", url);
 
-  const launchOptions = {
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
-  };
-  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
-    launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
-  }
-  const browser = await puppeteer.launch(launchOptions);
+  const browser = await getBrowser();
+  const page = await browser.newPage();
 
   try {
-    const page = await browser.newPage();
     await page.setUserAgent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
     );
     await page.setViewport({ width: 1280, height: 900 });
 
-    await page.goto(url, { waitUntil: "networkidle2", timeout: 30000 });
+    await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
 
     await page.waitForSelector(".s-card", { timeout: 15000 }).catch(() => {
       console.log("No .s-card found, checking page state...");
@@ -277,7 +323,7 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
     console.log(`Parsed ${listings.length} sold listings for "${query}"`);
     return listings;
   } finally {
-    await browser.close();
+    await page.close();
   }
 }
 
