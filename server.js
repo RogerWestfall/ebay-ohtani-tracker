@@ -17,6 +17,11 @@ function loadPortfolio() {
 const cache = {};
 const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
 
+// Background fetch tracking
+const fetchingCards = new Set(); // card cache keys currently being fetched
+const fetchErrors = {};          // consecutive error count per cache key
+const MAX_FETCH_ERRORS = 3;
+
 // Shared browser singleton — one Chrome instance reused across all requests
 let browserInstance = null;
 let browserLaunchPromise = null;
@@ -91,8 +96,35 @@ app.get("/api/portfolio", (_req, res) => {
   }
 });
 
+// Kick off a background eBay fetch for a card (no-op if already running)
+function startFetchIfNeeded(card, idx) {
+  const cacheKey = `card_${idx}`;
+  if (fetchingCards.has(cacheKey)) return; // already in progress
+
+  fetchingCards.add(cacheKey);
+  queueFetch(() =>
+    fetchSoldListings(card.query, {
+      excludeTerms: card.excludeTerms || [],
+      requireTerms: card.requireTerms || [],
+      cardNumber: card.cardNumber || null,
+      variant: card.variant !== undefined ? card.variant : null,
+      autograph: card.autograph !== undefined ? card.autograph : null,
+    })
+  ).then(listings => {
+    cache[cacheKey] = { listings, fetchedAt: Date.now() };
+    fetchingCards.delete(cacheKey);
+    delete fetchErrors[cacheKey];
+    console.log(`Cached: ${card.name} (${listings.length} listings)`);
+  }).catch(err => {
+    fetchingCards.delete(cacheKey);
+    fetchErrors[cacheKey] = (fetchErrors[cacheKey] || 0) + 1;
+    console.error(`Fetch error for ${card.name} (attempt ${fetchErrors[cacheKey]}):`, err.message);
+  });
+}
+
 // Fetch sold listings for a specific card by index
-app.get("/api/sold-listings/:cardIndex", async (req, res) => {
+// Responds immediately — data is fetched in the background; client polls until ready.
+app.get("/api/sold-listings/:cardIndex", (req, res) => {
   try {
     const portfolio = loadPortfolio();
     const idx = parseInt(req.params.cardIndex, 10);
@@ -102,48 +134,29 @@ app.get("/api/sold-listings/:cardIndex", async (req, res) => {
 
     const card = portfolio.cards[idx];
     const cacheKey = `card_${idx}`;
-    const now = Date.now();
 
-    if (cache[cacheKey] && now - cache[cacheKey].fetchedAt < CACHE_TTL) {
-      return res.json({
-        success: true,
-        card: card.name,
-        listings: cache[cacheKey].listings,
-        cached: true,
-      });
+    // ?retry=1 resets the error counter so the client can force a fresh attempt
+    if (req.query.retry === "1") {
+      delete fetchErrors[cacheKey];
     }
 
-    const REQUEST_TIMEOUT_MS = 25000; // respond before Render's ~30s HTTP timeout
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("REQUEST_TIMEOUT")), REQUEST_TIMEOUT_MS)
-    );
-
-    let listings;
-    try {
-      listings = await Promise.race([
-        queueFetch(() =>
-          fetchSoldListings(card.query, {
-            excludeTerms: card.excludeTerms || [],
-            requireTerms: card.requireTerms || [],
-            cardNumber: card.cardNumber || null,
-            variant: card.variant !== undefined ? card.variant : null,
-            autograph: card.autograph !== undefined ? card.autograph : null,
-          })
-        ),
-        timeoutPromise,
-      ]);
-    } catch (err) {
-      if (err.message === "REQUEST_TIMEOUT") {
-        console.warn(`Timeout on card index ${idx} (${card.name}) — client will retry`);
-        return res.json({ success: false, error: "timeout", retry: true });
-      }
-      throw err;
+    // Serve from cache if fresh
+    if (cache[cacheKey] && Date.now() - cache[cacheKey].fetchedAt < CACHE_TTL) {
+      return res.json({ success: true, card: card.name, listings: cache[cacheKey].listings, cached: true });
     }
 
-    cache[cacheKey] = { listings, fetchedAt: now };
-    res.json({ success: true, card: card.name, listings });
+    // After MAX_FETCH_ERRORS consecutive failures, report the error
+    if ((fetchErrors[cacheKey] || 0) >= MAX_FETCH_ERRORS) {
+      return res.json({ success: false, error: "Could not fetch eBay data after several attempts. Click Retry to try again." });
+    }
+
+    // Trigger background fetch (queued, max 2 concurrent)
+    startFetchIfNeeded(card, idx);
+
+    // Respond immediately — client will poll
+    return res.json({ success: false, pending: true });
   } catch (err) {
-    console.error("Error fetching listings:", err.message);
+    console.error("Error in sold-listings route:", err.message);
     res.status(500).json({ success: false, error: err.message });
   }
 });
@@ -222,7 +235,7 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
     );
     await page.setViewport({ width: 1280, height: 900 });
 
-    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+    await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
 
     await page.waitForSelector(".s-card", { timeout: 15000 }).catch(() => {
       console.log("No .s-card found, checking page state...");
@@ -365,23 +378,7 @@ app.listen(PORT, () => {
   try {
     const portfolio = loadPortfolio();
     console.log(`Pre-warming cache for ${portfolio.cards.length} cards...`);
-    portfolio.cards.forEach((card, idx) => {
-      const cacheKey = `card_${idx}`;
-      queueFetch(() =>
-        fetchSoldListings(card.query, {
-          excludeTerms: card.excludeTerms || [],
-          requireTerms: card.requireTerms || [],
-          cardNumber: card.cardNumber || null,
-          variant: card.variant !== undefined ? card.variant : null,
-          autograph: card.autograph !== undefined ? card.autograph : null,
-        })
-      ).then(listings => {
-        cache[cacheKey] = { listings, fetchedAt: Date.now() };
-        console.log(`Cache warmed: ${card.name} (${listings.length} listings)`);
-      }).catch(err => {
-        console.error(`Cache warm failed for ${card.name}:`, err.message);
-      });
-    });
+    portfolio.cards.forEach((card, idx) => startFetchIfNeeded(card, idx));
   } catch (err) {
     console.error("Failed to start cache warming:", err.message);
   }

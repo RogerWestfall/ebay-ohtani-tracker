@@ -326,33 +326,31 @@
       portfolio.cards.forEach((_, i) => fetchCard(i));
     }
 
-    function fetchCard(i) {
+    function fetchCard(i, retry) {
       const panel = document.getElementById(`panel-${i}`);
       const loadingEl = panel.querySelector(".loading");
       const errorEl = panel.querySelector(".error");
       loadingEl.style.display = "block";
       errorEl.style.display = "none";
 
-      fetch(`/api/sold-listings/${i}`)
+      const url = `/api/sold-listings/${i}` + (retry ? "?retry=1" : "");
+
+      fetch(url)
         .then(async r => {
           const text = await r.text();
-          if (!text) throw new Error("Server returned an empty response — it may have timed out. Try refreshing.");
-          let data;
-          try { data = JSON.parse(text); }
-          catch (e) { throw new Error("Invalid server response. It may have timed out on Render."); }
-          return data;
+          if (!text) throw new Error("Server returned an empty response.");
+          try { return JSON.parse(text); }
+          catch (e) { throw new Error("Invalid response from server."); }
         })
         .then(data => {
+          if (data.pending) {
+            // Background fetch in progress — poll again in 3 seconds
+            setTimeout(() => fetchCard(i), 3000);
+            return;
+          }
           if (!data.success) {
             loadingEl.style.display = "none";
-            if (data.retry) {
-              // Server was busy — auto-retry after a short delay
-              loadingEl.innerHTML = `<div class="spinner"></div><div>Server busy, retrying…</div>`;
-              loadingEl.style.display = "block";
-              setTimeout(() => fetchCard(i), 4000);
-              return;
-            }
-            showCardError(i, "Server error: " + data.error);
+            showCardError(i, data.error || "Unknown server error.");
             return;
           }
 
@@ -403,7 +401,7 @@
       panel.querySelector(".card-market").style.display = "none";
       panel.querySelector(".card-chart-container").style.display = "none";
       panel.querySelector(".listings-table").style.display = "none";
-      fetchCard(i);
+      fetchCard(i, true);
     }
 
     function upscaleImage(url) {
