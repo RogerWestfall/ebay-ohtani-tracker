@@ -354,7 +354,17 @@
             return;
           }
 
-          cardData[i].listings = data.listings;
+          // Sort by date sold descending (most recent first)
+          const sorted = [...data.listings].sort((a, b) => {
+            if (!a.dateSold && !b.dateSold) return 0;
+            if (!a.dateSold) return 1;
+            if (!b.dateSold) return -1;
+            return new Date(b.dateSold) - new Date(a.dateSold);
+          });
+          cardData[i].listings = sorted;
+          cardData[i].sortCol = "dateSold";
+          cardData[i].sortDir = "desc";
+
           loadingEl.style.display = "none";
           panel.querySelector(".card-hero").style.display = "flex";
           panel.querySelector(".card-investment").style.display = "block";
@@ -363,13 +373,16 @@
           panel.querySelector(".listings-table").style.display = "table";
 
           // Find and display the card hero image
-          setHeroImage(i, data.listings);
+          setHeroImage(i, sorted);
 
           renderCardInvestment(i);
           renderCardMarketStats(i);
-          renderCardTable(i, data.listings);
+          renderCardTable(i, sorted);
           renderCardChart(i);
           setupSorting(i);
+          // Show initial sort arrow on Date Sold column
+          const dateSoldTh = panel.querySelector('th[data-col="dateSold"]');
+          if (dateSoldTh) dateSoldTh.querySelector(".sort-arrow").textContent = "▼";
 
           // Update portfolio summary as each card loads
           renderPortfolioSummary();
