@@ -13,9 +13,12 @@ function loadPortfolio() {
   return JSON.parse(fs.readFileSync(path.join(__dirname, "portfolio.json"), "utf8"));
 }
 
-// Per-card cache
+// ScraperAPI proxy — set SCRAPER_API_KEY env var on Render to route through residential IPs
+const SCRAPER_API_KEY = process.env.SCRAPER_API_KEY || "";
+
+// Per-card cache — longer TTL when using proxy to conserve API credits
 const cache = {};
-const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
+const CACHE_TTL = SCRAPER_API_KEY ? 2 * 60 * 60 * 1000 : 15 * 60 * 1000; // 2h (proxy) or 15min (direct)
 
 // Concurrency-limited queue — 2 simultaneous eBay fetches (avoids rate limiting)
 const MAX_CONCURRENT = 2;
@@ -59,8 +62,9 @@ function fetchCardListings(card, cacheKey) {
     .catch(err => {
       // Retry once after 5s if eBay rate-limited us
       if (err.message === "RATE_LIMITED") {
-        console.warn(`Rate limited on ${card.name}, refreshing cookies and retrying in 5s...`);
-        return refreshSessionCookies()
+        console.warn(`Rate limited on ${card.name}, retrying in 5s...`);
+        const refresh = SCRAPER_API_KEY ? Promise.resolve() : refreshSessionCookies();
+        return refresh
           .then(() => new Promise(r => setTimeout(r, 5000)))
           .then(doFetch);
       }
@@ -90,24 +94,23 @@ app.get("/api/portfolio", (_req, res) => {
   }
 });
 
-// Diagnostic endpoint — shows what eBay returns from Render's IP
+// Diagnostic endpoint — shows what eBay returns
 app.get("/api/debug-ebay", async (_req, res) => {
   try {
-    await refreshSessionCookies();
     const url = "https://www.ebay.com/sch/i.html?_nkw=baseball+card&LH_Complete=1&LH_Sold=1&_ipg=10";
     const html = await fetchPage(url);
     const hasCards = html.includes("s-card");
     const title = html.match(/<title>(.*?)<\/title>/)?.[1] || "no title";
     res.json({
       success: true,
+      mode: SCRAPER_API_KEY ? "proxy" : "direct",
       htmlLength: html.length,
       hasListingCards: hasCards,
       pageTitle: title,
-      cookiesPresent: !!sessionCookies,
       snippet: html.substring(0, 500),
     });
   } catch (err) {
-    res.json({ success: false, error: err.message, cookiesPresent: !!sessionCookies });
+    res.json({ success: false, error: err.message, mode: SCRAPER_API_KEY ? "proxy" : "direct" });
   }
 });
 
@@ -195,7 +198,39 @@ function matchesCardNumber(title, cardNumber) {
   return pattern.test(title);
 }
 
-// Session cookies — collected from eBay to pass bot detection on datacenter IPs
+// ── Fetch page via ScraperAPI proxy (used on Render) ──
+function fetchViaProxy(targetUrl) {
+  const proxyUrl = `https://api.scraperapi.com?api_key=${SCRAPER_API_KEY}&url=${encodeURIComponent(targetUrl)}`;
+  return new Promise((resolve, reject) => {
+    const req = https.get(proxyUrl, (res) => {
+      if (res.statusCode !== 200) {
+        let body = "";
+        res.on("data", (chunk) => (body += chunk));
+        res.on("end", () => {
+          console.error(`ScraperAPI HTTP ${res.statusCode}: ${body.substring(0, 300)}`);
+          // ScraperAPI returns 429 when credits exhausted
+          if (res.statusCode === 429) {
+            reject(new Error("SCRAPER_API_LIMIT"));
+          } else {
+            reject(new Error(`ScraperAPI returned HTTP ${res.statusCode}`));
+          }
+        });
+        return;
+      }
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => resolve(data));
+      res.on("error", reject);
+    });
+    req.on("error", reject);
+    req.setTimeout(60000, () => {
+      req.destroy();
+      reject(new Error("ScraperAPI request timed out after 60s"));
+    });
+  });
+}
+
+// ── Fetch page directly (used locally) ──
 let sessionCookies = "";
 
 async function refreshSessionCookies() {
@@ -227,8 +262,7 @@ async function refreshSessionCookies() {
   });
 }
 
-// Fetch a URL via HTTPS with full browser-like headers + cookies
-function fetchPage(url) {
+function fetchDirect(url) {
   return new Promise((resolve, reject) => {
     const headers = {
       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
@@ -250,22 +284,19 @@ function fetchPage(url) {
     if (sessionCookies) headers["Cookie"] = sessionCookies;
 
     const req = https.get(url, { headers }, (res) => {
-      // Collect any new cookies from the response
       const setCookies = res.headers["set-cookie"];
       if (setCookies) {
         const newCookies = setCookies.map(c => c.split(";")[0]).join("; ");
         sessionCookies = sessionCookies ? sessionCookies + "; " + newCookies : newCookies;
       }
 
-      // Detect eBay bot-detection challenge
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
         if (res.headers.location.includes("challenge") || res.headers.location.includes("captcha")) {
           reject(new Error("RATE_LIMITED"));
           return;
         }
-        // Follow normal redirects
-        fetchPage(res.headers.location).then(resolve, reject);
+        fetchDirect(res.headers.location).then(resolve, reject);
         return;
       }
       if (res.statusCode !== 200) {
@@ -289,6 +320,12 @@ function fetchPage(url) {
       reject(new Error("eBay request timed out after 15s"));
     });
   });
+}
+
+// ── Route to proxy or direct based on config ──
+function fetchPage(url) {
+  if (SCRAPER_API_KEY) return fetchViaProxy(url);
+  return fetchDirect(url);
 }
 
 async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber, variant, autograph }) {
@@ -426,21 +463,22 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
 
 app.listen(PORT, async () => {
   console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Fetch mode: ${SCRAPER_API_KEY ? "ScraperAPI proxy" : "direct"}, Cache TTL: ${CACHE_TTL / 60000}min`);
 
-  // Grab eBay session cookies before any scraping (helps pass bot detection on datacenter IPs)
-  await refreshSessionCookies();
+  // Only need session cookies for direct mode
+  if (!SCRAPER_API_KEY) await refreshSessionCookies();
 
   // Pre-warm cache on startup so first visitor gets instant results
   try {
     const portfolio = loadPortfolio();
     console.log(`Pre-warming cache for ${portfolio.cards.length} cards...`);
-    // Stagger pre-warming requests to avoid eBay rate limiting
+    const stagger = SCRAPER_API_KEY ? 3000 : 1500; // longer stagger for proxy
     portfolio.cards.forEach((card, idx) => {
       setTimeout(() => {
         fetchCardListings(card, `card_${idx}`)
           .then(listings => console.log(`Cached: ${card.name} (${listings.length} listings)`))
           .catch(err => console.error(`Cache warm failed for ${card.name}:`, err.message));
-      }, idx * 1500); // 1.5s between each card start
+      }, idx * stagger);
     });
   } catch (err) {
     console.error("Failed to start cache warming:", err.message);
