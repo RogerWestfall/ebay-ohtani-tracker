@@ -90,6 +90,27 @@ app.get("/api/portfolio", (_req, res) => {
   }
 });
 
+// Diagnostic endpoint — shows what eBay returns from Render's IP
+app.get("/api/debug-ebay", async (_req, res) => {
+  try {
+    await refreshSessionCookies();
+    const url = "https://www.ebay.com/sch/i.html?_nkw=baseball+card&LH_Complete=1&LH_Sold=1&_ipg=10";
+    const html = await fetchPage(url);
+    const hasCards = html.includes("s-card");
+    const title = html.match(/<title>(.*?)<\/title>/)?.[1] || "no title";
+    res.json({
+      success: true,
+      htmlLength: html.length,
+      hasListingCards: hasCards,
+      pageTitle: title,
+      cookiesPresent: !!sessionCookies,
+      snippet: html.substring(0, 500),
+    });
+  } catch (err) {
+    res.json({ success: false, error: err.message, cookiesPresent: !!sessionCookies });
+  }
+});
+
 // Fetch sold listings for a specific card by index
 app.get("/api/sold-listings/:cardIndex", async (req, res) => {
   try {
@@ -248,8 +269,13 @@ function fetchPage(url) {
         return;
       }
       if (res.statusCode !== 200) {
-        res.resume();
-        reject(new Error(`eBay returned HTTP ${res.statusCode}`));
+        let body = "";
+        res.on("data", (chunk) => (body += chunk));
+        res.on("end", () => {
+          const title = body.match(/<title>(.*?)<\/title>/)?.[1] || "";
+          console.error(`eBay HTTP ${res.statusCode} — title: "${title}", body length: ${body.length}`);
+          reject(new Error(`eBay returned HTTP ${res.statusCode} (${title || "no title"})`));
+        });
         return;
       }
       let data = "";
