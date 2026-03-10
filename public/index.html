@@ -326,28 +326,19 @@
       portfolio.cards.forEach((_, i) => fetchCard(i));
     }
 
-    function fetchCard(i, retry) {
+    function fetchCard(i) {
       const panel = document.getElementById(`panel-${i}`);
       const loadingEl = panel.querySelector(".loading");
       const errorEl = panel.querySelector(".error");
       loadingEl.style.display = "block";
       errorEl.style.display = "none";
 
-      const url = `/api/sold-listings/${i}` + (retry ? "?retry=1" : "");
-
-      fetch(url)
-        .then(async r => {
-          const text = await r.text();
-          if (!text) throw new Error("Server returned an empty response.");
-          try { return JSON.parse(text); }
-          catch (e) { throw new Error("Invalid response from server."); }
+      fetch(`/api/sold-listings/${i}`)
+        .then(r => {
+          if (!r.ok) throw new Error(`Server error (${r.status})`);
+          return r.json();
         })
         .then(data => {
-          if (data.pending) {
-            // Background fetch in progress — poll again in 3 seconds
-            setTimeout(() => fetchCard(i), 3000);
-            return;
-          }
           if (!data.success) {
             loadingEl.style.display = "none";
             showCardError(i, data.error || "Unknown server error.");
@@ -414,7 +405,7 @@
       panel.querySelector(".card-market").style.display = "none";
       panel.querySelector(".card-chart-container").style.display = "none";
       panel.querySelector(".listings-table").style.display = "none";
-      fetchCard(i, true);
+      fetchCard(i);
     }
 
     function upscaleImage(url) {
