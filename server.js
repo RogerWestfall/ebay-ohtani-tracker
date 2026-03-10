@@ -59,8 +59,10 @@ function fetchCardListings(card, cacheKey) {
     .catch(err => {
       // Retry once after 5s if eBay rate-limited us
       if (err.message === "RATE_LIMITED") {
-        console.warn(`Rate limited on ${card.name}, retrying in 5s...`);
-        return new Promise(r => setTimeout(r, 5000)).then(doFetch);
+        console.warn(`Rate limited on ${card.name}, refreshing cookies and retrying in 5s...`);
+        return refreshSessionCookies()
+          .then(() => new Promise(r => setTimeout(r, 5000)))
+          .then(doFetch);
       }
       throw err;
     })
@@ -172,17 +174,68 @@ function matchesCardNumber(title, cardNumber) {
   return pattern.test(title);
 }
 
-// Fetch a URL via HTTPS with browser-like headers, returns HTML string
-function fetchPage(url) {
-  return new Promise((resolve, reject) => {
-    const req = https.get(url, {
+// Session cookies — collected from eBay to pass bot detection on datacenter IPs
+let sessionCookies = "";
+
+async function refreshSessionCookies() {
+  return new Promise((resolve) => {
+    https.get("https://www.ebay.com", {
       headers: {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
         "Accept-Encoding": "identity",
+        "Sec-Ch-Ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+        "Sec-Ch-Ua-Mobile": "?0",
+        "Sec-Ch-Ua-Platform": '"macOS"',
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Sec-Fetch-User": "?1",
+        "Upgrade-Insecure-Requests": "1",
       },
     }, (res) => {
+      const setCookies = res.headers["set-cookie"];
+      if (setCookies) {
+        sessionCookies = setCookies.map(c => c.split(";")[0]).join("; ");
+        console.log("Got eBay session cookies");
+      }
+      res.resume();
+      resolve();
+    }).on("error", () => resolve());
+  });
+}
+
+// Fetch a URL via HTTPS with full browser-like headers + cookies
+function fetchPage(url) {
+  return new Promise((resolve, reject) => {
+    const headers = {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "Accept-Language": "en-US,en;q=0.9",
+      "Accept-Encoding": "identity",
+      "Cache-Control": "max-age=0",
+      "Connection": "keep-alive",
+      "DNT": "1",
+      "Sec-Ch-Ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+      "Sec-Ch-Ua-Mobile": "?0",
+      "Sec-Ch-Ua-Platform": '"macOS"',
+      "Sec-Fetch-Dest": "document",
+      "Sec-Fetch-Mode": "navigate",
+      "Sec-Fetch-Site": "none",
+      "Sec-Fetch-User": "?1",
+      "Upgrade-Insecure-Requests": "1",
+    };
+    if (sessionCookies) headers["Cookie"] = sessionCookies;
+
+    const req = https.get(url, { headers }, (res) => {
+      // Collect any new cookies from the response
+      const setCookies = res.headers["set-cookie"];
+      if (setCookies) {
+        const newCookies = setCookies.map(c => c.split(";")[0]).join("; ");
+        sessionCookies = sessionCookies ? sessionCookies + "; " + newCookies : newCookies;
+      }
+
       // Detect eBay bot-detection challenge
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
@@ -345,8 +398,11 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
   return listings;
 }
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server running at http://localhost:${PORT}`);
+
+  // Grab eBay session cookies before any scraping (helps pass bot detection on datacenter IPs)
+  await refreshSessionCookies();
 
   // Pre-warm cache on startup so first visitor gets instant results
   try {
