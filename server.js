@@ -54,6 +54,10 @@ const inFlight = new Map();
 function fetchCardListings(card, cacheKey) {
   if (inFlight.has(cacheKey)) return inFlight.get(cacheKey);
 
+  // Extract grading info from card name (e.g. "PSA 10" → { grader: "PSA", grade: "10" })
+  const gradeMatch = card.name.match(/\b(PSA|BGS|SGC|CGC)\s+(\d+(?:\.\d+)?)\b/i);
+  const gradingInfo = gradeMatch ? { grader: gradeMatch[1].toUpperCase(), grade: gradeMatch[2] } : null;
+
   const doFetch = () => queueFetch(() =>
     fetchSoldListings(card.query, {
       excludeTerms: card.excludeTerms || [],
@@ -61,6 +65,7 @@ function fetchCardListings(card, cacheKey) {
       cardNumber: card.cardNumber || null,
       variant: card.variant !== undefined ? card.variant : null,
       autograph: card.autograph !== undefined ? card.autograph : null,
+      gradingInfo,
     })
   );
 
@@ -334,7 +339,7 @@ function fetchPage(url) {
   return fetchDirect(url);
 }
 
-async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber, variant, autograph }) {
+async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber, variant, autograph, gradingInfo }) {
   const encoded = encodeURIComponent(query);
   const url = `https://www.ebay.com/sch/i.html?_nkw=${encoded}&LH_Complete=1&LH_Sold=1&_sop=13&_ipg=120`;
 
@@ -373,6 +378,18 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
 
     // Require card number match if specified
     if (!matchesCardNumber(title, cardNumber)) return;
+
+    // Filter out listings with a different grade than our card
+    // e.g. if our card is PSA 10, reject listings mentioning PSA 9, BGS 9.5, etc.
+    if (gradingInfo) {
+      const gradePattern = /\b(PSA|BGS|SGC|CGC)\s+(\d+(?:\.\d+)?)\b/gi;
+      let match;
+      while ((match = gradePattern.exec(title)) !== null) {
+        if (match[1].toUpperCase() === gradingInfo.grader && match[2] !== gradingInfo.grade) {
+          return; // Different grade from same grader — wrong card
+        }
+      }
+    }
 
     // Filter out bundle/lot listings (multiple cards sold together)
     if (isBundleListing(title)) return;

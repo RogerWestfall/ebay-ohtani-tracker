@@ -25,12 +25,15 @@ async function main() {
     console.log(`[${i + 1}/${portfolio.cards.length}] ${card.name}`);
 
     try {
+      const gradeMatch = card.name.match(/\b(PSA|BGS|SGC|CGC)\s+(\d+(?:\.\d+)?)\b/i);
+      const gradingInfo = gradeMatch ? { grader: gradeMatch[1].toUpperCase(), grade: gradeMatch[2] } : null;
       const listings = await fetchSoldListings(card.query, {
         excludeTerms: card.excludeTerms || [],
         requireTerms: card.requireTerms || [],
         cardNumber: card.cardNumber || null,
         variant: card.variant !== undefined ? card.variant : null,
         autograph: card.autograph !== undefined ? card.autograph : null,
+        gradingInfo,
       });
       results[`card_${i}`] = {
         name: card.name,
