@@ -60,6 +60,19 @@
       "totalCost": 186.45,
       "purchaseDate": "2025-11-16",
       "excludeTerms": ["black box", "whiteout", "white-out", "white out", "scribble", "saw cut", "corrected", "rick face"]
+    },
+    {
+      "name": "2025 Bowman Chrome Prospects JJ Wetherholt PSA 10",
+      "query": "2025 Bowman Chrome Prospects JJ Wetherholt BCP22 PSA 10",
+      "cardNumber": "BCP22",
+      "variant": false,
+      "autograph": false,
+      "itemId": "358387958694",
+      "misc": "Rookie",
+      "purchasePrice": 129.99,
+      "totalCost": 147.05,
+      "purchaseDate": "2026-03-29",
+      "excludeTerms": []
     }
   ]
 }
