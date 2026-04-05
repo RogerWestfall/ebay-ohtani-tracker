@@ -269,6 +269,31 @@
       const mid = Math.floor(sorted.length / 2);
       return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
     }
+
+    // Compute median from recent sales using a tiered window.
+    // Prefers recent data but expands the window for illiquid cards.
+    // Returns { median, count, windowDays } so the UI can show context.
+    const MIN_SAMPLE = 3;
+    const WINDOWS = [3, 10, 30, 60, 90];
+    function recentMedian(listings) {
+      if (listings.length === 0) return { median: 0, count: 0, windowDays: null };
+      const now = new Date();
+      for (const days of WINDOWS) {
+        const cutoff = new Date(now);
+        cutoff.setDate(cutoff.getDate() - days);
+        const recent = listings.filter(l => {
+          if (!l.dateSold) return false;
+          return new Date(l.dateSold) >= cutoff;
+        });
+        if (recent.length >= MIN_SAMPLE) {
+          const prices = recent.map(l => l.price);
+          return { median: median(prices), count: recent.length, windowDays: days };
+        }
+      }
+      // Not enough dated sales in any window — use all listings
+      const prices = listings.map(l => l.price);
+      return { median: median(prices), count: prices.length, windowDays: null };
+    }
     function esc(str) {
       const d = document.createElement("div");
       d.textContent = str;
@@ -550,8 +575,9 @@
 
     function renderCardInvestment(i) {
       const card = cardData[i].card;
-      const prices = cardData[i].listings.map(l => l.price);
-      const med = median(prices);
+      const rm = recentMedian(cardData[i].listings);
+      cardData[i]._recentMedian = rm; // cache for portfolio summary
+      const med = rm.median;
       const cost = card.totalCost;
       const pnl = med - cost;
       const pnlPct = (pnl / cost) * 100;
@@ -561,7 +587,8 @@
       document.getElementById(`inv-pp-${i}`).textContent = "Card price: " + fmt(card.purchasePrice);
       document.getElementById(`inv-market-${i}`).textContent = fmt(med);
       document.getElementById(`inv-market-${i}`).className = "value " + (pos ? "green" : "red");
-      document.getElementById(`inv-market-sub-${i}`).textContent = "Based on " + prices.length + " recent sales";
+      const windowLabel = rm.windowDays ? `last ${rm.windowDays} days` : "all time";
+      document.getElementById(`inv-market-sub-${i}`).textContent = `Based on ${rm.count} sales (${windowLabel})`;
       document.getElementById(`inv-pnl-${i}`).textContent = (pos ? "+" : "") + fmt(pnl);
       document.getElementById(`inv-pnl-${i}`).className = "value " + (pos ? "green" : "red");
       document.getElementById(`inv-pnl-pct-${i}`).textContent = (pos ? "+" : "") + pnlPct.toFixed(1) + "%";
@@ -698,7 +725,8 @@
       cardData.forEach(cd => {
         if (!cd.listings) return;
         totalCost += cd.card.totalCost;
-        totalValue += median(cd.listings.map(l => l.price));
+        const rm = cd._recentMedian || recentMedian(cd.listings);
+        totalValue += rm.median;
         cardsLoaded++;
       });
 
