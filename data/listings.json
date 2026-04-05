@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-04-05T05:48:59.782Z",
+  "fetchedAt": "2026-04-05T08:55:07.527Z",
   "cards": {
     "card_0": {
       "name": "2018 Bowman Chrome Shohei Ohtani Rookie PSA 10",
@@ -915,7 +915,7 @@
           "image": "https://i.ebayimg.com/images/g/klkAAeSw5bNpn5Io/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-04-05T05:48:47.162Z"
+      "fetchedAt": "2026-04-05T08:54:54.930Z"
     },
     "card_1": {
       "name": "2018 Topps Chrome Update Juan Soto PSA 10",
@@ -1971,7 +1971,7 @@
           "image": "https://i.ebayimg.com/images/g/R0gAAeSw9KNpqLf~/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-04-05T05:48:50.491Z"
+      "fetchedAt": "2026-04-05T08:54:58.057Z"
     },
     "card_2": {
       "name": "2024 Bowman Draft Chrome Konnor Griffin PSA 10",
@@ -2159,7 +2159,7 @@
           "image": "https://i.ebayimg.com/images/g/7JQAAeSw17hpvvnv/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-04-05T05:48:53.507Z"
+      "fetchedAt": "2026-04-05T08:55:00.946Z"
     },
     "card_3": {
       "name": "2018 Topps Chrome Shohei Ohtani Pink Refractor Pitching PSA 10",
@@ -2291,20 +2291,6 @@
           "image": "https://i.ebayimg.com/images/g/PpsAAeSwX2VpVif6/s-l140.webp"
         },
         {
-          "title": "2018 TOPPS CHROME PITCHING-PINK REFRACTOR #150 SHOHEI OHTANI ROOKIE RC PSA 10",
-          "price": 1699,
-          "shippingCost": 5.99,
-          "shippingText": "+$5.99 delivery",
-          "dateSold": "Jan 4, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "psa — 99.9% positive (471.9K)",
-          "location": "Located in United States",
-          "link": "https://www.ebay.com/itm/116964048110",
-          "image": "https://i.ebayimg.com/images/g/B~EAAeSweVlpWdf4/s-l140.webp"
-        },
-        {
           "title": "PSA 9 2018 Topps Chrome #150 Shohei Ohtani Pitching Pink Refractor RC Angels",
           "price": 1499.99,
           "shippingCost": 15,
@@ -2317,20 +2303,6 @@
           "location": "Located in United States",
           "link": "https://www.ebay.com/itm/406735926886",
           "image": "https://i.ebayimg.com/images/g/KtMAAeSw5BNpp5jN/s-l140.webp"
-        },
-        {
-          "title": "2018 TOPPS CHROME PITCHING-PINK REFRACTOR #150 SHOHEI OHTANI ROOKIE RC PSA 9",
-          "price": 1800,
-          "shippingCost": 6.99,
-          "shippingText": "+$6.99 delivery",
-          "dateSold": "Mar 18, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "dmoore517 — 100% positive (1K)",
-          "location": "Located in United States",
-          "link": "https://www.ebay.com/itm/287184880521",
-          "image": "https://i.ebayimg.com/images/g/HG4AAeSw2yNpq0py/s-l140.webp"
         },
         {
           "title": "2018 TOPPS CHROME PITCHING-PINK REFRACTOR #150 SHOHEI OHTANI ROOKIE CARD PSA 9",
@@ -2347,6 +2319,20 @@
           "image": "https://i.ebayimg.com/images/g/UOEAAeSw4iBpaoQm/s-l140.webp"
         },
         {
+          "title": "2018 TOPPS CHROME PITCHING-PINK REFRACTOR #150 SHOHEI OHTANI ROOKIE RC PSA 9",
+          "price": 1800,
+          "shippingCost": 6.99,
+          "shippingText": "+$6.99 delivery",
+          "dateSold": "Mar 18, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "dmoore517 — 100% positive (1K)",
+          "location": "Located in United States",
+          "link": "https://www.ebay.com/itm/287184880521",
+          "image": "https://i.ebayimg.com/images/g/HG4AAeSw2yNpq0py/s-l140.webp"
+        },
+        {
           "title": "PSA 9 2018 TOPPS CHROME PITCHING-PINK REFRACTOR #150 SHOHEI OHTANI ROOKIE RC",
           "price": 1999.99,
           "shippingCost": 5.5,
@@ -2361,7 +2347,7 @@
           "image": "https://i.ebayimg.com/images/g/7UYAAeSwPENpwyRb/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-04-05T05:48:56.875Z"
+      "fetchedAt": "2026-04-05T08:55:04.215Z"
     },
     "card_4": {
       "name": "1989 Fleer Bill Ripken FF Error PSA 9",
@@ -3697,7 +3683,7 @@
           "image": "https://i.ebayimg.com/images/g/HTEAAeSwEptpmwIK/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-04-05T05:48:59.781Z"
+      "fetchedAt": "2026-04-05T08:55:07.525Z"
     }
   }
 }
