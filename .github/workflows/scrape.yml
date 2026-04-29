@@ -1,8 +1,10 @@
 name: Scrape eBay Listings
 
 on:
+  # Scheduled runs only work with SCRAPER_API_KEY secret set
+  # (eBay blocks GitHub Actions datacenter IPs without a proxy)
   schedule:
-    - cron: '0 */4 * * *'   # Every 4 hours
+    - cron: '0 */4 * * *'
   workflow_dispatch:          # Manual trigger from Actions tab
   push:
     branches: [main]
@@ -21,7 +23,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - run: npm ci
 

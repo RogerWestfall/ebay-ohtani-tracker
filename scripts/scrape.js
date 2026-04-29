@@ -76,10 +76,12 @@ async function main() {
   console.log(`Done: ${successCount}/${portfolio.cards.length} cards scraped`);
   console.log(`Wrote ${dataPath}`);
 
-  if (successCount === 0) {
-    console.error("\nAll cards failed!");
-    console.error("If running in GitHub Actions, eBay may be blocking this runner's IP.");
-    console.error("Try adding SCRAPER_API_KEY as a repository secret.");
+  if (successCount === 0 && Object.keys(existing).length > 0) {
+    console.warn("\nNo new data scraped — eBay may be blocking this IP.");
+    console.warn("Existing data preserved. Run locally or add SCRAPER_API_KEY secret.");
+  } else if (successCount === 0) {
+    console.error("\nAll cards failed and no existing data!");
+    console.error("Run locally or add SCRAPER_API_KEY as a repository secret.");
     process.exit(1);
   }
 }
