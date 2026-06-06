@@ -245,21 +245,21 @@ function fetchViaProxy(targetUrl) {
 let sessionCookies = "";
 
 async function refreshSessionCookies() {
+  // Reset cookies completely — stale cookies cause rate limiting
+  sessionCookies = "";
   return new Promise((resolve) => {
     https.get("https://www.ebay.com", {
       headers: {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.9",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
         "Accept-Encoding": "identity",
-        "Sec-Ch-Ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
-        "Sec-Ch-Ua-Mobile": "?0",
-        "Sec-Ch-Ua-Platform": '"macOS"',
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
         "Sec-Fetch-Dest": "document",
         "Sec-Fetch-Mode": "navigate",
         "Sec-Fetch-Site": "none",
         "Sec-Fetch-User": "?1",
-        "Upgrade-Insecure-Requests": "1",
       },
     }, (res) => {
       const setCookies = res.headers["set-cookie"];
@@ -276,31 +276,20 @@ async function refreshSessionCookies() {
 function fetchDirect(url) {
   return new Promise((resolve, reject) => {
     const headers = {
-      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-      "Accept-Language": "en-US,en;q=0.9",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.5",
       "Accept-Encoding": "identity",
-      "Cache-Control": "max-age=0",
       "Connection": "keep-alive",
-      "DNT": "1",
-      "Sec-Ch-Ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
-      "Sec-Ch-Ua-Mobile": "?0",
-      "Sec-Ch-Ua-Platform": '"macOS"',
+      "Upgrade-Insecure-Requests": "1",
       "Sec-Fetch-Dest": "document",
       "Sec-Fetch-Mode": "navigate",
       "Sec-Fetch-Site": "none",
       "Sec-Fetch-User": "?1",
-      "Upgrade-Insecure-Requests": "1",
     };
     if (sessionCookies) headers["Cookie"] = sessionCookies;
 
     const req = https.get(url, { headers }, (res) => {
-      const setCookies = res.headers["set-cookie"];
-      if (setCookies) {
-        const newCookies = setCookies.map(c => c.split(";")[0]).join("; ");
-        sessionCookies = sessionCookies ? sessionCookies + "; " + newCookies : newCookies;
-      }
-
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
         if (res.headers.location.includes("challenge") || res.headers.location.includes("captcha")) {

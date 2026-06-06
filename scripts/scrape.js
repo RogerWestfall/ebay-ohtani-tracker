@@ -47,10 +47,16 @@ async function main() {
       // Don't include failed cards — previous data is preserved via merge below
     }
 
-    // Rate-limit delay between cards
+    // Rate-limit delay between cards — fresh cookies + long delay to avoid blocks
     if (i < portfolio.cards.length - 1) {
-      const delay = process.env.SCRAPER_API_KEY ? 3000 : 2000;
-      await new Promise((r) => setTimeout(r, delay));
+      if (process.env.SCRAPER_API_KEY) {
+        await new Promise((r) => setTimeout(r, 3000));
+      } else {
+        const wait = 30000;
+        console.log(`  Waiting ${wait/1000}s before next card...`);
+        await new Promise((r) => setTimeout(r, wait));
+        await refreshSessionCookies();
+      }
     }
   }
 
