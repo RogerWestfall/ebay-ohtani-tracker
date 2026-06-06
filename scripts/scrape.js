@@ -72,7 +72,15 @@ async function main() {
     } catch {}
   }
 
-  const merged = { ...existing, ...results };
+  // Only overwrite cards that got actual results — keep existing data for empty scrapes
+  const merged = { ...existing };
+  for (const [key, value] of Object.entries(results)) {
+    if (value.listings.length > 0) {
+      merged[key] = value;
+    } else {
+      console.log(`Keeping existing data for ${key} (scrape returned 0 listings)`);
+    }
+  }
 
   fs.writeFileSync(
     dataPath,
