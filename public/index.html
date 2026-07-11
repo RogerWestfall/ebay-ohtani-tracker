@@ -79,6 +79,31 @@
     .banner-value.red   { color: var(--red); }
     .banner-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
 
+    /* ── Portfolio overview table ── */
+    .portfolio-overview { margin-bottom: 28px; }
+    .portfolio-overview .table-container { margin-top: 14px; }
+    .portfolio-overview table { font-size: 0.84rem; }
+    .portfolio-overview th { cursor: default; }
+    .portfolio-overview td { padding: 12px 14px; }
+    .portfolio-overview .card-name-link {
+      color: var(--text); font-weight: 600; cursor: pointer;
+      transition: color 0.15s;
+    }
+    .portfolio-overview .card-name-link:hover { color: var(--accent); text-decoration: none; }
+    .portfolio-overview .pnl-positive { color: var(--green); font-weight: 600; }
+    .portfolio-overview .pnl-negative { color: var(--red); font-weight: 600; }
+    .portfolio-overview .date { color: var(--text-muted); }
+    .portfolio-overview tfoot td {
+      border-top: 2px solid var(--border-2); font-weight: 700;
+      background: var(--surface-2); font-size: 0.85rem;
+    }
+
+    /* ── Portfolio chart ── */
+    .portfolio-chart-container {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px; margin-top: 14px; height: 260px;
+    }
+
     /* ── Card selector ── */
     .card-selector-wrapper { margin-bottom: 24px; }
     .card-selector-label {
@@ -243,6 +268,30 @@
         <div class="banner-label">Total P&amp;L</div>
         <div class="banner-value green" id="port-pnl">—</div>
         <div class="banner-sub" id="port-pnl-pct"></div>
+      </div>
+    </div>
+
+    <!-- Portfolio Overview -->
+    <div id="portfolio-overview" class="portfolio-overview" style="display:none;">
+      <h2>Portfolio Overview</h2>
+      <div class="portfolio-chart-container">
+        <canvas id="portfolio-chart"></canvas>
+      </div>
+      <div class="table-container" style="margin-top:14px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Card</th>
+              <th>Cost Basis</th>
+              <th>Market Value</th>
+              <th>P&amp;L</th>
+              <th>Return</th>
+              <th>Purchase Date</th>
+            </tr>
+          </thead>
+          <tbody id="portfolio-tbody"></tbody>
+          <tfoot id="portfolio-tfoot"></tfoot>
+        </table>
       </div>
     </div>
 
@@ -744,6 +793,175 @@
       document.getElementById("port-pnl").className = "banner-value " + (pos ? "green" : "red");
       document.getElementById("port-pnl-pct").textContent = (pos ? "+" : "") + pnlPct.toFixed(1) + "%";
       document.getElementById("port-pnl-pct").style.color = pos ? "var(--green)" : "var(--red)";
+
+      renderPortfolioTable(totalCost, totalValue);
+      renderPortfolioValueChart();
+    }
+
+    function renderPortfolioTable(totalCost, totalValue) {
+      const rows = [];
+      cardData.forEach((cd, i) => {
+        if (!cd.listings) return;
+        const rm = cd._recentMedian || recentMedian(cd.listings);
+        const cost = cd.card.totalCost;
+        const pnl = rm.median - cost;
+        const pnlPct = (pnl / cost) * 100;
+        const pd = new Date(cd.card.purchaseDate);
+        rows.push({ i, name: cd.card.name, cost, market: rm.median, pnl, pnlPct, pd });
+      });
+
+      rows.sort((a, b) => a.name.localeCompare(b.name));
+
+      const tbody = document.getElementById("portfolio-tbody");
+      tbody.innerHTML = rows.map(r => {
+        const pos = r.pnl >= 0;
+        const pnlClass = pos ? "pnl-positive" : "pnl-negative";
+        const dateStr = r.pd.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+        return `<tr>
+          <td><a class="card-name-link" onclick="switchTab(${r.i}); document.getElementById('card-selector').value=${r.i};">${esc(r.name)}</a></td>
+          <td>${fmt(r.cost)}</td>
+          <td style="font-weight:600;">${fmt(r.market)}</td>
+          <td class="${pnlClass}">${pos ? "+" : "-"}${fmt(Math.abs(r.pnl))}</td>
+          <td class="${pnlClass}">${pos ? "+" : ""}${r.pnlPct.toFixed(1)}%</td>
+          <td class="date">${dateStr}</td>
+        </tr>`;
+      }).join("");
+
+      const totalPnl = totalValue - totalCost;
+      const totalPnlPct = (totalPnl / totalCost) * 100;
+      const pos = totalPnl >= 0;
+      const pnlClass = pos ? "pnl-positive" : "pnl-negative";
+      document.getElementById("portfolio-tfoot").innerHTML = `<tr>
+        <td>Total (${rows.length} cards)</td>
+        <td>${fmt(totalCost)}</td>
+        <td style="font-weight:700;">${fmt(totalValue)}</td>
+        <td class="${pnlClass}">${pos ? "+" : ""}${fmt(totalPnl)}</td>
+        <td class="${pnlClass}">${pos ? "+" : ""}${totalPnlPct.toFixed(1)}%</td>
+        <td></td>
+      </tr>`;
+
+      document.getElementById("portfolio-overview").style.display = "block";
+    }
+
+    let portfolioChart = null;
+    function renderPortfolioValueChart() {
+      const allListings = [];
+      cardData.forEach((cd, i) => {
+        if (!cd.listings) return;
+        cd.listings.forEach(l => {
+          if (l.dateSold) allListings.push({ cardIdx: i, date: new Date(l.dateSold), price: l.price });
+        });
+      });
+      if (allListings.length === 0) return;
+
+      allListings.sort((a, b) => a.date - b.date);
+
+      const startDate = allListings[0].date;
+      const endDate = new Date();
+      const dayMs = 86400000;
+
+      // Build daily time series of portfolio value
+      // For each day, each card's value = most recent sale price on or before that day
+      const latestPrice = {};
+      const dailyLabels = [];
+      const dailyValues = [];
+      let listingIdx = 0;
+
+      for (let d = new Date(startDate); d <= endDate; d = new Date(d.getTime() + dayMs)) {
+        const dayEnd = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59);
+        while (listingIdx < allListings.length && allListings[listingIdx].date <= dayEnd) {
+          latestPrice[allListings[listingIdx].cardIdx] = allListings[listingIdx].price;
+          listingIdx++;
+        }
+
+        let portfolioValue = 0;
+        let cardsWithPrice = 0;
+        cardData.forEach((cd, i) => {
+          if (!cd.listings || latestPrice[i] === undefined) return;
+          portfolioValue += latestPrice[i];
+          cardsWithPrice++;
+        });
+
+        if (cardsWithPrice > 0) {
+          const label = (d.getMonth() + 1) + "/" + d.getDate();
+          dailyLabels.push(label);
+          dailyValues.push(portfolioValue);
+        }
+      }
+
+      // Downsample if too many points (keep ~90 max)
+      let labels = dailyLabels;
+      let values = dailyValues;
+      if (dailyLabels.length > 90) {
+        const step = Math.ceil(dailyLabels.length / 90);
+        labels = []; values = [];
+        for (let i = 0; i < dailyLabels.length; i += step) {
+          labels.push(dailyLabels[i]);
+          values.push(dailyValues[i]);
+        }
+        // Always include the last point
+        if (labels[labels.length - 1] !== dailyLabels[dailyLabels.length - 1]) {
+          labels.push(dailyLabels[dailyLabels.length - 1]);
+          values.push(dailyValues[dailyValues.length - 1]);
+        }
+      }
+
+      // Total cost line
+      let totalCost = 0;
+      cardData.forEach(cd => { if (cd.listings) totalCost += cd.card.totalCost; });
+
+      if (portfolioChart) portfolioChart.destroy();
+
+      const ctx = document.getElementById("portfolio-chart").getContext("2d");
+      portfolioChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [{
+            label: "Portfolio Value",
+            data: values,
+            borderColor: "#58a6ff",
+            backgroundColor: "rgba(88, 166, 255, 0.08)",
+            fill: true,
+            tension: 0.3,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            borderWidth: 2,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: { label: ctx => "Portfolio: " + fmt(ctx.parsed.y) },
+            },
+            annotation: {
+              annotations: {
+                costLine: {
+                  type: "line",
+                  yMin: totalCost, yMax: totalCost,
+                  borderColor: "#f85149", borderWidth: 2, borderDash: [8, 4],
+                  label: {
+                    display: true,
+                    content: "Total Cost: " + fmt(totalCost),
+                    position: "start",
+                    backgroundColor: "rgba(248, 81, 73, 0.85)",
+                    color: "#fff",
+                    font: { size: 11, weight: "bold" },
+                    padding: 4,
+                  },
+                },
+              },
+            },
+          },
+          scales: {
+            x: { ticks: { color: "#8b949e", maxRotation: 0, maxTicksLimit: 12 }, grid: { color: "#21262d" } },
+            y: { ticks: { color: "#8b949e", callback: v => "$" + v.toLocaleString() }, grid: { color: "#21262d" } },
+          },
+        },
+      });
     }
 
     init();
