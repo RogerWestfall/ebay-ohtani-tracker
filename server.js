@@ -211,7 +211,7 @@ function matchesCardNumber(title, cardNumber) {
 
 // ── Fetch page via ScraperAPI proxy (used on Render) ──
 function fetchViaProxy(targetUrl) {
-  const proxyUrl = `https://api.scraperapi.com?api_key=${SCRAPER_API_KEY}&url=${encodeURIComponent(targetUrl)}`;
+  const proxyUrl = `https://api.scraperapi.com?api_key=${SCRAPER_API_KEY}&country_code=us&url=${encodeURIComponent(targetUrl)}`;
   return new Promise((resolve, reject) => {
     const req = https.get(proxyUrl, (res) => {
       if (res.statusCode !== 200) {
@@ -340,10 +340,28 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
   const $ = cheerio.load(html);
   const listings = [];
 
-  $(".s-card").each((_i, el) => {
+  // eBay serves two HTML layouts — detect which one we got
+  let items;
+  let layout;
+  if ($(".s-card").length > 0) {
+    items = $(".s-card");
+    layout = "us";
+  } else {
+    items = $(".su-card-container");
+    layout = "intl";
+  }
+  console.log(`Layout: ${layout}, items: ${items.length}`);
+
+  items.each((_i, el) => {
     const $el = $(el);
 
-    const title = $el.find(".s-card__title .su-styled-text").first().text().trim();
+    let title;
+    if (layout === "us") {
+      title = $el.find(".s-card__title .su-styled-text").first().text().trim();
+    } else {
+      title = $el.find("[role='heading']").first().text().trim()
+        || $el.find(".su-item-card__title .su-styled-text").first().text().trim();
+    }
     if (!title || title === "Shop on eBay") return;
 
     // Filter out excluded terms (card-specific blacklist)
@@ -369,13 +387,12 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
     if (!matchesCardNumber(title, cardNumber)) return;
 
     // Filter out listings with a different grade than our card
-    // e.g. if our card is PSA 10, reject listings mentioning PSA 9, BGS 9.5, etc.
     if (gradingInfo) {
       const gradePattern = /\b(PSA|BGS|SGC|CGC)\s+(\d+(?:\.\d+)?)\b/gi;
       let match;
       while ((match = gradePattern.exec(title)) !== null) {
         if (match[1].toUpperCase() === gradingInfo.grader && match[2] !== gradingInfo.grade) {
-          return; // Different grade from same grader — wrong card
+          return;
         }
       }
     }
@@ -383,17 +400,32 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
     // Filter out bundle/lot listings (multiple cards sold together)
     if (isBundleListing(title)) return;
 
-    const link = $el.find("a.s-card__link[href*='/itm/']").attr("href") || "";
-    const image = $el.find(".s-card__image").attr("src") || "";
+    let link, image, priceText;
+    if (layout === "us") {
+      link = $el.find("a.s-card__link[href*='/itm/']").attr("href") || "";
+      image = $el.find(".s-card__image").attr("src") || "";
+      priceText = $el.find(".s-card__price").text().trim();
+    } else {
+      link = $el.find("a[href*='/itm/']").first().attr("href") || "";
+      image = $el.find("img").first().attr("src") || "";
+      priceText = $el.find(".su-item-card__price").text().trim()
+        || $el.find(".su-item-card__price-container .su-styled-text").first().text().trim();
+    }
 
-    const priceText = $el.find(".s-card__price").text().trim();
     const priceMatch = priceText.match(/\$([\d,]+\.?\d*)/);
     const price = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, "")) : null;
 
+    // Gather attribute text for shipping/type detection
     const attrTexts = [];
-    $el.find(".s-card__attribute-row").each((_j, row) => {
-      attrTexts.push($(row).text().trim());
-    });
+    if (layout === "us") {
+      $el.find(".s-card__attribute-row").each((_j, row) => {
+        attrTexts.push($(row).text().trim());
+      });
+    } else {
+      $el.find(".su-card-container__attributes__primary .su-styled-text").each((_j, row) => {
+        attrTexts.push($(row).text().trim());
+      });
+    }
     const attrJoined = attrTexts.join(" | ");
 
     let shippingCost = null;
@@ -412,8 +444,14 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
     }
 
     let dateSold = null;
-    const captionText = $el.find(".s-card__caption .su-styled-text").text().trim();
-    const dateMatch = captionText.match(
+    let captionText;
+    if (layout === "us") {
+      captionText = $el.find(".s-card__caption .su-styled-text").text().trim();
+    } else {
+      captionText = $el.find(".signal--recent").text().trim()
+        || $el.find(".su-card-container__header .signal").text().trim();
+    }
+    const dateMatch = (captionText || "").match(
       /Sold\s+((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},?\s*\d{4})/i
     );
     if (dateMatch) {
@@ -431,10 +469,15 @@ async function fetchSoldListings(query, { excludeTerms, requireTerms, cardNumber
     const bidsMatch = lowerAttrs.match(/(\d+)\s*bid/i);
     const bids = bidsMatch ? parseInt(bidsMatch[1], 10) : null;
 
-    const condition = $el.find(".s-card__subtitle .su-styled-text").text().trim() || null;
+    let condition;
+    if (layout === "us") {
+      condition = $el.find(".s-card__subtitle .su-styled-text").text().trim() || null;
+    } else {
+      condition = $el.find(".su-item-card__subtitle .su-styled-text").text().trim() || null;
+    }
 
     let seller = null;
-    const sellerEl = $el.find(".su-card-container__attributes__secondary .s-card__attribute-row").first();
+    const sellerEl = $el.find(".su-card-container__attributes__secondary");
     if (sellerEl.length) {
       const sellerTexts = [];
       sellerEl.find(".su-styled-text").each((_j, st) => {
