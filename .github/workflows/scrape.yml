@@ -4,7 +4,7 @@ on:
   # Scheduled runs only work with SCRAPER_API_KEY secret set
   # (eBay blocks GitHub Actions datacenter IPs without a proxy)
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '0 8 * * 1,3,5'
   workflow_dispatch:          # Manual trigger from Actions tab
   push:
     branches: [main]
@@ -30,7 +30,7 @@ jobs:
       - name: Scrape eBay listings
         run: node scripts/scrape.js
         env:
-          OPENWEBNINJA_API_KEY: ${{ secrets.OPENWEBNINJA_API_KEY }}
+          SOLDCOMPS_API_KEY: ${{ secrets.SOLDCOMPS_API_KEY }}
           SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
 
       - name: Commit and push updated data
