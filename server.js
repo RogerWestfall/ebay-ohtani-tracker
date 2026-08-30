@@ -378,7 +378,7 @@ async function fetchSoldListingsViaAPI(query) {
       domain: "com",
       page: String(page),
     });
-    const url = `https://api.openwebninja.com/realtime-ebay-data/search?${params}`;
+    const url = `https://api.openwebninja.com/real-time-ebay-data/search?${params}`;
 
     console.log(`OpenWeb Ninja API page ${page}: "${query}"`);
 
