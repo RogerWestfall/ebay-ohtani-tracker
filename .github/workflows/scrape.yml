@@ -30,6 +30,7 @@ jobs:
       - name: Scrape eBay listings
         run: node scripts/scrape.js
         env:
+          OPENWEBNINJA_API_KEY: ${{ secrets.OPENWEBNINJA_API_KEY }}
           SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
 
       - name: Commit and push updated data
