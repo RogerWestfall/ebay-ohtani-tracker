@@ -24,7 +24,7 @@ const HAS_PRESCRAPED = fs.existsSync(DATA_PATH);
 // Cache TTL: pre-scraped data never expires (server restarts on deploy); otherwise 2h/15min
 const cache = {};
 const CACHE_TTL = HAS_PRESCRAPED
-  ? 24 * 60 * 60 * 1000   // 24h — effectively forever since deploys restart the server
+  ? Infinity               // pre-scraped data never expires; refreshed by GitHub Actions
   : (SOLDCOMPS_API_KEY || SCRAPER_API_KEY ? 2 * 60 * 60 * 1000 : 15 * 60 * 1000);
 
 // Concurrency-limited queue — 2 simultaneous eBay fetches (avoids rate limiting)
