@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-17T12:58:53.362Z",
+  "fetchedAt": "2026-09-19T12:14:56.356Z",
   "cards": {
     "card_0": {
       "name": "2018 Bowman Chrome Shohei Ohtani Rookie PSA 10",
@@ -105,7 +105,7 @@
         {
           "title": "Bowman 2018 Bowman Chrome Shohei Ohtani #1 RC Batting PSA 10 Angels",
           "price": 5900,
-          "shippingCost": 5.4,
+          "shippingCost": 5.5,
           "shippingText": "paid",
           "dateSold": "Sep 10, 2026",
           "listingType": "Auction",
@@ -217,7 +217,7 @@
         {
           "title": "Bowman 2018 Bowman Chrome Shohei Ohtani #1 RC Batting PSA 10 Los Angeles Angels",
           "price": 6100,
-          "shippingCost": 5.93,
+          "shippingCost": 6.4,
           "shippingText": "paid",
           "dateSold": "Sep 6, 2026",
           "listingType": "Auction",
@@ -397,39 +397,11 @@
           "image": "https://i.ebayimg.com/images/g/F3cAAeSw7RNqj01R/s-l225.jpg"
         }
       ],
-      "fetchedAt": "2026-09-17T12:55:35.229Z"
+      "fetchedAt": "2026-09-19T12:11:36.916Z"
     },
     "card_1": {
       "name": "2018 Topps Chrome Update Juan Soto PSA 10",
       "listings": [
-        {
-          "title": "2018 Topps Chrome Update #HMT55 Juan Soto RC Rookie PSA 10 Gem Mint",
-          "price": 56,
-          "shippingCost": 6,
-          "shippingText": "paid",
-          "dateSold": "Sep 14, 2026",
-          "listingType": "Auction",
-          "bids": 8,
-          "condition": "New (Other)",
-          "seller": "nakita96",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/198625840553",
-          "image": "https://i.ebayimg.com/images/g/CQIAAeSwv8Bqnzx7/s-l225.jpg"
-        },
-        {
-          "title": "Topps 2018 Chrome Update Juan Soto Nationals RC PSA GEM MT 10 #HMT55",
-          "price": 60,
-          "shippingCost": 5.4,
-          "shippingText": "paid",
-          "dateSold": "Sep 14, 2026",
-          "listingType": "Auction",
-          "bids": 1,
-          "condition": "New (Other)",
-          "seller": "aljohnsonsells",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/198625514945",
-          "image": "https://i.ebayimg.com/images/g/SzoAAeSwG9Fqlcyg/s-l225.jpg"
-        },
         {
           "title": "2018 TOPPS CHROME #HMT55 JUAN SOTO UPDATE ROOKIE PSA 10",
           "price": 59.01,
@@ -473,6 +445,48 @@
           "image": "https://i.ebayimg.com/images/g/8n0AAeSwRu1qoA86/s-l225.jpg"
         },
         {
+          "title": "44706052 Juan Soto 2018 Topps Chrome Update #HMT55 Rookie RC PSA 10",
+          "price": 64,
+          "shippingCost": null,
+          "shippingText": null,
+          "dateSold": "Sep 17, 2026",
+          "listingType": "Auction",
+          "bids": 19,
+          "condition": "New (Other)",
+          "seller": "pc_sportscards",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/158279489474",
+          "image": "https://i.ebayimg.com/images/g/jTUAAeSwNiVqoy2b/s-l225.jpg"
+        },
+        {
+          "title": "Topps 2018 Chrome Update Juan Soto Nationals RC PSA GEM MT 10 #HMT55",
+          "price": 60,
+          "shippingCost": 5.38,
+          "shippingText": "paid",
+          "dateSold": "Sep 14, 2026",
+          "listingType": "Auction",
+          "bids": 1,
+          "condition": "New (Other)",
+          "seller": "aljohnsonsells",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/198625514945",
+          "image": "https://i.ebayimg.com/images/g/SzoAAeSwG9Fqlcyg/s-l225.jpg"
+        },
+        {
+          "title": "Topps 2018 Chrome Update Juan Soto RC #HMT55 PSA 10 Nationals MLB",
+          "price": 75,
+          "shippingCost": 5.82,
+          "shippingText": "paid",
+          "dateSold": "Sep 14, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "mikey_tsu_zebra",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/227503051939",
+          "image": "https://i.ebayimg.com/images/g/SAMAAeSwvFJqmJMw/s-l225.jpg"
+        },
+        {
           "title": "2018 Topps Chrome Update- Juan Soto- HMT55- PSA 10 Gem Mint- Rookie Card- RC",
           "price": 75,
           "shippingCost": 5.99,
@@ -489,8 +503,8 @@
         {
           "title": "Juan Soto PSA 10 2018 Topps Chrome Update Washington Nationals #HMT55 RC ROOKIE",
           "price": 72,
-          "shippingCost": null,
-          "shippingText": null,
+          "shippingCost": 5.27,
+          "shippingText": "paid",
           "dateSold": "Sep 12, 2026",
           "listingType": "Buy It Now",
           "bids": null,
@@ -501,9 +515,23 @@
           "image": "https://i.ebayimg.com/images/g/kn8AAeSwWihqh6vv/s-l225.jpg"
         },
         {
+          "title": "2018 Topps Chrome Update #HMT55 Juan Soto RC Rookie PSA 10 Gem Mint",
+          "price": 56,
+          "shippingCost": 6,
+          "shippingText": "paid",
+          "dateSold": "Sep 14, 2026",
+          "listingType": "Auction",
+          "bids": 8,
+          "condition": "New (Other)",
+          "seller": "nakita96",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/198625840553",
+          "image": "https://i.ebayimg.com/images/g/CQIAAeSwv8Bqnzx7/s-l225.jpg"
+        },
+        {
           "title": "2018 Topps Chrome Update - Juan Soto #HMT55 (RC) PSA 10",
           "price": 57.88,
-          "shippingCost": 5.48,
+          "shippingCost": 5.72,
           "shippingText": "paid",
           "dateSold": "Sep 12, 2026",
           "listingType": "Auction",
@@ -515,37 +543,9 @@
           "image": "https://i.ebayimg.com/images/g/Oo8AAeSwxqFqnFCx/s-l225.jpg"
         },
         {
-          "title": "Topps 2018 Chrome Update Juan Soto RC #HMT55 PSA 10 Nationals MLB",
-          "price": 75,
-          "shippingCost": 5.62,
-          "shippingText": "paid",
-          "dateSold": "Sep 14, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "mikey_tsu_zebra",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/227503051939",
-          "image": "https://i.ebayimg.com/images/g/SAMAAeSwvFJqmJMw/s-l225.jpg"
-        },
-        {
-          "title": "2018 Topps Chrome Update- Juan Soto- HMT55- PSA 10 Gem Mint- Rookie Card- RC",
-          "price": 80,
-          "shippingCost": 5.7,
-          "shippingText": "paid",
-          "dateSold": "Sep 10, 2026",
-          "listingType": "Buy It Now",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "bluelinecards16",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/137326401491",
-          "image": "https://i.ebayimg.com/images/g/n7AAAeSwICVqDTG4/s-l225.jpg"
-        },
-        {
           "title": "Topps 2018 Chrome Update Juan Soto HMT55 PSA 10 Rookie Card Nationals",
           "price": 71,
-          "shippingCost": 5.62,
+          "shippingCost": 5.82,
           "shippingText": "paid",
           "dateSold": "Sep 11, 2026",
           "listingType": "Best Offer Accepted",
@@ -555,20 +555,6 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/287546028773",
           "image": "https://i.ebayimg.com/images/g/lu0AAeSw2DJqjiSg/s-l225.jpg"
-        },
-        {
-          "title": "JUAN SOTO PSA 10 2018 TOPPS CHROME UPDATE #HMT55 ROOKIE RC NATIONALS 0231",
-          "price": 66,
-          "shippingCost": null,
-          "shippingText": null,
-          "dateSold": "Sep 10, 2026",
-          "listingType": "Auction",
-          "bids": 19,
-          "condition": "New (Other)",
-          "seller": "mc_sportscards",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/188880286910",
-          "image": "https://i.ebayimg.com/images/g/lnYAAeSwzkRqmX9b/s-l225.jpg"
         },
         {
           "title": "2018 Topps Chrome Update Juan Soto Rookie RC #HMT55 Nationals PSA 10 GEM MINT",
@@ -585,9 +571,37 @@
           "image": "https://i.ebayimg.com/images/g/J3YAAeSwYwdqmyFW/s-l225.jpg"
         },
         {
+          "title": "JUAN SOTO PSA 10 2018 TOPPS CHROME UPDATE #HMT55 ROOKIE RC NATIONALS 0231",
+          "price": 66,
+          "shippingCost": 6,
+          "shippingText": "paid",
+          "dateSold": "Sep 10, 2026",
+          "listingType": "Auction",
+          "bids": 19,
+          "condition": "New (Other)",
+          "seller": "mc_sportscards",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/188880286910",
+          "image": "https://i.ebayimg.com/images/g/lnYAAeSwzkRqmX9b/s-l225.jpg"
+        },
+        {
+          "title": "2018 Topps Chrome Update- Juan Soto- HMT55- PSA 10 Gem Mint- Rookie Card- RC",
+          "price": 80,
+          "shippingCost": 5.68,
+          "shippingText": "paid",
+          "dateSold": "Sep 10, 2026",
+          "listingType": "Buy It Now",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "bluelinecards16",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/137326401491",
+          "image": "https://i.ebayimg.com/images/g/n7AAAeSwICVqDTG4/s-l225.jpg"
+        },
+        {
           "title": "Topps 2018 Chrome Update Juan Soto RC #HMT55 Washington Nationals PSA 10",
           "price": 70,
-          "shippingCost": 5.48,
+          "shippingCost": 5.58,
           "shippingText": "paid",
           "dateSold": "Sep 8, 2026",
           "listingType": "Auction",
@@ -597,20 +611,6 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/147547269222",
           "image": "https://i.ebayimg.com/images/g/18wAAeSwG9FqmYpz/s-l225.jpg"
-        },
-        {
-          "title": "2018 Topps Chrome Update Juan Soto RC #HMT55 PSA 10",
-          "price": 71,
-          "shippingCost": 8.75,
-          "shippingText": "paid",
-          "dateSold": "Sep 5, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "corem-61",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/128057650365",
-          "image": "https://i.ebayimg.com/images/g/aiUAAeSwSytqmC7Z/s-l225.jpg"
         },
         {
           "title": "2018 Topps Chrome Update - Juan Soto #HMT55 (RC) PSA 10",
@@ -629,7 +629,7 @@
         {
           "title": "2018 Topps Chrome Update Juan Soto Rookie #HMT55 PSA 10",
           "price": 70,
-          "shippingCost": 5.97,
+          "shippingCost": 6.07,
           "shippingText": "paid",
           "dateSold": "Sep 6, 2026",
           "listingType": "Buy It Now",
@@ -639,6 +639,20 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/158207156782",
           "image": "https://i.ebayimg.com/images/g/4HkAAeSwPdNqkQgX/s-l225.jpg"
+        },
+        {
+          "title": "2018 Topps Chrome Update Juan Soto RC #HMT55 PSA 10",
+          "price": 71,
+          "shippingCost": 8.75,
+          "shippingText": "paid",
+          "dateSold": "Sep 5, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "corem-61",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/128057650365",
+          "image": "https://i.ebayimg.com/images/g/aiUAAeSwSytqmC7Z/s-l225.jpg"
         },
         {
           "title": "2018 Topps Chrome Update JUAN SOTO Batting RC Rookie PSA 10 #HMT55 NY METS",
@@ -653,41 +667,13 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/167163519783",
           "image": "https://i.ebayimg.com/images/g/IQEAAOSwmBxnVyYo/s-l225.jpg"
-        },
-        {
-          "title": "2018 Topps Chrome Update Juan Soto HMT55 PSA 10 Gem Mint Rookie Card RC",
-          "price": 69,
-          "shippingCost": 5.28,
-          "shippingText": "paid",
-          "dateSold": "Sep 3, 2026",
-          "listingType": "Buy It Now",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "goldglovela",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/206368583589",
-          "image": "https://i.ebayimg.com/images/g/NfAAAeSwmGpqOyTH/s-l225.jpg"
         }
       ],
-      "fetchedAt": "2026-09-17T12:56:09.596Z"
+      "fetchedAt": "2026-09-19T12:12:10.043Z"
     },
     "card_2": {
       "name": "2024 Bowman Draft Chrome Konnor Griffin PSA 10",
       "listings": [
-        {
-          "title": "2024 BOWMAN DRAFT CHROME #BDC22 KONNOR GRIFFIN PSA 10",
-          "price": 125,
-          "shippingCost": 5.17,
-          "shippingText": "paid",
-          "dateSold": "Sep 4, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "krebscollectibles",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/127873166560",
-          "image": "https://i.ebayimg.com/images/g/oc4AAeSwHUxqDHFB/s-l225.jpg"
-        },
         {
           "title": "2024 BOWMAN DRAFT CHROME #BDC22 KONNOR GRIFFIN PSA 10",
           "price": 140,
@@ -703,21 +689,21 @@
           "image": "https://i.ebayimg.com/images/g/a8sAAeSwEjtqkd8q/s-l225.jpg"
         },
         {
-          "title": "2024 Bowman Draft Konnor Griffin 1st Bowman Chrome (RC) BDC22 Pirates PSA 10!🔥",
-          "price": 190,
-          "shippingCost": null,
-          "shippingText": null,
-          "dateSold": "Sep 2, 2026",
-          "listingType": "Buy It Now",
+          "title": "2024 BOWMAN DRAFT CHROME #BDC22 KONNOR GRIFFIN PSA 10",
+          "price": 125,
+          "shippingCost": 5.17,
+          "shippingText": "paid",
+          "dateSold": "Sep 4, 2026",
+          "listingType": "Best Offer Accepted",
           "bids": null,
           "condition": "New (Other)",
-          "seller": "jeffstuff42",
+          "seller": "krebscollectibles",
           "location": "United States",
-          "link": "https://www.ebay.com/itm/307140964441",
-          "image": "https://i.ebayimg.com/images/g/vScAAeSwSLlqf275/s-l225.jpg"
+          "link": "https://www.ebay.com/itm/127873166560",
+          "image": "https://i.ebayimg.com/images/g/oc4AAeSwHUxqDHFB/s-l225.jpg"
         }
       ],
-      "fetchedAt": "2026-09-17T12:56:42.122Z"
+      "fetchedAt": "2026-09-19T12:12:43.584Z"
     },
     "card_3": {
       "name": "2018 Topps Chrome Shohei Ohtani Pink Refractor Pitching PSA 10",
@@ -809,7 +795,7 @@
         {
           "title": "Topps 2018 Chrome Shohei Ohtani Pitching RC Pink Refractor #150 PSA 10",
           "price": 3900,
-          "shippingCost": 5.28,
+          "shippingCost": 5.38,
           "shippingText": "paid",
           "dateSold": "Jun 29, 2026",
           "listingType": "Buy It Now",
@@ -849,39 +835,11 @@
           "image": "https://i.ebayimg.com/images/g/eIIAAeSwripqPaG-/s-l225.jpg"
         }
       ],
-      "fetchedAt": "2026-09-17T12:57:14.817Z"
+      "fetchedAt": "2026-09-19T12:13:17.081Z"
     },
     "card_4": {
       "name": "1989 Fleer Bill Ripken FF Error PSA 9",
       "listings": [
-        {
-          "title": "1989 Bill Ripken Fleer #616 FF Error PSA 9 Mint Iconic Card Billy Face Orioles",
-          "price": 300,
-          "shippingCost": 0,
-          "shippingText": "free",
-          "dateSold": "Sep 7, 2026",
-          "listingType": "Buy It Now",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "bulls.bears",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/236794837503",
-          "image": "https://i.ebayimg.com/images/g/RUgAAeSwxChp9sTb/s-l225.jpg"
-        },
-        {
-          "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
-          "price": 220.5,
-          "shippingCost": 8,
-          "shippingText": "paid",
-          "dateSold": "Sep 13, 2026",
-          "listingType": "Auction",
-          "bids": 32,
-          "condition": "New (Other)",
-          "seller": "braveheart100",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/117397593635",
-          "image": "https://i.ebayimg.com/images/g/-skAAeSwfPFqnERJ/s-l225.jpg"
-        },
         {
           "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
           "price": 275,
@@ -895,20 +853,6 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/407205309463",
           "image": "https://i.ebayimg.com/images/g/4oYAAeSwdbpqodEX/s-l225.jpg"
-        },
-        {
-          "title": "1989 Fleer Bill Ripken #616 FF Error Baltimore Orioles PSA 9",
-          "price": 275,
-          "shippingCost": 5.28,
-          "shippingText": "paid",
-          "dateSold": "Sep 14, 2026",
-          "listingType": "Buy It Now",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "copes-cards",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/398385968641",
-          "image": "https://i.ebayimg.com/images/g/cOAAAeSwjBpqpKsS/s-l225.jpg"
         },
         {
           "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
@@ -925,6 +869,20 @@
           "image": "https://i.ebayimg.com/images/g/nKEAAeSw4T1qn2IR/s-l225.jpg"
         },
         {
+          "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
+          "price": 220.5,
+          "shippingCost": 8,
+          "shippingText": "paid",
+          "dateSold": "Sep 13, 2026",
+          "listingType": "Auction",
+          "bids": 32,
+          "condition": "New (Other)",
+          "seller": "braveheart100",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/117397593635",
+          "image": "https://i.ebayimg.com/images/g/-skAAeSwfPFqnERJ/s-l225.jpg"
+        },
+        {
           "title": "BILL RIPKEN 1989 FLEER BASEBALL FF ERROR #616 BALTIMORE ORIOLES PSA 9 Q7217",
           "price": 227.5,
           "shippingCost": 6,
@@ -939,18 +897,88 @@
           "image": "https://i.ebayimg.com/images/g/mzsAAeSwFGhqoU8p/s-l225.jpg"
         },
         {
-          "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
-          "price": 260,
-          "shippingCost": 8,
+          "title": "1989 Fleer Bill Ripken #616 FF Error Baltimore Orioles PSA 9",
+          "price": 275,
+          "shippingCost": 5.38,
           "shippingText": "paid",
-          "dateSold": "Aug 22, 2026",
-          "listingType": "Auction",
-          "bids": 28,
+          "dateSold": "Sep 14, 2026",
+          "listingType": "Buy It Now",
+          "bids": null,
           "condition": "New (Other)",
-          "seller": "braveheart100",
+          "seller": "copes-cards",
           "location": "United States",
-          "link": "https://www.ebay.com/itm/117361202583",
-          "image": "https://i.ebayimg.com/images/g/2-YAAeSwP~VqgJlj/s-l225.jpg"
+          "link": "https://www.ebay.com/itm/398385968641",
+          "image": "https://i.ebayimg.com/images/g/cOAAAeSwjBpqpKsS/s-l225.jpg"
+        },
+        {
+          "title": "1989 FLEER BILL RIPKEN FF Bat ERROR #616 PSA 9 Baseball Card Vintage Billy",
+          "price": 269.88,
+          "shippingCost": 8.51,
+          "shippingText": "paid",
+          "dateSold": "Sep 18, 2026",
+          "listingType": "Buy It Now",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "resaled",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/128064666413",
+          "image": "https://i.ebayimg.com/images/g/7doAAeSwuxVqnL09/s-l225.jpg"
+        },
+        {
+          "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
+          "price": 218.5,
+          "shippingCost": 5.72,
+          "shippingText": "paid",
+          "dateSold": "Sep 18, 2026",
+          "listingType": "Auction",
+          "bids": 12,
+          "condition": "New (Other)",
+          "seller": "bear_down_cards",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/307174707440",
+          "image": "https://i.ebayimg.com/images/g/DhEAAeSwJMFqpLi5/s-l225.jpg"
+        },
+        {
+          "title": "1989 Fleer Bill Ripken FF Error Bat Knob #616 Orioles PSA 9 Mint",
+          "price": 225.5,
+          "shippingCost": 5.82,
+          "shippingText": "paid",
+          "dateSold": "Aug 25, 2026",
+          "listingType": "Auction",
+          "bids": 3,
+          "condition": "New (Other)",
+          "seller": "dr2112",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/336749706727",
+          "image": "https://i.ebayimg.com/images/g/l3oAAeSwqlBqhO7k/s-l225.jpg"
+        },
+        {
+          "title": "1989 Bill Ripken Fleer #616 FF Error PSA 9 Mint Iconic Card Billy Face Orioles",
+          "price": 300,
+          "shippingCost": 0,
+          "shippingText": "free",
+          "dateSold": "Sep 7, 2026",
+          "listingType": "Buy It Now",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "bulls.bears",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/236794837503",
+          "image": "https://i.ebayimg.com/images/g/RUgAAeSwxChp9sTb/s-l225.jpg"
+        },
+        {
+          "title": "1989 Fleet Bill Ripken FF Error Psa 9 #616.",
+          "price": 215,
+          "shippingCost": 5.82,
+          "shippingText": "paid",
+          "dateSold": "Sep 2, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "stlcitysportscards",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/398349547651",
+          "image": "https://i.ebayimg.com/images/g/Fx8AAeSwMtZql42k/s-l225.jpg"
         },
         {
           "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
@@ -981,20 +1009,6 @@
           "image": "https://i.ebayimg.com/images/g/sZ8AAeSwLdRpgl9j/s-l225.jpg"
         },
         {
-          "title": "1989 FLEER FF ERROR #616 BILL RIPKEN PSA 9",
-          "price": 227.5,
-          "shippingCost": 5.99,
-          "shippingText": "paid",
-          "dateSold": "Aug 31, 2026",
-          "listingType": "Auction",
-          "bids": 14,
-          "condition": "New (Other)",
-          "seller": "psa",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/117373809056",
-          "image": "https://i.ebayimg.com/images/g/tyQAAeSwmOBqi0KN/s-l225.jpg"
-        },
-        {
           "title": "Bill Ripken 1989 Fleer (FF ERROR) PSA 9 #616",
           "price": 250,
           "shippingCost": 10,
@@ -1009,74 +1023,18 @@
           "image": "https://i.ebayimg.com/images/g/IgMAAeSwQKZql3V0/s-l225.jpg"
         },
         {
-          "title": "1989 Fleet Bill Ripken FF Error Psa 9 #616.",
-          "price": 215,
-          "shippingCost": 5.72,
+          "title": "1989 FLEER FF ERROR #616 BILL RIPKEN PSA 9",
+          "price": 227.5,
+          "shippingCost": 5.99,
           "shippingText": "paid",
-          "dateSold": "Sep 2, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "stlcitysportscards",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/398349547651",
-          "image": "https://i.ebayimg.com/images/g/Fx8AAeSwMtZql42k/s-l225.jpg"
-        },
-        {
-          "title": "1989 Fleer #616 Bill Ripken FF Error PSA 9 MINT",
-          "price": 242.5,
-          "shippingCost": 6.99,
-          "shippingText": "paid",
-          "dateSold": "Sep 1, 2026",
+          "dateSold": "Aug 31, 2026",
           "listingType": "Auction",
-          "bids": 19,
+          "bids": 14,
           "condition": "New (Other)",
-          "seller": "gotbaseballcards",
+          "seller": "psa",
           "location": "United States",
-          "link": "https://www.ebay.com/itm/237029378681",
-          "image": "https://i.ebayimg.com/images/g/B1oAAeSwvr5qjZ7y/s-l225.jpg"
-        },
-        {
-          "title": "Bill Ripken 1989 Fleer (FF ERROR) PSA 9 #616",
-          "price": 238.5,
-          "shippingCost": 6.5,
-          "shippingText": "paid",
-          "dateSold": "Sep 1, 2026",
-          "listingType": "Auction",
-          "bids": 12,
-          "condition": "New (Other)",
-          "seller": "cruehead1974",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/407169686694",
-          "image": "https://i.ebayimg.com/images/g/7d4AAeSwrj5qjT~O/s-l225.jpg"
-        },
-        {
-          "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
-          "price": 237.51,
-          "shippingCost": 8,
-          "shippingText": "paid",
-          "dateSold": "Aug 30, 2026",
-          "listingType": "Auction",
-          "bids": 26,
-          "condition": "New (Other)",
-          "seller": "braveheart100",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/117364702732",
-          "image": "https://i.ebayimg.com/images/g/gYAAAeSwMbhqgm5s/s-l225.jpg"
-        },
-        {
-          "title": "Fleer 1989 Bill Ripken #616 FF Error on Bat Knob PSA 9 Baseball Card",
-          "price": 220,
-          "shippingCost": 5.62,
-          "shippingText": "paid",
-          "dateSold": "Aug 30, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "bru_1208",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/198604773770",
-          "image": "https://i.ebayimg.com/images/g/1u0AAeSwC5xqk5Xp/s-l225.jpg"
+          "link": "https://www.ebay.com/itm/117373809056",
+          "image": "https://i.ebayimg.com/images/g/tyQAAeSwmOBqi0KN/s-l225.jpg"
         },
         {
           "title": "1989 FLEER #616 BILL RIPKEN FF ERROR PSA 9",
@@ -1107,9 +1065,65 @@
           "image": "https://i.ebayimg.com/images/g/apEAAeSwvDhqhOir/s-l225.jpg"
         },
         {
+          "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
+          "price": 237.51,
+          "shippingCost": 8,
+          "shippingText": "paid",
+          "dateSold": "Aug 30, 2026",
+          "listingType": "Auction",
+          "bids": 26,
+          "condition": "New (Other)",
+          "seller": "braveheart100",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/117364702732",
+          "image": "https://i.ebayimg.com/images/g/gYAAAeSwMbhqgm5s/s-l225.jpg"
+        },
+        {
+          "title": "1989 Fleer #616 Bill Ripken FF Error PSA 9 MINT",
+          "price": 242.5,
+          "shippingCost": 6.99,
+          "shippingText": "paid",
+          "dateSold": "Sep 1, 2026",
+          "listingType": "Auction",
+          "bids": 19,
+          "condition": "New (Other)",
+          "seller": "gotbaseballcards",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/237029378681",
+          "image": "https://i.ebayimg.com/images/g/B1oAAeSwvr5qjZ7y/s-l225.jpg"
+        },
+        {
+          "title": "Bill Ripken 1989 Fleer (FF ERROR) PSA 9 #616",
+          "price": 238.5,
+          "shippingCost": 6.5,
+          "shippingText": "paid",
+          "dateSold": "Sep 1, 2026",
+          "listingType": "Auction",
+          "bids": 12,
+          "condition": "New (Other)",
+          "seller": "cruehead1974",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/407169686694",
+          "image": "https://i.ebayimg.com/images/g/7d4AAeSwrj5qjT~O/s-l225.jpg"
+        },
+        {
+          "title": "Fleer 1989 Bill Ripken #616 FF Error on Bat Knob PSA 9 Baseball Card",
+          "price": 220,
+          "shippingCost": 5.72,
+          "shippingText": "paid",
+          "dateSold": "Aug 30, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "bru_1208",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/198604773770",
+          "image": "https://i.ebayimg.com/images/g/1u0AAeSwC5xqk5Xp/s-l225.jpg"
+        },
+        {
           "title": "1989 Fleer Bill Ripken #616 FF Error (Bat Knob) PSA 9 MLB Baltimore Orioles",
           "price": 289,
-          "shippingCost": 5.97,
+          "shippingCost": 6.07,
           "shippingText": "paid",
           "dateSold": "Aug 29, 2026",
           "listingType": "Best Offer Accepted",
@@ -1121,79 +1135,9 @@
           "image": "https://i.ebayimg.com/images/g/XPIAAeSwHrZqjGXF/s-l225.jpg"
         },
         {
-          "title": "1989 Fleer Bill Ripken FF on Bat Knob Error PSA 9 Graded #616 Orioles",
-          "price": 250,
-          "shippingCost": 5.83,
-          "shippingText": "paid",
-          "dateSold": "Aug 28, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "lombardycollectibles",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/137341368675",
-          "image": "https://i.ebayimg.com/images/g/OTcAAeSw8fBqE0uF/s-l225.jpg"
-        },
-        {
-          "title": "1989 Fleer Bill Ripken #616 FF Error PSA 9 MINT – Famous Error Card",
-          "price": 217.5,
-          "shippingCost": 5.97,
-          "shippingText": "paid",
-          "dateSold": "Aug 26, 2026",
-          "listingType": "Auction",
-          "bids": 20,
-          "condition": "New (Other)",
-          "seller": "bretlowr_21",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/137641012130",
-          "image": "https://i.ebayimg.com/images/g/iS4AAeSwMf5qhjM-/s-l225.jpg"
-        },
-        {
-          "title": "1989 Fleer Baseball Card #616 Bill Ripken Baltimore Orioles PSA 9 Mint FF Error",
-          "price": 258.99,
-          "shippingCost": 0,
-          "shippingText": "free",
-          "dateSold": "Aug 26, 2026",
-          "listingType": "Buy It Now",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "hayesoneillenterprises",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/178334885880",
-          "image": "https://i.ebayimg.com/images/g/x20AAeSwfqVqFCg9/s-l225.jpg"
-        },
-        {
-          "title": "1989 Fleer Bill Ripken #616 FF Error PSA 9 MINT Famous Bat Error Card",
-          "price": 250,
-          "shippingCost": 5.97,
-          "shippingText": "paid",
-          "dateSold": "Aug 26, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "choleva3",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/198595097811",
-          "image": "https://i.ebayimg.com/images/g/-JcAAeSwu3Zqji27/s-l225.jpg"
-        },
-        {
-          "title": "1989 FLEER #616 BILL RIPKEN ORIOLES FF ERROR PSA 9",
-          "price": 237.07,
-          "shippingCost": 6.25,
-          "shippingText": "paid",
-          "dateSold": "Aug 25, 2026",
-          "listingType": "Auction",
-          "bids": 23,
-          "condition": "New (Other)",
-          "seller": "4_sharp_corners",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/366611356009",
-          "image": "https://i.ebayimg.com/images/g/5ukAAeSw69pqgxkM/s-l225.jpg"
-        },
-        {
           "title": "1989 Fleer Baseball Card #616 Bill Ripken Orioles PSA 9 Mint FF Error Face Card",
           "price": 246.99,
-          "shippingCost": 6.24,
+          "shippingCost": 6.34,
           "shippingText": "paid",
           "dateSold": "Aug 27, 2026",
           "listingType": "Buy It Now",
@@ -1207,7 +1151,7 @@
         {
           "title": "1989 Fleer Bill Ripken #616 FF Error PSA 9 MINT Famous Bat Error Card",
           "price": 250,
-          "shippingCost": 5.72,
+          "shippingCost": 5.82,
           "shippingText": "paid",
           "dateSold": "Aug 27, 2026",
           "listingType": "Buy It Now",
@@ -1233,35 +1177,77 @@
           "image": "https://i.ebayimg.com/images/g/msoAAeSwunVqPZMT/s-l225.jpg"
         },
         {
-          "title": "1989 Fleer Bill Ripken FF Error Bat Knob #616 Orioles PSA 9 Mint",
-          "price": 225.5,
-          "shippingCost": 5.82,
+          "title": "1989 Fleer Bill Ripken #616 FF Error PSA 9 MINT – Famous Error Card",
+          "price": 217.5,
+          "shippingCost": 6.07,
           "shippingText": "paid",
-          "dateSold": "Aug 25, 2026",
+          "dateSold": "Aug 26, 2026",
           "listingType": "Auction",
-          "bids": 3,
+          "bids": 20,
           "condition": "New (Other)",
-          "seller": "dr2112",
+          "seller": "bretlowr_21",
           "location": "United States",
-          "link": "https://www.ebay.com/itm/336749706727",
-          "image": "https://i.ebayimg.com/images/g/l3oAAeSwqlBqhO7k/s-l225.jpg"
+          "link": "https://www.ebay.com/itm/137641012130",
+          "image": "https://i.ebayimg.com/images/g/iS4AAeSwMf5qhjM-/s-l225.jpg"
         },
         {
-          "title": "Bill Ripken 1989 Fleer ERROR F FACE #616 PSA 9 NEW PSA GRADE!",
-          "price": 324,
-          "shippingCost": 6.98,
+          "title": "1989 Fleer Bill Ripken FF on Bat Knob Error PSA 9 Graded #616 Orioles",
+          "price": 250,
+          "shippingCost": 5.93,
           "shippingText": "paid",
-          "dateSold": "Aug 23, 2026",
+          "dateSold": "Aug 28, 2026",
           "listingType": "Best Offer Accepted",
           "bids": null,
           "condition": "New (Other)",
-          "seller": "factocards",
+          "seller": "lombardycollectibles",
           "location": "United States",
-          "link": "https://www.ebay.com/itm/158196064301",
-          "image": "https://i.ebayimg.com/images/g/If0AAeSwcVhqNrGl/s-l225.jpg"
+          "link": "https://www.ebay.com/itm/137341368675",
+          "image": "https://i.ebayimg.com/images/g/OTcAAeSw8fBqE0uF/s-l225.jpg"
+        },
+        {
+          "title": "1989 Fleer Baseball Card #616 Bill Ripken Baltimore Orioles PSA 9 Mint FF Error",
+          "price": 258.99,
+          "shippingCost": 0,
+          "shippingText": "free",
+          "dateSold": "Aug 26, 2026",
+          "listingType": "Buy It Now",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "hayesoneillenterprises",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/178334885880",
+          "image": "https://i.ebayimg.com/images/g/x20AAeSwfqVqFCg9/s-l225.jpg"
+        },
+        {
+          "title": "1989 Fleer Bill Ripken #616 FF Error PSA 9 MINT Famous Bat Error Card",
+          "price": 250,
+          "shippingCost": 6.07,
+          "shippingText": "paid",
+          "dateSold": "Aug 26, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "choleva3",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/198595097811",
+          "image": "https://i.ebayimg.com/images/g/-JcAAeSwu3Zqji27/s-l225.jpg"
+        },
+        {
+          "title": "1989 FLEER #616 BILL RIPKEN ORIOLES FF ERROR PSA 9",
+          "price": 237.07,
+          "shippingCost": 6.25,
+          "shippingText": "paid",
+          "dateSold": "Aug 25, 2026",
+          "listingType": "Auction",
+          "bids": 23,
+          "condition": "New (Other)",
+          "seller": "4_sharp_corners",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/366611356009",
+          "image": "https://i.ebayimg.com/images/g/5ukAAeSw69pqgxkM/s-l225.jpg"
         }
       ],
-      "fetchedAt": "2026-09-17T12:57:47.460Z"
+      "fetchedAt": "2026-09-19T12:13:50.073Z"
     },
     "card_5": {
       "name": "2025 Bowman Chrome Prospects JJ Wetherholt PSA 10",
@@ -1269,7 +1255,7 @@
         {
           "title": "Bowman 2025 JJ Wetherholt 1st Bowman Chrome Prospects #BCP22 PSA 10",
           "price": 90,
-          "shippingCost": 5.72,
+          "shippingCost": 5.82,
           "shippingText": "paid",
           "dateSold": "Aug 25, 2026",
           "listingType": "Best Offer Accepted",
@@ -1283,7 +1269,7 @@
         {
           "title": "JJ Wetherholt 2025 Bowman #BCP22⚡️Chrome Prospect Reptilian⚡️PSA 10💎",
           "price": 155,
-          "shippingCost": 5.62,
+          "shippingCost": 6.07,
           "shippingText": "paid",
           "dateSold": "Sep 16, 2026",
           "listingType": "Best Offer Accepted",
@@ -1323,7 +1309,7 @@
           "image": "https://i.ebayimg.com/images/g/2WYAAeSw779pqxLM/s-l225.jpg"
         }
       ],
-      "fetchedAt": "2026-09-17T12:58:20.446Z"
+      "fetchedAt": "2026-09-19T12:14:23.096Z"
     },
     "card_6": {
       "name": "2019 Topps Chrome Bundesliga Erling Haaland PSA 10",
@@ -1443,7 +1429,7 @@
         {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
           "price": 900,
-          "shippingCost": 5.97,
+          "shippingCost": 6.07,
           "shippingText": "paid",
           "dateSold": "Aug 31, 2026",
           "listingType": "Best Offer Accepted",
@@ -1583,7 +1569,7 @@
         {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
           "price": 815,
-          "shippingCost": 5.97,
+          "shippingCost": 6.07,
           "shippingText": "paid",
           "dateSold": "Aug 1, 2026",
           "listingType": "Buy It Now",
@@ -1693,7 +1679,7 @@
           "image": "https://i.ebayimg.com/images/g/-9UAAeSwIoZqVCnS/s-l225.jpg"
         }
       ],
-      "fetchedAt": "2026-09-17T12:58:53.361Z"
+      "fetchedAt": "2026-09-19T12:14:56.355Z"
     }
   }
 }
