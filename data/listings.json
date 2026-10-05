@@ -1,13 +1,27 @@
 {
-  "fetchedAt": "2026-10-03T12:59:17.648Z",
+  "fetchedAt": "2026-10-05T16:44:38.859Z",
   "cards": {
     "card_0": {
       "name": "2018 Bowman Chrome Shohei Ohtani Rookie PSA 10",
       "listings": [
         {
           "title": "2018 BOWMAN CHROME #1 SHOHEI OHTANI ROOKIE RC PSA 10",
+          "price": 5050,
+          "shippingCost": 5.99,
+          "shippingText": "paid",
+          "dateSold": "Oct 4, 2026",
+          "listingType": "Auction",
+          "bids": 30,
+          "condition": "New (Other)",
+          "seller": "psa",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/307200867636",
+          "image": "https://i.ebayimg.com/images/g/yIcAAeSw~mRquCa9/s-l500.webp"
+        },
+        {
+          "title": "2018 BOWMAN CHROME #1 SHOHEI OHTANI ROOKIE RC PSA 10",
           "price": 5100,
-          "shippingCost": 32,
+          "shippingCost": 5.99,
           "shippingText": "paid",
           "dateSold": "Oct 2, 2026",
           "listingType": "Auction",
@@ -16,13 +30,13 @@
           "seller": "psa",
           "location": "United States",
           "link": "https://www.ebay.com/itm/117419046357",
-          "image": "https://i.ebayimg.com/images/g/docAAeSwZkVqrWV0/s-l500.webp"
+          "image": "https://i.ebayimg.com/images/g/docAAeSwZkVqrWV0/s-l140.webp"
         },
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT (76)",
           "price": 5251,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Oct 2, 2026",
           "listingType": "Auction",
           "bids": 38,
@@ -30,12 +44,12 @@
           "seller": "dcsports87",
           "location": "United States",
           "link": "https://www.ebay.com/itm/128101906655",
-          "image": "https://i.ebayimg.com/images/g/vFcAAeSwgXRqoxrU/s-l500.webp"
+          "image": "https://i.ebayimg.com/images/g/vFcAAeSwgXRqoxrU/s-l140.webp"
         },
         {
           "title": "2018 Bowman Chrome #1 Shohei Ohtani Batting Angels RC Rookie PSA 10 GEM MINT",
           "price": 5100,
-          "shippingCost": 150,
+          "shippingCost": 50,
           "shippingText": "paid",
           "dateSold": "Sep 30, 2026",
           "listingType": "Auction",
@@ -49,7 +63,7 @@
         {
           "title": "2018 BOWMAN CHROME #1 SHOHEI OHTANI ROOKIE RC PSA 10",
           "price": 5250,
-          "shippingCost": 32,
+          "shippingCost": 5.99,
           "shippingText": "paid",
           "dateSold": "Sep 30, 2026",
           "listingType": "Auction",
@@ -63,7 +77,7 @@
         {
           "title": "SHOHEI OHTANI PSA 10 2018 BOWMAN CHROME #1 ROOKIE BATTING RC ANGELS 976",
           "price": 5200,
-          "shippingCost": 125,
+          "shippingCost": 50,
           "shippingText": "paid",
           "dateSold": "Sep 29, 2026",
           "listingType": "Auction",
@@ -77,8 +91,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
           "price": 5200,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 29, 2026",
           "listingType": "Auction",
           "bids": 47,
@@ -91,7 +105,7 @@
         {
           "title": "SHOHEI OHTANI PSA 10 2018 BOWMAN CHROME #1 BATTING ROOKIE RC GEM MINT 3860",
           "price": 5100,
-          "shippingCost": 100,
+          "shippingCost": 35,
           "shippingText": "paid",
           "dateSold": "Sep 28, 2026",
           "listingType": "Auction",
@@ -105,8 +119,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani #1 Rookie Card PSA 10 GEM MINT",
           "price": 5167,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 9.5,
+          "shippingText": "paid",
           "dateSold": "Sep 27, 2026",
           "listingType": "Auction",
           "bids": 37,
@@ -119,8 +133,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
           "price": 5100,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 27, 2026",
           "listingType": "Auction",
           "bids": 20,
@@ -133,8 +147,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani RC Rookie #1 Angels PSA 10 GEM MINT",
           "price": 5300,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 25, 2026",
           "listingType": "Auction",
           "bids": 15,
@@ -147,7 +161,7 @@
         {
           "title": "SHOHEI OHTANI PSA 10 2018 BOWMAN CHROME #1 BATTING ROOKIE RC GEM MINT 9259",
           "price": 5578,
-          "shippingCost": 125,
+          "shippingCost": 50,
           "shippingText": "paid",
           "dateSold": "Sep 24, 2026",
           "listingType": "Auction",
@@ -161,7 +175,7 @@
         {
           "title": "2018 BOWMAN CHROME #1 SHOHEI OHTANI ROOKIE RC PSA 10",
           "price": 5800,
-          "shippingCost": 32,
+          "shippingCost": 5.99,
           "shippingText": "paid",
           "dateSold": "Sep 24, 2026",
           "listingType": "Auction",
@@ -175,7 +189,7 @@
         {
           "title": "2018 BOWMAN CHROME #1 SHOHEI OHTANI ROOKIE RC PSA 10",
           "price": 5377,
-          "shippingCost": 32,
+          "shippingCost": 5.99,
           "shippingText": "paid",
           "dateSold": "Sep 24, 2026",
           "listingType": "Auction",
@@ -189,8 +203,8 @@
         {
           "title": "2018 Bowman Chrome - Base Shohei Ohtani #1 Batting (RC) PSA 10",
           "price": 5500,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 0,
+          "shippingText": "free",
           "dateSold": "Sep 23, 2026",
           "listingType": "Buy It Now",
           "bids": null,
@@ -203,8 +217,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
           "price": 5400,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 22, 2026",
           "listingType": "Auction",
           "bids": 51,
@@ -217,7 +231,7 @@
         {
           "title": "2018 BOWMAN CHROME #1 SHOHEI OHTANI ROOKIE RC PSA 10",
           "price": 5469.69,
-          "shippingCost": 32,
+          "shippingCost": 5.99,
           "shippingText": "paid",
           "dateSold": "Sep 22, 2026",
           "listingType": "Auction",
@@ -231,7 +245,7 @@
         {
           "title": "SHOHEI OHTANI PSA 10 2018 BOWMAN CHROME #1 BATTING ROOKIE RC ANGELS GEM 2373",
           "price": 5700,
-          "shippingCost": 125,
+          "shippingCost": 50,
           "shippingText": "paid",
           "dateSold": "Sep 21, 2026",
           "listingType": "Auction",
@@ -245,8 +259,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
           "price": 5488,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 21, 2026",
           "listingType": "Auction",
           "bids": 18,
@@ -259,7 +273,7 @@
         {
           "title": "2018 BOWMAN CHROME #1 SHOHEI OHTANI ROOKIE RC PSA 10",
           "price": 5400,
-          "shippingCost": 32,
+          "shippingCost": 5.99,
           "shippingText": "paid",
           "dateSold": "Sep 21, 2026",
           "listingType": "Auction",
@@ -273,8 +287,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
           "price": 5477,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 20, 2026",
           "listingType": "Auction",
           "bids": 69,
@@ -287,8 +301,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani RC Rookie #1 Angels PSA 10 GEM MINT",
           "price": 5501,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 0,
+          "shippingText": "free",
           "dateSold": "Sep 20, 2026",
           "listingType": "Auction",
           "bids": 17,
@@ -301,8 +315,8 @@
         {
           "title": "Shohei Ohtani 2018 Topps Bowman Chrome True Rookie Angels RC #1 Gem Mint PSA 10",
           "price": 5550,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 6.07,
+          "shippingText": "paid",
           "dateSold": "Sep 19, 2026",
           "listingType": "Auction",
           "bids": 19,
@@ -315,8 +329,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani RC Rookie #1 Angels PSA 10 GEM MINT",
           "price": 6500,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 0,
+          "shippingText": "free",
           "dateSold": "Sep 17, 2026",
           "listingType": "Buy It Now",
           "bids": null,
@@ -329,8 +343,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT (66)",
           "price": 5400,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 15, 2026",
           "listingType": "Auction",
           "bids": 14,
@@ -343,8 +357,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
           "price": 5501,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 15, 2026",
           "listingType": "Auction",
           "bids": 28,
@@ -357,8 +371,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT (76)",
           "price": 5500.02,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 15, 2026",
           "listingType": "Auction",
           "bids": 20,
@@ -371,7 +385,7 @@
         {
           "title": "2018 BOWMAN CHROME #1 SHOHEI OHTANI ROOKIE RC PSA 10",
           "price": 5600,
-          "shippingCost": 32,
+          "shippingCost": 5.99,
           "shippingText": "paid",
           "dateSold": "Sep 14, 2026",
           "listingType": "Auction",
@@ -385,8 +399,8 @@
         {
           "title": "2018 Bowman Chrome #1 Shohei Ohtani RC Rookie PSA 10 GEM MINT ANGELS",
           "price": 5600,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 79.99,
+          "shippingText": "paid",
           "dateSold": "Sep 13, 2026",
           "listingType": "Auction",
           "bids": 18,
@@ -399,8 +413,8 @@
         {
           "title": "Bowman 2018 Bowman Chrome Shohei Ohtani #1 RC Batting PSA 10 Angels",
           "price": 5900,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 5.5,
+          "shippingText": "paid",
           "dateSold": "Sep 10, 2026",
           "listingType": "Auction",
           "bids": 20,
@@ -413,8 +427,8 @@
         {
           "title": "Shohei Ohtani 2018 Topps Bowman Chrome True Rookie Angels RC #1 Gem Mint PSA 10",
           "price": 6250,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 13.36,
+          "shippingText": "paid",
           "dateSold": "Sep 10, 2026",
           "listingType": "Buy It Now",
           "bids": null,
@@ -427,7 +441,7 @@
         {
           "title": "2018 Bowman Chrome #1 Shohei Ohtani RC Rookie PSA 10 MBA SILVER DIAMOND",
           "price": 6100,
-          "shippingCost": 60,
+          "shippingCost": 20,
           "shippingText": "paid",
           "dateSold": "Sep 8, 2026",
           "listingType": "Auction",
@@ -441,7 +455,7 @@
         {
           "title": "2018 BOWMAN CHROME #1 SHOHEI OHTANI ROOKIE RC PSA 10",
           "price": 6208.88,
-          "shippingCost": 32,
+          "shippingCost": 5.99,
           "shippingText": "paid",
           "dateSold": "Sep 8, 2026",
           "listingType": "Auction",
@@ -455,8 +469,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
           "price": 5600.02,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 8, 2026",
           "listingType": "Auction",
           "bids": 33,
@@ -469,7 +483,7 @@
         {
           "title": "SHOHEI OHTANI PSA 10 2018 BOWMAN CHROME #1 BATTING ROOKIE RC GEM MINT 9259",
           "price": 6200,
-          "shippingCost": 125,
+          "shippingCost": 50,
           "shippingText": "paid",
           "dateSold": "Sep 7, 2026",
           "listingType": "Auction",
@@ -483,7 +497,7 @@
         {
           "title": "SHOHEI OHTANI PSA 10 2018 BOWMAN CHROME #1 BATTING ROOKIE RC GEM MINT 9038",
           "price": 6077.77,
-          "shippingCost": 125,
+          "shippingCost": 50,
           "shippingText": "paid",
           "dateSold": "Sep 7, 2026",
           "listingType": "Auction",
@@ -497,8 +511,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani RC Rookie #1 Angels PSA 10 GEM MINT",
           "price": 6250,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 7, 2026",
           "listingType": "Auction",
           "bids": 42,
@@ -511,8 +525,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
           "price": 6100,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 7, 2026",
           "listingType": "Auction",
           "bids": 41,
@@ -525,8 +539,8 @@
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
           "price": 6101.09,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 4.99,
+          "shippingText": "paid",
           "dateSold": "Sep 7, 2026",
           "listingType": "Auction",
           "bids": 37,
@@ -539,8 +553,8 @@
         {
           "title": "Bowman 2018 Bowman Chrome Shohei Ohtani #1 RC Batting PSA 10 Los Angeles Angels",
           "price": 6100,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 6.4,
+          "shippingText": "paid",
           "dateSold": "Sep 6, 2026",
           "listingType": "Auction",
           "bids": 19,
@@ -553,8 +567,8 @@
         {
           "title": "2018 Bowman Chrome #1 Shohei Ohtani PSA 10",
           "price": 6350,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 5.99,
+          "shippingText": "paid",
           "dateSold": "Sep 4, 2026",
           "listingType": "Auction",
           "bids": 5,
@@ -563,69 +577,83 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/800588746106",
           "image": "https://i.ebayimg.com/images/g/s5sAAeSwlU9qNzSY/s-l140.webp"
-        },
-        {
-          "title": "2018 Bowman Chrome Shohei Ohtani #1 (RC) PSA 10",
-          "price": 6600,
-          "shippingCost": null,
-          "shippingText": "unknown",
-          "dateSold": "Sep 3, 2026",
-          "listingType": "Auction",
-          "bids": 6,
-          "condition": "New (Other)",
-          "seller": "brrodo_0",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/366633631679",
-          "image": "https://i.ebayimg.com/images/g/blgAAeSwCjpqkSdC/s-l140.webp"
-        },
-        {
-          "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
-          "price": 6338,
-          "shippingCost": null,
-          "shippingText": "unknown",
-          "dateSold": "Sep 2, 2026",
-          "listingType": "Auction",
-          "bids": 37,
-          "condition": "New (Other)",
-          "seller": "dcsports87",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/377454062900",
-          "image": "https://i.ebayimg.com/images/g/UMEAAeSwqlBqkbTK/s-l140.webp"
-        },
-        {
-          "title": "2018 Bowman Chrome #1 Shohei Ohtani PSA 10 Batting Rookie RC GEM MINT",
-          "price": 7499.99,
-          "shippingCost": null,
-          "shippingText": "unknown",
-          "dateSold": "Sep 1, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "thirteencardco",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/267772511851",
-          "image": "https://i.ebayimg.com/images/g/hzIAAeSwj8NqlghX/s-l140.webp"
-        },
-        {
-          "title": "2018 Bowman Chrome Shohei Ohtani RC Rookie #1 Angels PSA 10 GEM MINT",
-          "price": 6311.55,
-          "shippingCost": null,
-          "shippingText": "unknown",
-          "dateSold": "Sep 1, 2026",
-          "listingType": "Auction",
-          "bids": 34,
-          "condition": "New (Other)",
-          "seller": "dcsports87",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/128047695192",
-          "image": "https://i.ebayimg.com/images/g/i7QAAeSwbr9qkHAz/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-10-03T12:55:19.705Z"
+      "fetchedAt": "2026-10-05T16:40:51.580Z"
     },
     "card_1": {
       "name": "2018 Topps Chrome Update Juan Soto PSA 10",
       "listings": [
+        {
+          "title": "Topps 2018 Chrome Update Juan Soto Rookie Base #HMT55 PSA 10",
+          "price": 70,
+          "shippingCost": 5.5,
+          "shippingText": "paid",
+          "dateSold": "Oct 5, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "kardboard_rookie",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/117443259330",
+          "image": "https://i.ebayimg.com/images/g/2qsAAeSw9D9qv7sk/s-l500.webp"
+        },
+        {
+          "title": "Juan Soto 2018 Topps Chrome Update #HMT55 Base Rookie PSA 10 Gem MT Mets 💎🔥",
+          "price": 74.99,
+          "shippingCost": 5.34,
+          "shippingText": "paid",
+          "dateSold": "Oct 4, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "444trading",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/327360149436",
+          "image": "https://i.ebayimg.com/images/g/e4AAAeSwZXtqqgBR/s-l500.webp"
+        },
+        {
+          "title": "JUAN SOTO PSA 10 2018 TOPPS CHROME UPDATE #HMT55 ROOKIE RC NATIONALS 3034",
+          "price": 65.84,
+          "shippingCost": 6,
+          "shippingText": "paid",
+          "dateSold": "Oct 4, 2026",
+          "listingType": "Auction",
+          "bids": 26,
+          "condition": "New (Other)",
+          "seller": "mc_sportscards",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/188974823122",
+          "image": "https://i.ebayimg.com/images/g/w4wAAeSwH0hqtCfP/s-l140.webp"
+        },
+        {
+          "title": "2018 Topps Chrome Update Juan Soto Rookie RC #HMT55 Nationals PSA 10 GEM MINT",
+          "price": 58,
+          "shippingCost": 4.99,
+          "shippingText": "paid",
+          "dateSold": "Oct 4, 2026",
+          "listingType": "Auction",
+          "bids": 21,
+          "condition": "New (Other)",
+          "seller": "dcsports87",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/128105506702",
+          "image": "https://i.ebayimg.com/images/g/IMcAAeSw5oZqvBh5/s-l140.webp"
+        },
+        {
+          "title": "Juan Soto 2018 Topps Chrome Update Rookie RC #HMT55 Nationals PSA 10 GEM MINT",
+          "price": 69.99,
+          "shippingCost": null,
+          "shippingText": "unknown",
+          "dateSold": "Oct 3, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "grandslamcards1",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/407259670817",
+          "image": "https://i.ebayimg.com/images/g/tiwAAeSwD7NqvnNB/s-l140.webp"
+        },
         {
           "title": "2018 Topps Chrome #HMT55 Juan Soto Update PSA 10",
           "price": 63.99,
@@ -638,12 +666,12 @@
           "seller": "rainier_collectibles",
           "location": "United States",
           "link": "https://www.ebay.com/itm/178540017411",
-          "image": "https://i.ebayimg.com/images/g/krkAAeSw0SxqvCVC/s-l500.webp"
+          "image": "https://i.ebayimg.com/images/g/krkAAeSw0SxqvCVC/s-l140.webp"
         },
         {
           "title": "Topps 2018 Chrome Update Juan Soto #HMT55 RC PSA 10 Nationals",
           "price": 70,
-          "shippingCost": 5.38,
+          "shippingCost": 5.5,
           "shippingText": "paid",
           "dateSold": "Oct 1, 2026",
           "listingType": "Buy It Now",
@@ -685,7 +713,7 @@
         {
           "title": "2018 Topps Chrome Update Juan Soto #HMT55 Rookie Card RC Graded PSA 10 GEM MINT",
           "price": 75,
-          "shippingCost": 8.3,
+          "shippingCost": 8.55,
           "shippingText": "paid",
           "dateSold": "Sep 28, 2026",
           "listingType": "Best Offer Accepted",
@@ -727,7 +755,7 @@
         {
           "title": "Topps 2018 Chrome Update Juan Soto RC #HMT55 Nationals PSA 10",
           "price": 70,
-          "shippingCost": 5.82,
+          "shippingCost": 6.07,
           "shippingText": "paid",
           "dateSold": "Sep 26, 2026",
           "listingType": "Best Offer Accepted",
@@ -741,7 +769,7 @@
         {
           "title": "Topps 2018 Chrome Update Juan Soto Rookie #HMT55 PSA 10 Washington Nationals",
           "price": 70,
-          "shippingCost": 5.58,
+          "shippingCost": 5.72,
           "shippingText": "paid",
           "dateSold": "Sep 26, 2026",
           "listingType": "Best Offer Accepted",
@@ -811,7 +839,7 @@
         {
           "title": "Topps 2018 Chrome Update Juan Soto HMT55 Rookie Base PSA GEM MT 10 Nationals 🔥",
           "price": 70,
-          "shippingCost": 5.5,
+          "shippingCost": 5.38,
           "shippingText": "paid",
           "dateSold": "Sep 22, 2026",
           "listingType": "Best Offer Accepted",
@@ -825,7 +853,7 @@
         {
           "title": "2018 Topps Chrome Update #HMT55 Juan Soto PSA 10 RC Rookie Card",
           "price": 75,
-          "shippingCost": 8.3,
+          "shippingCost": 8.8,
           "shippingText": "paid",
           "dateSold": "Sep 22, 2026",
           "listingType": "Best Offer Accepted",
@@ -839,7 +867,7 @@
         {
           "title": "2018 Topps Chrome Update - Juan Soto #HMT55 (RC) PSA 10",
           "price": 65,
-          "shippingCost": 5.5,
+          "shippingCost": 5.58,
           "shippingText": "paid",
           "dateSold": "Sep 22, 2026",
           "listingType": "Best Offer Accepted",
@@ -853,7 +881,7 @@
         {
           "title": "2018 Topps Chrome Update #HMT55 - Juan Soto RC Nationals PSA 10 No Scratch Slab",
           "price": 73.99,
-          "shippingCost": 5.34,
+          "shippingCost": 5.5,
           "shippingText": "paid",
           "dateSold": "Sep 21, 2026",
           "listingType": "Best Offer Accepted",
@@ -895,7 +923,7 @@
         {
           "title": "Topps 2018 Chrome Update Juan Soto Rookie Base Set #HMT55 PSA 10",
           "price": 61,
-          "shippingCost": 5.5,
+          "shippingCost": 5.34,
           "shippingText": "paid",
           "dateSold": "Sep 20, 2026",
           "listingType": "Auction",
@@ -909,7 +937,7 @@
         {
           "title": "Topps 2018 Chrome Update Juan Soto RC Base #HMT55 PSA 10 GEM MT",
           "price": 79.99,
-          "shippingCost": 5.5,
+          "shippingCost": 5.38,
           "shippingText": "paid",
           "dateSold": "Sep 19, 2026",
           "listingType": "Buy It Now",
@@ -993,7 +1021,7 @@
         {
           "title": "Topps 2018 Chrome Update Juan Soto Nationals RC PSA GEM MT 10 #HMT55",
           "price": 60,
-          "shippingCost": 5.5,
+          "shippingCost": 5.38,
           "shippingText": "paid",
           "dateSold": "Sep 14, 2026",
           "listingType": "Auction",
@@ -1035,7 +1063,7 @@
         {
           "title": "Juan Soto PSA 10 2018 Topps Chrome Update Washington Nationals #HMT55 RC ROOKIE",
           "price": 72,
-          "shippingCost": 5.5,
+          "shippingCost": 5.34,
           "shippingText": "paid",
           "dateSold": "Sep 12, 2026",
           "listingType": "Buy It Now",
@@ -1059,65 +1087,9 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/227507701381",
           "image": "https://i.ebayimg.com/images/g/Oo8AAeSwxqFqnFCx/s-l140.webp"
-        },
-        {
-          "title": "Topps 2018 Chrome Update Juan Soto HMT55 PSA 10 Rookie Card Nationals",
-          "price": 71,
-          "shippingCost": 5.72,
-          "shippingText": "paid",
-          "dateSold": "Sep 11, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "ni_320372",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/287546028773",
-          "image": "https://i.ebayimg.com/images/g/lu0AAeSw2DJqjiSg/s-l140.webp"
-        },
-        {
-          "title": "JUAN SOTO PSA 10 2018 TOPPS CHROME UPDATE #HMT55 ROOKIE RC NATIONALS 0231",
-          "price": 66,
-          "shippingCost": 6,
-          "shippingText": "paid",
-          "dateSold": "Sep 10, 2026",
-          "listingType": "Auction",
-          "bids": 19,
-          "condition": "New (Other)",
-          "seller": "mc_sportscards",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/188880286910",
-          "image": "https://i.ebayimg.com/images/g/lnYAAeSwzkRqmX9b/s-l140.webp"
-        },
-        {
-          "title": "2018 Topps Chrome Update- Juan Soto- HMT55- PSA 10 Gem Mint- Rookie Card- RC",
-          "price": 80,
-          "shippingCost": 5.93,
-          "shippingText": "paid",
-          "dateSold": "Sep 10, 2026",
-          "listingType": "Buy It Now",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "bluelinecards16",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/137326401491",
-          "image": "https://i.ebayimg.com/images/g/n7AAAeSwICVqDTG4/s-l140.webp"
-        },
-        {
-          "title": "2018 Topps Chrome Update Juan Soto Rookie RC #HMT55 Nationals PSA 10 GEM MINT",
-          "price": 67.88,
-          "shippingCost": 4.99,
-          "shippingText": "paid",
-          "dateSold": "Sep 9, 2026",
-          "listingType": "Auction",
-          "bids": 23,
-          "condition": "New (Other)",
-          "seller": "dcsports87",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/128062191133",
-          "image": "https://i.ebayimg.com/images/g/J3YAAeSwYwdqmyFW/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-10-03T12:55:55.477Z"
+      "fetchedAt": "2026-10-05T16:41:25.394Z"
     },
     "card_2": {
       "name": "2024 Bowman Draft Chrome Konnor Griffin PSA 10",
@@ -1139,8 +1111,8 @@
         {
           "title": "2024 Bowman Chrome Draft #BDC22 Konnor Griffin Pirates RC Rookie PSA 10 GEM MINT",
           "price": 57,
-          "shippingCost": 8,
-          "shippingText": "paid",
+          "shippingCost": null,
+          "shippingText": "unknown",
           "dateSold": "Sep 28, 2026",
           "listingType": "Auction",
           "bids": 17,
@@ -1193,15 +1165,29 @@
           "image": "https://i.ebayimg.com/images/g/Av8AAeSw~H9qrCuF/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-10-03T12:56:28.627Z"
+      "fetchedAt": "2026-10-05T16:42:02.377Z"
     },
     "card_3": {
       "name": "2018 Topps Chrome Shohei Ohtani Pink Refractor Pitching PSA 10",
       "listings": [
         {
           "title": "2018 Topps Chrome Shohei Ohtani Pitching Pink Refractor #150 PSA 10",
+          "price": 5755,
+          "shippingCost": 8.8,
+          "shippingText": "paid",
+          "dateSold": "Oct 3, 2026",
+          "listingType": "Auction",
+          "bids": 20,
+          "condition": "New (Other)",
+          "seller": "kelvinl1383",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/206583626852",
+          "image": "https://i.ebayimg.com/images/g/IQgAAeSwmdlqt90s/s-l500.webp"
+        },
+        {
+          "title": "2018 Topps Chrome Shohei Ohtani Pitching Pink Refractor #150 PSA 10",
           "price": 5500,
-          "shippingCost": 9.45,
+          "shippingCost": 8.8,
           "shippingText": "paid",
           "dateSold": "Sep 25, 2026",
           "listingType": "Auction",
@@ -1297,11 +1283,81 @@
           "image": "https://i.ebayimg.com/images/g/g04AAeSwOgVqQWRY/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-10-03T12:57:14.986Z"
+      "fetchedAt": "2026-10-05T16:42:40.227Z"
     },
     "card_4": {
       "name": "1989 Fleer Bill Ripken FF Error PSA 9",
       "listings": [
+        {
+          "title": "1989 Fleer #616 Billy Bill Ripken FF Error PSA MINT 9 Slab",
+          "price": 250,
+          "shippingCost": 6.07,
+          "shippingText": "paid",
+          "dateSold": "Oct 4, 2026",
+          "listingType": "Buy It Now",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "andadle-0",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/920008275485",
+          "image": "https://i.ebayimg.com/images/g/TgUAAeSwZ2hqwsMz/s-l500.webp"
+        },
+        {
+          "title": "1989 Fleer Bill Ripken F@$& Face Error Card #616 PSA 9",
+          "price": 249.99,
+          "shippingCost": 5.82,
+          "shippingText": "paid",
+          "dateSold": "Oct 4, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "chitown-chuy",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/960012161249",
+          "image": "https://i.ebayimg.com/images/g/gzgAAeSwTMVqwj91/s-l500.webp"
+        },
+        {
+          "title": "1989 Fleer Bill Ripken FF Error #616 PSA 9 Mint Orioles Rare Error Card",
+          "price": 229,
+          "shippingCost": 6.34,
+          "shippingText": "paid",
+          "dateSold": "Mar 27, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "a-10legacygroup",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/236669246508",
+          "image": "https://i.ebayimg.com/images/g/52wAAeSw2yNprBs-/s-l140.webp"
+        },
+        {
+          "title": "Fleer 1989 Fleer Bill Ripken #616 FF on Bat Knob Error PSA 9 Orioles",
+          "price": 225,
+          "shippingCost": 0,
+          "shippingText": "free",
+          "dateSold": "Oct 4, 2026",
+          "listingType": "Buy It Now",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "tk71881",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/128095663485",
+          "image": "https://i.ebayimg.com/images/g/pg4AAeSwMOxqtI7S/s-l140.webp"
+        },
+        {
+          "title": "1989 Bill Ripken Fleer #616 FF Error PSA 9 Mint Iconic Card Billy Face Orioles",
+          "price": 270,
+          "shippingCost": 6.9,
+          "shippingText": "paid",
+          "dateSold": "Oct 4, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "rickybrando",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/178547423622",
+          "image": "https://i.ebayimg.com/images/g/7TcAAeSwwlhqqfba/s-l140.webp"
+        },
         {
           "title": "1989 Bill Ripken Fleer #616 FF Error PSA 9 Mint Iconic Card Billy Face Orioles",
           "price": 285,
@@ -1314,7 +1370,7 @@
           "seller": "rickybrando",
           "location": "United States",
           "link": "https://www.ebay.com/itm/178500788833",
-          "image": "https://i.ebayimg.com/images/g/7TcAAeSwwlhqqfba/s-l500.webp"
+          "image": "https://i.ebayimg.com/images/g/7TcAAeSwwlhqqfba/s-l140.webp"
         },
         {
           "title": "PSA 9 Fleer 1989 Bill Ripken #616 FF on Bat Knob Error Baltimore Orioles",
@@ -1403,8 +1459,8 @@
         {
           "title": "1989 Fleer Bill Ripken FF Error #616 PSA 9",
           "price": 195,
-          "shippingCost": 8.95,
-          "shippingText": "paid",
+          "shippingCost": null,
+          "shippingText": "unknown",
           "dateSold": "Sep 21, 2026",
           "listingType": "Auction",
           "bids": 15,
@@ -1739,7 +1795,7 @@
         {
           "title": "1989 Fleer Baseball #616 BILL RIPKEN FF Error PSA 9",
           "price": 205.15,
-          "shippingCost": 9.83,
+          "shippingCost": 10.58,
           "shippingText": "paid",
           "dateSold": "Aug 26, 2026",
           "listingType": "Auction",
@@ -1805,79 +1861,9 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/366611356009",
           "image": "https://i.ebayimg.com/images/g/5ukAAeSw69pqgxkM/s-l140.webp"
-        },
-        {
-          "title": "1989 Fleer Bill Ripken FF Error Bat Knob #616 Orioles PSA 9 Mint",
-          "price": 225.5,
-          "shippingCost": 5.82,
-          "shippingText": "paid",
-          "dateSold": "Aug 25, 2026",
-          "listingType": "Auction",
-          "bids": 3,
-          "condition": "New (Other)",
-          "seller": "dr2112",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/336749706727",
-          "image": "https://i.ebayimg.com/images/g/l3oAAeSwqlBqhO7k/s-l140.webp"
-        },
-        {
-          "title": "Bill Ripken 1989 Fleer ERROR F FACE #616 PSA 9 NEW PSA GRADE!",
-          "price": 324,
-          "shippingCost": 7.08,
-          "shippingText": "paid",
-          "dateSold": "Aug 23, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "factocards",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/158196064301",
-          "image": "https://i.ebayimg.com/images/g/If0AAeSwcVhqNrGl/s-l140.webp"
-        },
-        {
-          "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
-          "price": 260,
-          "shippingCost": 8,
-          "shippingText": "paid",
-          "dateSold": "Aug 22, 2026",
-          "listingType": "Auction",
-          "bids": 28,
-          "condition": "New (Other)",
-          "seller": "braveheart100",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/117361202583",
-          "image": "https://i.ebayimg.com/images/g/2-YAAeSwP~VqgJlj/s-l140.webp"
-        },
-        {
-          "title": "1989 Fleer Bill Ripken FF ERROR Card #616 Billy F**K Face PSA 9 Rare Mint",
-          "price": 299.99,
-          "shippingCost": 5.5,
-          "shippingText": "paid",
-          "dateSold": "Aug 22, 2026",
-          "listingType": "Buy It Now",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "cactuszone-cards",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/398177787957",
-          "image": "https://i.ebayimg.com/images/g/QRYAAeSwlDZqV8PJ/s-l140.webp"
-        },
-        {
-          "title": "1989 FLEER FF ERROR #616 BILL RIPKEN PSA 9",
-          "price": 232.37,
-          "shippingCost": 5.99,
-          "shippingText": "paid",
-          "dateSold": "Aug 21, 2026",
-          "listingType": "Auction",
-          "bids": 22,
-          "condition": "New (Other)",
-          "seller": "psa",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/117356235029",
-          "image": "https://i.ebayimg.com/images/g/1h4AAeSwtixqfQPD/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-10-03T12:57:48.228Z"
+      "fetchedAt": "2026-10-05T16:43:23.252Z"
     },
     "card_5": {
       "name": "2025 Bowman Chrome Prospects JJ Wetherholt PSA 10",
@@ -1913,7 +1899,7 @@
         {
           "title": "JJ Wetherholt 2025 Bowman #BCP22⚡️Chrome Prospect Reptilian⚡️PSA 10💎",
           "price": 155,
-          "shippingCost": 5.58,
+          "shippingCost": 8.24,
           "shippingText": "paid",
           "dateSold": "Sep 16, 2026",
           "listingType": "Best Offer Accepted",
@@ -1927,7 +1913,7 @@
         {
           "title": "Bowman 2025 JJ Wetherholt 1st Bowman Chrome Prospects #BCP22 PSA 10",
           "price": 90,
-          "shippingCost": 5.58,
+          "shippingCost": 8.24,
           "shippingText": "paid",
           "dateSold": "Aug 25, 2026",
           "listingType": "Best Offer Accepted",
@@ -1967,15 +1953,43 @@
           "image": "https://i.ebayimg.com/images/g/2WYAAeSw779pqxLM/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-10-03T12:58:25.536Z"
+      "fetchedAt": "2026-10-05T16:43:58.039Z"
     },
     "card_6": {
       "name": "2019 Topps Chrome Bundesliga Erling Haaland PSA 10",
       "listings": [
         {
+          "title": "2019-20 Topps Chrome Bundesliga ERLING HAALAND RC PSA 10 #72",
+          "price": 999.99,
+          "shippingCost": 5.99,
+          "shippingText": "paid",
+          "dateSold": "Oct 5, 2026",
+          "listingType": "Best Offer Accepted",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "mj_elliott",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/318637966867",
+          "image": "https://i.ebayimg.com/images/g/XzEAAeSwf4JqZkU2/s-l500.webp"
+        },
+        {
+          "title": "2019 Topps Chrome Bundesliga - Erling Haaland Rookie RC #72 PSA 10 Dortmund Kit",
+          "price": 800,
+          "shippingCost": 6.34,
+          "shippingText": "paid",
+          "dateSold": "Oct 3, 2026",
+          "listingType": "Auction",
+          "bids": 1,
+          "condition": "New (Other)",
+          "seller": "cu5430",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/257772115744",
+          "image": "https://i.ebayimg.com/images/g/aM0AAeSwRrRqqBbq/s-l500.webp"
+        },
+        {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
           "price": 900,
-          "shippingCost": 9.45,
+          "shippingCost": 10.2,
           "shippingText": "paid",
           "dateSold": "Sep 29, 2026",
           "listingType": "Buy It Now",
@@ -1984,7 +1998,7 @@
           "seller": "ufslider",
           "location": "United States",
           "link": "https://www.ebay.com/itm/178514632068",
-          "image": "https://i.ebayimg.com/images/g/AekAAeSwZsZqsItD/s-l500.jpg"
+          "image": "https://i.ebayimg.com/images/g/AekAAeSwZsZqsItD/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga - Erling Haaland Rookie RC #72 PSA 10 Dortmund Kit",
@@ -1998,7 +2012,7 @@
           "seller": "cu5430",
           "location": "United States",
           "link": "https://www.ebay.com/itm/257742483307",
-          "image": "https://i.ebayimg.com/images/g/aM0AAeSwRrRqqBbq/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/aM0AAeSwRrRqqBbq/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Erling Haaland Rookie #72 PSA 10 IM1-2",
@@ -2012,7 +2026,7 @@
           "seller": "ab_sportscards_collectibles",
           "location": "United States",
           "link": "https://www.ebay.com/itm/178474266074",
-          "image": "https://i.ebayimg.com/images/g/Ov8AAeSwPgVqndwN/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/Ov8AAeSwPgVqndwN/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Erling Haaland Rookie #72 PSA 10 IM1",
@@ -2026,12 +2040,12 @@
           "seller": "ab_sportscards_collectibles",
           "location": "United States",
           "link": "https://www.ebay.com/itm/178471446619",
-          "image": "https://i.ebayimg.com/images/g/VdgAAeSwl1dqnLUL/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/VdgAAeSwl1dqnLUL/s-l140.webp"
         },
         {
           "title": "2019 TOPPS CHROME BUNDESLIGA ERLING HAALAND ROOKIE #72 PSA 10 Norway",
           "price": 879,
-          "shippingCost": 9.45,
+          "shippingCost": 10.2,
           "shippingText": "paid",
           "dateSold": "Sep 12, 2026",
           "listingType": "Buy It Now",
@@ -2040,7 +2054,7 @@
           "seller": "dynastycollectibles",
           "location": "United States",
           "link": "https://www.ebay.com/itm/227487220218",
-          "image": "https://i.ebayimg.com/images/g/FJAAAeSwR7pqihAd/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/FJAAAeSwR7pqihAd/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga #72 Erling Haaland PSA 10",
@@ -2054,7 +2068,7 @@
           "seller": "slabsnsingles",
           "location": "United States",
           "link": "https://www.ebay.com/itm/227459734624",
-          "image": "https://i.ebayimg.com/images/g/9B0AAeSwmA5qcAmC/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/9B0AAeSwmA5qcAmC/s-l140.webp"
         },
         {
           "title": "2019 TOPPS CHROME BUNDESLIGA #72 ERLING HAALAND ROOKIE RC PSA 10",
@@ -2068,7 +2082,7 @@
           "seller": "psa",
           "location": "United States",
           "link": "https://www.ebay.com/itm/307145793127",
-          "image": "https://i.ebayimg.com/images/g/okQAAeSw2ZtqjcIo/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/okQAAeSw2ZtqjcIo/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
@@ -2082,7 +2096,7 @@
           "seller": "loganlounge",
           "location": "United States",
           "link": "https://www.ebay.com/itm/237030276826",
-          "image": "https://i.ebayimg.com/images/g/nqAAAeSwmmZqjkAu/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/nqAAAeSwmmZqjkAu/s-l140.webp"
         },
         {
           "title": "2019 TOPPS CHROME BUNDESLIGA #72 ERLING HAALAND ROOKIE RC PSA 10",
@@ -2096,7 +2110,7 @@
           "seller": "psa",
           "location": "United States",
           "link": "https://www.ebay.com/itm/298626612069",
-          "image": "https://i.ebayimg.com/images/g/UVIAAeSwLrNqkuPX/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/UVIAAeSwLrNqkuPX/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Erling Haaland Rookie RC #72 Dortmund PSA 10",
@@ -2110,12 +2124,12 @@
           "seller": "dcsports87",
           "location": "United States",
           "link": "https://www.ebay.com/itm/377439665337",
-          "image": "https://i.ebayimg.com/images/g/~FAAAeSwvr5qiNU7/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/~FAAAeSwvr5qiNU7/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland #72 (RC) PSA 10 GEM MT",
           "price": 875,
-          "shippingCost": 9.45,
+          "shippingCost": 10.2,
           "shippingText": "paid",
           "dateSold": "Aug 20, 2026",
           "listingType": "Best Offer Accepted",
@@ -2124,7 +2138,7 @@
           "seller": "jonaky_87",
           "location": "United States",
           "link": "https://www.ebay.com/itm/188662615755",
-          "image": "https://i.ebayimg.com/images/g/fyoAAeSw459qXCC3/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/fyoAAeSw459qXCC3/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland #72 RC PSA 10 GEM MT",
@@ -2138,7 +2152,7 @@
           "seller": "cardpavilion1990",
           "location": "United States",
           "link": "https://www.ebay.com/itm/298596707656",
-          "image": "https://i.ebayimg.com/images/g/ErUAAeSwvDhqg4aH/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/ErUAAeSwvDhqg4aH/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10",
@@ -2152,7 +2166,7 @@
           "seller": "probstein123",
           "location": "United States",
           "link": "https://www.ebay.com/itm/377408400137",
-          "image": "https://i.ebayimg.com/images/g/yJUAAeSwa4FqegyI/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/yJUAAeSwa4FqegyI/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Erling Haaland RC #72 Dortmund PSA 10 Rookie",
@@ -2166,7 +2180,7 @@
           "seller": "dcsports87",
           "location": "United States",
           "link": "https://www.ebay.com/itm/377413326199",
-          "image": "https://i.ebayimg.com/images/g/a1YAAeSwSJFqfMOd/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/a1YAAeSwSJFqfMOd/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland #72 (RC) PSA 10 GEM MT",
@@ -2180,7 +2194,7 @@
           "seller": "diehardukfan",
           "location": "United States",
           "link": "https://www.ebay.com/itm/236989296817",
-          "image": "https://i.ebayimg.com/images/g/jVsAAeSwZB9qXR0Q/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/jVsAAeSwZB9qXR0Q/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
@@ -2194,7 +2208,7 @@
           "seller": "card_e",
           "location": "United States",
           "link": "https://www.ebay.com/itm/318594251144",
-          "image": "https://i.ebayimg.com/images/g/eVoAAeSwUXxqWaIG/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/eVoAAeSwUXxqWaIG/s-l140.webp"
         },
         {
           "title": "2019 TOPPS CHROME BUNDESLIGA #72 ERLING HAALAND ROOKIE RC PSA 10",
@@ -2208,7 +2222,7 @@
           "seller": "psa",
           "location": "United States",
           "link": "https://www.ebay.com/itm/307114717926",
-          "image": "https://i.ebayimg.com/images/g/g5AAAeSwFW1qd2Jn/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/g5AAAeSwFW1qd2Jn/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland #72 (RC) PSA 10 GEM MT",
@@ -2222,7 +2236,7 @@
           "seller": "diehardukfan",
           "location": "United States",
           "link": "https://www.ebay.com/itm/236949072257",
-          "image": "https://i.ebayimg.com/images/g/jVsAAeSwZB9qXR0Q/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/jVsAAeSwZB9qXR0Q/s-l140.webp"
         },
         {
           "title": "ERLING HAALAND (RC) 2019 Topps Chrome #72 PSA 10 Gem Mt. 🔥🔥",
@@ -2236,7 +2250,7 @@
           "seller": "cards420",
           "location": "United States",
           "link": "https://www.ebay.com/itm/318587520195",
-          "image": "https://i.ebayimg.com/images/g/ce4AAeSwZB9qV9Vm/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/ce4AAeSwZB9qV9Vm/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
@@ -2250,7 +2264,7 @@
           "seller": "neighborb",
           "location": "United States",
           "link": "https://www.ebay.com/itm/236942138961",
-          "image": "https://i.ebayimg.com/images/g/N-MAAeSwmaVqWOnd/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/N-MAAeSwmaVqWOnd/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland #72 RC PSA 10",
@@ -2264,7 +2278,7 @@
           "seller": "unopenedpackman",
           "location": "United States",
           "link": "https://www.ebay.com/itm/117314914701",
-          "image": "https://i.ebayimg.com/images/g/BGEAAeSw6JVqWXiZ/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/BGEAAeSw6JVqWXiZ/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland PSA `10 #72 (RC)",
@@ -2278,7 +2292,7 @@
           "seller": "gogagne38",
           "location": "United States",
           "link": "https://www.ebay.com/itm/206426158740",
-          "image": "https://i.ebayimg.com/images/g/2fQAAeSwGjJqXQXq/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/2fQAAeSwGjJqXQXq/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland #72 PSA 10",
@@ -2292,7 +2306,7 @@
           "seller": "murozond",
           "location": "China",
           "link": "https://www.ebay.com/itm/366553440958",
-          "image": "https://i.ebayimg.com/images/g/950AAeSwIoZqXZRf/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/950AAeSwIoZqXZRf/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
@@ -2306,7 +2320,7 @@
           "seller": "cardsinzion19",
           "location": "United States",
           "link": "https://www.ebay.com/itm/336702737062",
-          "image": "https://i.ebayimg.com/images/g/NjAAAeSwvTxqYQy8/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/NjAAAeSwvTxqYQy8/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
@@ -2320,7 +2334,7 @@
           "seller": "probstein123",
           "location": "United States",
           "link": "https://www.ebay.com/itm/366540112319",
-          "image": "https://i.ebayimg.com/images/g/pTgAAeSwMndqVP91/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/pTgAAeSwMndqVP91/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland Rookie Card RC #72 PSA 10",
@@ -2334,12 +2348,12 @@
           "seller": "evergreen_way",
           "location": "United States",
           "link": "https://www.ebay.com/itm/298505639259",
-          "image": "https://i.ebayimg.com/images/g/KoUAAeSwHkZqVtNj/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/KoUAAeSwHkZqVtNj/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland #72 (RC) PSA 10 GEM MT",
           "price": 1150,
-          "shippingCost": 11,
+          "shippingCost": 11.5,
           "shippingText": "paid",
           "dateSold": "Jul 17, 2026",
           "listingType": "Best Offer Accepted",
@@ -2348,7 +2362,7 @@
           "seller": "chascu-79",
           "location": "United States",
           "link": "https://www.ebay.com/itm/398167721920",
-          "image": "https://i.ebayimg.com/images/g/-9UAAeSwIoZqVCnS/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/-9UAAeSwIoZqVCnS/s-l140.webp"
         },
         {
           "title": "ERLING HAALAND 2019 TOPPS CHROME BUNDESLIGA ROOKIE CARD RC #72 PSA 10 see descr",
@@ -2362,7 +2376,7 @@
           "seller": "bballplayer29",
           "location": "United States",
           "link": "https://www.ebay.com/itm/278186478314",
-          "image": "https://i.ebayimg.com/images/g/OTUAAeSwhZ9qWEcN/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/OTUAAeSwhZ9qWEcN/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MIN",
@@ -2376,7 +2390,7 @@
           "seller": "probstein123",
           "location": "United States",
           "link": "https://www.ebay.com/itm/377329470751",
-          "image": "https://i.ebayimg.com/images/g/XrgAAeSwWbdqTqgT/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/XrgAAeSwWbdqTqgT/s-l140.webp"
         },
         {
           "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
@@ -2390,7 +2404,7 @@
           "seller": "probstein123",
           "location": "United States",
           "link": "https://www.ebay.com/itm/377329470892",
-          "image": "https://i.ebayimg.com/images/g/98gAAeSwyUdqTqgg/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/98gAAeSwyUdqTqgg/s-l140.webp"
         },
         {
           "title": "2019 TOPPS CHROME BUNDESLIGA #72 ERLING HAALAND ROOKIE RC PSA 10",
@@ -2404,7 +2418,7 @@
           "seller": "tranquilpumpkin",
           "location": "United States",
           "link": "https://www.ebay.com/itm/358796775221",
-          "image": "https://i.ebayimg.com/images/g/plAAAeSwsIxqUuCe/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/plAAAeSwsIxqUuCe/s-l140.webp"
         },
         {
           "title": "2019 TOPPS CHROME BUNDESLIGA #72 ERLING HAALAND ROOKIE RC PSA 10",
@@ -2418,7 +2432,7 @@
           "seller": "cj19oliva",
           "location": "United States",
           "link": "https://www.ebay.com/itm/267725815298",
-          "image": "https://i.ebayimg.com/images/g/iw0AAeSwRT1qU-rJ/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/iw0AAeSwRT1qU-rJ/s-l140.webp"
         },
         {
           "title": "2019 TOPPS CHROME BUNDESLIGA #72 ERLING HAALAND ROOKIE RC PSA 10",
@@ -2432,7 +2446,7 @@
           "seller": "psa",
           "location": "United States",
           "link": "https://www.ebay.com/itm/117273716412",
-          "image": "https://i.ebayimg.com/images/g/wc0AAeSw3ZNqQWML/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/wc0AAeSw3ZNqQWML/s-l140.webp"
         },
         {
           "title": "2019 TOPPS CHROME BUNDESLIGA #72 ERLING HAALAND ROOKIE RC PSA 10",
@@ -2446,7 +2460,7 @@
           "seller": "tranquilpumpkin",
           "location": "United States",
           "link": "https://www.ebay.com/itm/358785191741",
-          "image": "https://i.ebayimg.com/images/g/plAAAeSwsIxqUuCe/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/plAAAeSwsIxqUuCe/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland #72 PSA 10",
@@ -2460,7 +2474,7 @@
           "seller": "murozond",
           "location": "China",
           "link": "https://www.ebay.com/itm/366531407636",
-          "image": "https://i.ebayimg.com/images/g/SOEAAeSwPAdqTxOd/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/SOEAAeSwPAdqTxOd/s-l140.webp"
         },
         {
           "title": "2019 TOPPS CHROME BUNDESLIGA #72 ERLING HAALAND ROOKIE RC PSA 10",
@@ -2474,7 +2488,7 @@
           "seller": "psa",
           "location": "United States",
           "link": "https://www.ebay.com/itm/307055013502",
-          "image": "https://i.ebayimg.com/images/g/BgIAAeSwGoRqUXQc/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/BgIAAeSwGoRqUXQc/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga #72 Erling Haaland RC Rookie Card PSA 10 *read*",
@@ -2488,7 +2502,7 @@
           "seller": "bergeron9",
           "location": "Canada",
           "link": "https://www.ebay.com/itm/178282052118",
-          "image": "https://i.ebayimg.com/images/g/HrgAAeSwoolqSEbm/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/HrgAAeSwoolqSEbm/s-l140.webp"
         },
         {
           "title": "2019-20 Topps Chrome Bundesliga Erling Haaland #72 (RC) PSA 10",
@@ -2502,38 +2516,10 @@
           "seller": "bairscards",
           "location": "United States",
           "link": "https://www.ebay.com/itm/407062390871",
-          "image": "https://i.ebayimg.com/images/g/Az4AAeSwPxJqUHiD/s-l140.jpg"
-        },
-        {
-          "title": "ERLING HAALAND 2019 TOPPS CHROME BUNDESLIGA ROOKIE CARD #72  PSA 10 GEM MINT",
-          "price": 1050,
-          "shippingCost": 9.45,
-          "shippingText": "paid",
-          "dateSold": "Jul 11, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "clevernickname0",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/327249601147",
-          "image": "https://i.ebayimg.com/images/g/LJMAAeSwPA1qS7HS/s-l140.jpg"
-        },
-        {
-          "title": "2019 Topps Chrome Bundesliga Soccer #72 Erling Haaland RC Rookie PSA 10 GEM MINT",
-          "price": 1100,
-          "shippingCost": 0,
-          "shippingText": "free",
-          "dateSold": "Jul 11, 2026",
-          "listingType": "Buy It Now",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "jackpack_dre",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/287408303521",
-          "image": "https://i.ebayimg.com/images/g/m60AAeSwvqtqNxGD/s-l140.jpg"
+          "image": "https://i.ebayimg.com/images/g/Az4AAeSwPxJqUHiD/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-10-03T12:59:17.647Z"
+      "fetchedAt": "2026-10-05T16:44:38.859Z"
     }
   }
 }
