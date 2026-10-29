@@ -1,9 +1,37 @@
 {
-  "fetchedAt": "2026-10-27T13:54:21.479Z",
+  "fetchedAt": "2026-10-29T14:55:17.267Z",
   "cards": {
     "card_0": {
       "name": "2018 Bowman Chrome Shohei Ohtani Rookie PSA 10",
       "listings": [
+        {
+          "title": "2018 Bowman Chrome #1 Shohei Ohtani Angels RC Rookie PSA 10 GEM MINT",
+          "price": 4326,
+          "shippingCost": 20,
+          "shippingText": "paid",
+          "dateSold": "Oct 28, 2026",
+          "listingType": "Auction",
+          "bids": 21,
+          "condition": "New (Other)",
+          "seller": "probstein123",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/377587532419",
+          "image": "https://i.ebayimg.com/images/g/hMcAAeSwM5tq2MmM/s-l500.webp"
+        },
+        {
+          "title": "SHOHEI OHTANI 2018 BOWMAN CHROME ROOKIE RC #1 PSA 10 Q6995",
+          "price": 4299.99,
+          "shippingCost": 6,
+          "shippingText": "paid",
+          "dateSold": "Oct 28, 2026",
+          "listingType": "Buy It Now",
+          "bids": null,
+          "condition": "New (Other)",
+          "seller": "quickconsign",
+          "location": "United States",
+          "link": "https://www.ebay.com/itm/940045855568",
+          "image": "https://i.ebayimg.com/images/g/YIoAAeSwEydq4Mg~/s-l500.webp"
+        },
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie Base PSA #1 Batting (RC)",
           "price": 4050,
@@ -16,7 +44,7 @@
           "seller": "enr-37987",
           "location": "United States",
           "link": "https://www.ebay.com/itm/920054512497",
-          "image": "https://i.ebayimg.com/images/g/NzcAAeSwdoZq0my-/s-l500.webp"
+          "image": "https://i.ebayimg.com/images/g/NzcAAeSwdoZq0my-/s-l140.webp"
         },
         {
           "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT",
@@ -619,37 +647,9 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/117419046357",
           "image": "https://i.ebayimg.com/images/g/docAAeSwZkVqrWV0/s-l140.webp"
-        },
-        {
-          "title": "2018 Bowman Chrome Shohei Ohtani Rookie RC #1 Angels PSA 10 GEM MINT (76)",
-          "price": 5251,
-          "shippingCost": 4.99,
-          "shippingText": "paid",
-          "dateSold": "Oct 2, 2026",
-          "listingType": "Auction",
-          "bids": 38,
-          "condition": "New (Other)",
-          "seller": "dcsports87",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/128101906655",
-          "image": "https://i.ebayimg.com/images/g/vFcAAeSwgXRqoxrU/s-l140.webp"
-        },
-        {
-          "title": "2018 Bowman Chrome #1 Shohei Ohtani Batting Angels RC Rookie PSA 10 GEM MINT",
-          "price": 5100,
-          "shippingCost": 50,
-          "shippingText": "paid",
-          "dateSold": "Sep 30, 2026",
-          "listingType": "Auction",
-          "bids": 17,
-          "condition": "New (Other)",
-          "seller": "probstein123",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/800705068888",
-          "image": "https://i.ebayimg.com/images/g/ppUAAeSwbQpqs~oR/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-10-27T13:50:46.877Z"
+      "fetchedAt": "2026-10-29T14:52:03.096Z"
     },
     "card_1": {
       "name": "2018 Topps Chrome Update Juan Soto PSA 10",
@@ -671,8 +671,8 @@
         {
           "title": "2018 Topps Chrome Update JUAN SOTO Batting RC Rookie PSA 10 #HMT55 Mets",
           "price": 110,
-          "shippingCost": null,
-          "shippingText": "unknown",
+          "shippingCost": 6.19,
+          "shippingText": "paid",
           "dateSold": "Oct 22, 2026",
           "listingType": "Buy It Now",
           "bids": null,
@@ -1035,8 +1035,8 @@
         {
           "title": "JUAN SOTO PSA 10 2018 TOPPS CHROME UPDATE #HMT55 ROOKIE RC NATIONALS 3034",
           "price": 65.84,
-          "shippingCost": 6,
-          "shippingText": "paid",
+          "shippingCost": null,
+          "shippingText": "unknown",
           "dateSold": "Oct 4, 2026",
           "listingType": "Auction",
           "bids": 26,
@@ -1063,8 +1063,8 @@
         {
           "title": "Juan Soto 2018 Topps Chrome Update Rookie RC #HMT55 Nationals PSA 10 GEM MINT",
           "price": 69.99,
-          "shippingCost": 6.01,
-          "shippingText": "paid",
+          "shippingCost": null,
+          "shippingText": "unknown",
           "dateSold": "Oct 3, 2026",
           "listingType": "Best Offer Accepted",
           "bids": null,
@@ -1119,8 +1119,8 @@
         {
           "title": "57155463 Juan Soto 2018 Topps Chrome Update #HMT55 Rookie RC PSA 10",
           "price": 53,
-          "shippingCost": 6,
-          "shippingText": "paid",
+          "shippingCost": null,
+          "shippingText": "unknown",
           "dateSold": "Sep 30, 2026",
           "listingType": "Auction",
           "bids": 9,
@@ -1129,37 +1129,9 @@
           "location": "United States",
           "link": "https://www.ebay.com/itm/158330773919",
           "image": "https://i.ebayimg.com/images/g/epoAAeSw0SFqtDmO/s-l140.webp"
-        },
-        {
-          "title": "2018 Topps Chrome Update Juan Soto #HMT55 Rookie Card RC Graded PSA 10 GEM MINT",
-          "price": 75,
-          "shippingCost": 8.55,
-          "shippingText": "paid",
-          "dateSold": "Sep 28, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "j-r00",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/256770628157",
-          "image": "https://i.ebayimg.com/images/g/~OUAAOSwFjRndu3n/s-l140.webp"
-        },
-        {
-          "title": "Topps 2018 Chrome Update Juan Soto Washington Nationals RC #HMT55 PSA 10",
-          "price": 75,
-          "shippingCost": 6.19,
-          "shippingText": "paid",
-          "dateSold": "Sep 28, 2026",
-          "listingType": "Best Offer Accepted",
-          "bids": null,
-          "condition": "New (Other)",
-          "seller": "pydyn-35",
-          "location": "United States",
-          "link": "https://www.ebay.com/itm/168574190819",
-          "image": "https://i.ebayimg.com/images/g/MkUAAeSwJM5qarKP/s-l140.webp"
         }
       ],
-      "fetchedAt": "2026-10-27T13:51:22.624Z"
+      "fetchedAt": "2026-10-29T14:52:44.659Z"
     },
     "card_2": {
       "name": "2024 Bowman Draft Chrome Konnor Griffin PSA 10",
